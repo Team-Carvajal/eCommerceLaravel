@@ -26,7 +26,7 @@
             <link rel="stylesheet" href="{{ url('assets/css/header-footer/footer.css')}}">
         <!-- CSS & JS Files End-->
     </head>
-    <body>
+    <body class="text-bg-light">
         <!-- ***** Preloader Start ***** -->
             <div id="preloader">
                 <div class="jumper">
@@ -73,7 +73,7 @@
                                             <li><a href="/ping/carrito"><i><img src="{{ url('assets/images/icon/cart2.svg')}}" width="14px" class="mx-2" alt=""></i>Carrito</a></li>
                                             <li><a href="/login"><i><img src="{{ url('assets/images/icon/iconUser.svg')}}" width="14px" class="mx-2" alt=""></i>Inicia sesión</a></li>
                                             <li><a href="/ping/registro"><i><img src="{{ url('assets/images/icon/iconUser.svg')}}" width="14px" class="mx-2" alt=""></i>Registrate</a></li>
-                                            <li><a href="/ping/sobre-nosotros"><i><img src="{{ url('assets/images/icon/people-fill.svg')}}" width="14px" class="mx-2" alt=""></i>Sobre nosotros</a></li>
+                                            <!-- <li><a href="/ping/sobre-nosotros"><i><img src="{{ url('assets/images/icon/people-fill.svg')}}" width="14px" class="mx-2" alt=""></i>Sobre nosotros</a></li> -->
                                             <li><a href="/ping/contactanos"><i><img src="{{ url('assets/images/icon/person-lines-fill.svg')}}" width="14px" class="mx-2" alt=""></i>Contactanos</a></li>
                                         </ul>
                                     </li>
