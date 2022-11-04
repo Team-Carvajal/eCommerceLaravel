@@ -21,6 +21,10 @@ Route::get('/ping/home', function () {
     // return view('welcome');
     return view('home');
 });
+Route::get('/ping/perfil', function () {
+    // return view('welcome');
+    return view('profile');
+});
 Route::get('/ping/contactanos', function () {
     // return view('welcome');
     return view('contactanos');
