@@ -72,6 +72,9 @@ header
     height: 60px;
     transition: all .3s;
   }
+  header .login-icono{
+    width: 45px;
+  }
   /* .Bg-24232e{
     background-color: #24232e;
   } */
@@ -201,7 +204,7 @@ header
   
   .header-area .main-nav .nav li.submenu {
     position: relative;
-    padding-right: 30px;
+    /* padding-right: 30px; */
   }
   
   .header-area .main-nav .nav li.submenu:after {
@@ -416,6 +419,9 @@ header
   }
   
   @media (max-width: 767px) {
+    header .login-icono{
+      width: 14px;
+    }
     .search-bg{
       background: #f7f7f7;
       width: 100%;
@@ -426,7 +432,7 @@ header
       background: #f7f7f7;
     }
     .down{
-      display: none;
+      display: contents;
     }
     .btn-outline-ping{
       font-family: 'Poppins', sans-serif;
@@ -576,21 +582,44 @@ header
     .header-area .main-nav .nav {
       display: flex !important;
     }
-  
+    a {
+      position: relative;
+      display: inline-block;
+    }
+    a[href="/login"] img{
+      border-radius: 100%;
+    }
+    a[href="/login"]:hover::after {
+      content: "Ingresa";
+      position: absolute;
+      font-size: 12px;
+      top: 130%;
+      left: -20px;
+      padding: 0 20px;
+      border-radius: 1em;
+      border: 1px solid white;
+      color: #f0f0f0;
+      background-color: #3d3d3d;
+    }
   }
   
-  body::-webkit-scrollbar {
+  .font{
+    font-size: 14px !important;
+    font-weight: 600;
+  }
+  
+
+body::-webkit-scrollbar {
     width: 8px;
     background: transparent ;
 }
 body::-webkit-scrollbar-thumb{
     /* background: #6e6e6e; */
     background: #ff0052;
-    border-radius: 1rem;
+    border-radius: 0em;
     
 }
 body::-webkit-scrollbar-thumb:hover{
     background: #b10038;
-    border-radius: 1rem;
     
 }

@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     // return view('welcome');
-    return view('index');
+    return view('home');
 });
 Route::get('/ping/home', function () {
     // return view('welcome');
@@ -44,4 +44,12 @@ Route::get('/ping/registro', function () {
 Route::get('/ping/sobre-nosotros', function () {
     // return view('welcome');
     return view('about');
+});
+Route::get('/pong', function () {
+    // return view('welcome');
+    return view('dashboard/dashboard');
+});
+Route::get('/pong/dashboard', function () {
+    // return view('welcome');
+    return view('dashboard/dashboard');
 });

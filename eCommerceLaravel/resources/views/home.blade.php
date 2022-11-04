@@ -138,7 +138,7 @@
                                     </div>
                                     <img src="{{ url('assets/images/men-01.jpg')}}"alt="">
                                 </div>
-                                <div class="down-content">
+                                <div class="down-content bg-transparent">
                                     <h4>Classic Spring</h4>
                                     <span>$120.00</span>
                                     <ul class="stars">
@@ -161,7 +161,7 @@
                                     </div>
                                     <img src="{{ url('assets/images/men-02.jpg')}}" alt="">
                                 </div>
-                                <div class="down-content">
+                                <div class="down-content bg-transparent">
                                     <h4>Air Force 1 X</h4>
                                     <span>$90.00</span>
                                     <ul class="stars">
@@ -184,7 +184,7 @@
                                     </div>
                                     <img src="{{ url('assets/images/men-03.jpg')}} " alt="">
                                 </div>
-                                <div class="down-content">
+                                <div class="down-content bg-transparent">
                                     <h4>Love Nana ‘20</h4>
                                     <span>$150.00</span>
                                     <ul class="stars">
@@ -196,7 +196,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="item">
+                            <div class="item ">
                                 <div class="thumb">
                                     <div class="hover-content">
                                         <ul>
@@ -207,7 +207,7 @@
                                     </div>
                                     <img src="{{ url('assets/images/men-01.jpg')}} " alt="">
                                 </div>
-                                <div class="down-content">
+                                <div class="down-content bg-light">
                                     <h4>Classic Spring</h4>
                                     <span>$120.00</span>
                                     <ul class="stars">

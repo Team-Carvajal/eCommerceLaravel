@@ -24,6 +24,7 @@
             <link rel="stylesheet" href="{{ url('assets/css/lightbox.css')}}">
             <link rel="stylesheet" href="{{ url('assets/css/header-footer/header.css')}}">
             <link rel="stylesheet" href="{{ url('assets/css/header-footer/footer.css')}}">
+            <link rel="stylesheet" href="{{ url('assets/css/shopping-car/car.css')}}">
         <!-- CSS & JS Files End-->
     </head>
     <body class="text-bg-light">
@@ -38,7 +39,7 @@
         <!-- ***** Preloader End ***** -->
         <!-- ***** Header Area Start ***** -->
             <header class="header-area header-sticky shadow-sm position-fixed">
-                <div class="mx-5">
+                <div class="mx-lg-5 mx-0 mx-sm-0 mx-md-5">
                     <div class="row">
                         <div class="col-12">
                             <nav class="main-nav">
@@ -51,42 +52,45 @@
                                         </div>
                                     </div>
                                 </a>
-                                <!-- ***** Logo End ***** -->
-                                <!-- ***** Menu Start ***** -->
                                 <ul class="nav">
-                                    <!-- <li class="scroll-to-section"><a href="#top" class="active">Inicio</a></li>
-                                    <li class="scroll-to-section"><a href="#men">Hombres</a></li>
-                                    <li class="scroll-to-section"><a href="#women">Mujeres</a></li>
-                                    <li class="scroll-to-section"><a href="#kids">Niños</a></li>
-                                    <li class="scroll-to-section"> -->
+     
                                     <li>
                                         <a>
                                             <button type="button" class="btn btn-outline-ping search-bg" data-bs-toggle="modal" data-bs-target="#buscar" onclick="modalBuscar()">
-                                                Buscar
+                                                <span class="font">
+                                                    Buscar
+                                                </span>    
                                             </button>
                                         </a>
                                     </li>
-                                    <li class="submenu ">
-                                        <a href="javascript:;">Ver más <i class="down"></i></a>
+                                    <li class="submenu font">
+                                        <a href="javascript:;" class="">Ver más <i class="down ms-4"></i></a>
                                         <ul>
                                             <li><a href="/ping/categorias"><i><img src="{{ url('assets/images/icon/border-all.svg')}}" width="14px" class="mx-2" alt=""></i>Categorias</a></li>
                                             <li><a href="/ping/carrito"><i><img src="{{ url('assets/images/icon/cart2.svg')}}" width="14px" class="mx-2" alt=""></i>Carrito</a></li>
-                                            <li><a href="/login"><i><img src="{{ url('assets/images/icon/iconUser.svg')}}" width="14px" class="mx-2" alt=""></i>Inicia sesión</a></li>
                                             <li><a href="/ping/registro"><i><img src="{{ url('assets/images/icon/iconUser.svg')}}" width="14px" class="mx-2" alt=""></i>Registrate</a></li>
                                             <!-- <li><a href="/ping/sobre-nosotros"><i><img src="{{ url('assets/images/icon/people-fill.svg')}}" width="14px" class="mx-2" alt=""></i>Sobre nosotros</a></li> -->
                                             <li><a href="/ping/contactanos"><i><img src="{{ url('assets/images/icon/person-lines-fill.svg')}}" width="14px" class="mx-2" alt=""></i>Contactanos</a></li>
                                         </ul>
                                     </li>
-                                    <!-- <li class="submenu">
-                                        <a href="javascript:;">Features</a>
-                                        <ul>
-                                            <li><a href="#">Features Page 1</a></li>
-                                            <li><a href="#">Features Page 2</a></li>
-                                            <li><a href="#">Features Page 3</a></li>
-                                            <li><a rel="nofollow" href="https://templatemo.com/page/4" target="_blank">Template Page 4</a></li>
-                                        </ul>
-                                    </li> -->
-                                    <!-- <li class="scroll-to-section"><a href="#explore">Explore</a></li> -->
+                                    <li>
+                                        <a href="/login" title="">
+                                            <i>
+                                                <img src="{{ url('assets/images/icon/iconUser.svg')}}" class="mx-sm-2 login-icono d-sm-none d-lg-block d-md-block" alt="">
+                                            </i>
+                                            <span class="d-lg-none d-md-none font">
+                                                Ingresa
+                                            </span>
+                                        </a>
+                                    </li>
+                                        <!-- <li class="d-grid">
+                                            <a href="/login" class="m-auto">
+                                                    <i class="d-flex">
+                                                        <img src="{{ url('assets/images/icon/iconUser.svg')}}" width="14px" class="mx-sm-2" alt="">
+                                                        <p class="">Inicia sesión</p>
+                                                    </i>
+                                            </a>
+                                        </li> -->
                                 </ul>        
                                 <a class='menu-trigger'>
                                     <span>Menu</span>
