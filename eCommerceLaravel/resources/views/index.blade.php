@@ -25,7 +25,9 @@
             <link rel="stylesheet" href="{{ url('assets/css/header-footer/header.css')}}">
             <link rel="stylesheet" href="{{ url('assets/css/header-footer/footer.css')}}">
             <link rel="stylesheet" href="{{ url('assets/css/shopping-car/car.css')}}">
-        <!-- CSS & JS Files End-->
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+        
+            <!-- CSS & JS Files End-->
     </head>
     <body class="text-bg-light">
         <!-- ***** Preloader Start ***** -->
@@ -194,8 +196,8 @@
             <script src="{{ url('assets/js/accordions.js')}}"></script>
             <script src="{{ url('assets/js/datepicker.js')}}"></script>
             <script src="{{ url('assets/js/scrollreveal.min.js')}}"></script>
-            <script src="{{ url('assets/js/waypoints.min.js')}}"></script>
-            <script src="{{ url('assets/js/jquery.counterup.min.js')}}"></script>
+            <!-- <script src="{{ url('assets/js/waypoints.min.js')}}"></script> -->
+            <!-- <script src="{{ url('assets/js/jquery.counterup.min.js')}}"></script> -->
             <script src="{{ url('assets/js/imgfix.min.js')}}"></script> 
             <script src="{{ url('assets/js/slick.js')}}"></script> 
             <script src="{{ url('assets/js/lightbox.js')}}"></script> 
