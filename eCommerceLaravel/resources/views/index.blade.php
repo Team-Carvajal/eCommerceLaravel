@@ -25,6 +25,8 @@
             <link rel="stylesheet" href="{{ url('assets/css/header-footer/header.css')}}">
             <link rel="stylesheet" href="{{ url('assets/css/header-footer/footer.css')}}">
             <link rel="stylesheet" href="{{ url('assets/css/shopping-car/car.css')}}">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
         <!-- CSS & JS Files End-->
     </head>
     <body class="text-bg-light">
