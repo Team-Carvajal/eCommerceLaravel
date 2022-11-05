@@ -74,7 +74,7 @@
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="/login" title="">
+                                        <a href="/inicio-de-sesion" title="">
                                             <i>
                                                 <img src="{{ url('assets/images/icon/iconUser.svg')}}" class="mx-sm-2 login-icono d-sm-none d-lg-block d-md-block" alt="">
                                             </i>
