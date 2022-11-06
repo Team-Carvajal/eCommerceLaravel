@@ -2,24 +2,7 @@
 @section('content')
     <link rel="stylesheet" href="{{ url('assets/css/login-registro.css')}}">
 
-    <style>
-        .back{
-            position: fixed;
-            top: 10px; 
-            left: 20px;
-            z-index: 3;
-        }
-        .back a i{
-            text-shadow: 0 0 10px #00000050;
-        }
-        header{
-            display: none !important;
-        }
-        .text-bg-light{
-            background: transparent !important;
-        }
 
-    </style>
 
         <div class="vh-100 d-grid">
             <div class="blur col-10 col-md-8  col-lg-5 col-sm-8 shadow rounded-2em m-auto">
