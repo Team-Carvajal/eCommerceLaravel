@@ -11,9 +11,9 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-DROP DATABASE IF EXISTS `ping`;
-CREATE DATABASE `ping`;
-USE `ping`;
+DROP DATABASE IF EXISTS `ping3`;
+CREATE DATABASE `ping3`;
+USE `ping3`;
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -72,7 +72,7 @@ INSERT INTO `billStates` (`idBillStates`, `state`) VALUES
 -- Estructura de tabla para la tabla `category`
 --
 
-CREATE TABLE `categories` (
+CREATE TABLE `categorys` (
   `idCategory` int(11) NOT NULL,
   `categoryName` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -81,7 +81,7 @@ CREATE TABLE `categories` (
 -- Volcado de datos para la tabla `category`
 --
 
-INSERT INTO `categories` (`idCategory`, `categoryName`) VALUES
+INSERT INTO `categorys` (`idCategory`, `categoryName`) VALUES
 (1, 'Hombres'),
 (2, 'Mujeres'),
 (3, 'Niños'),
@@ -90,10 +90,10 @@ INSERT INTO `categories` (`idCategory`, `categoryName`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `deliveries`
+-- Estructura de tabla para la tabla `deliverys`
 --
 
-CREATE TABLE `deliveries` (
+CREATE TABLE `deliverys` (
   `idDelivery` int(11) NOT NULL,
   `direction` varchar(100) NOT NULL,
   `bill_idBill` int(11) NOT NULL
@@ -469,8 +469,7 @@ INSERT INTO `UICode` (`idUICode`, `file`, `rol_idRol`) VALUES
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `lastName` varchar(50) COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `birthDate` DATE COLLATE utf8mb4_unicode_ci NULL,
+  `lastName` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `phone` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -511,13 +510,13 @@ ALTER TABLE `billStates`
 --
 -- Indices de la tabla `category`
 --
-ALTER TABLE `categories`
+ALTER TABLE `categorys`
   ADD PRIMARY KEY (`idCategory`);
 
 --
 -- Indices de la tabla `delivery`
 --
-ALTER TABLE `deliveries`
+ALTER TABLE `deliverys`
   ADD PRIMARY KEY (`idDelivery`),
   ADD KEY `bill_idBill` (`bill_idBill`);
 
@@ -673,13 +672,13 @@ ALTER TABLE `billStates`
 --
 -- AUTO_INCREMENT de la tabla `category`
 --
-ALTER TABLE `categories`
+ALTER TABLE `categorys`
   MODIFY `idCategory` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `delivery`
 --
-ALTER TABLE `deliveries`
+ALTER TABLE `deliverys`
   MODIFY `idDelivery` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -775,7 +774,7 @@ ALTER TABLE `bills`
 --
 -- Filtros para la tabla `delivery`
 --
-ALTER TABLE `deliveries`
+ALTER TABLE `deliverys`
   ADD CONSTRAINT `bill_delivery` FOREIGN KEY (`bill_idBill`) REFERENCES `bills` (`idBill`);
 
 --
@@ -808,7 +807,7 @@ ALTER TABLE `products`
   ADD CONSTRAINT `shirtSize_products` FOREIGN KEY (`shirtSize_idShirtSize`) REFERENCES `shirtSize` (`idShirtSize`),
   ADD CONSTRAINT `shirtType_products` FOREIGN KEY (`shirtType_idShirtType`) REFERENCES `shirtType` (`idShirtType`),
   ADD CONSTRAINT `typePrint_products` FOREIGN KEY (`typePrint_idTypePrint`) REFERENCES `typePrint` (`idTypePrint`),
-  ADD CONSTRAINT `category_products` FOREIGN KEY (`category_idCategory`) REFERENCES `categories` (`idCategory`),
+  ADD CONSTRAINT `category_products` FOREIGN KEY (`category_idCategory`) REFERENCES `categorys` (`idCategory`),
   ADD CONSTRAINT `descountSettings_products` FOREIGN KEY (`descountSettings_id`) REFERENCES `descountSettings` (`idDescountSettings`);
 
 --

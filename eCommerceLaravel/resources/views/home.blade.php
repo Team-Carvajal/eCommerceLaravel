@@ -131,9 +131,9 @@
                                 <div class="thumb">
                                     <div class="hover-content">
                                         <ul>
-                                            <li><a href="single-product.html"><i class="fa fa-eye"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <li><a href="/ping/producto"><i class="fa fa-eye"></i></a></li>
+                                            <li><a href="/ping/producto"><i class="fa fa-star"></i></a></li>
+                                            <li><a href="/ping/producto"><i class="fa fa-shopping-cart"></i></a></li>
                                         </ul>
                                     </div>
                                     <img src="{{ url('assets/images/men-01.jpg')}}"alt="">
@@ -154,9 +154,9 @@
                                 <div class="thumb">
                                     <div class="hover-content">
                                         <ul>
-                                            <li><a href="single-product.html"><i class="fa fa-eye"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <li><a href="/ping/producto"><i class="fa fa-eye"></i></a></li>
+                                            <li><a href="/ping/producto"><i class="fa fa-star"></i></a></li>
+                                            <li><a href="/ping/producto"><i class="fa fa-shopping-cart"></i></a></li>
                                         </ul>
                                     </div>
                                     <img src="{{ url('assets/images/men-02.jpg')}}" alt="">
@@ -177,9 +177,9 @@
                                 <div class="thumb">
                                     <div class="hover-content">
                                         <ul>
-                                            <li><a href="single-product.html"><i class="fa fa-eye"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <li><a href="/ping/producto"><i class="fa fa-eye"></i></a></li>
+                                            <li><a href="/ping/producto"><i class="fa fa-star"></i></a></li>
+                                            <li><a href="/ping/producto"><i class="fa fa-shopping-cart"></i></a></li>
                                         </ul>
                                     </div>
                                     <img src="{{ url('assets/images/men-03.jpg')}} " alt="">
@@ -200,9 +200,9 @@
                                 <div class="thumb">
                                     <div class="hover-content">
                                         <ul>
-                                            <li><a href="single-product.html"><i class="fa fa-eye"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <li><a href="/ping/producto"><i class="fa fa-eye"></i></a></li>
+                                            <li><a href="/ping/producto"><i class="fa fa-star"></i></a></li>
+                                            <li><a href="/ping/producto"><i class="fa fa-shopping-cart"></i></a></li>
                                         </ul>
                                     </div>
                                     <img src="{{ url('assets/images/men-01.jpg')}} " alt="">

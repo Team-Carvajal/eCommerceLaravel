@@ -33,11 +33,15 @@ Route::get('/ping/categorias', function () {
     // return view('welcome');
     return view('categorias');
 });
+Route::get('/ping/producto', function () {
+    // return view('welcome');
+    return view('vista-producto');
+});
 Route::get('/ping/carrito', function () {
     // return view('welcome');
     return view('carrito');
 });
-Route::get('/login', function () {
+Route::get('/inicio-de-sesion', function () {
     // return view('welcome');
     return view('login');
 });

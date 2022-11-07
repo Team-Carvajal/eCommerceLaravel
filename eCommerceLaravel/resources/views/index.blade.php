@@ -25,9 +25,10 @@
             <link rel="stylesheet" href="{{ url('assets/css/header-footer/header.css')}}">
             <link rel="stylesheet" href="{{ url('assets/css/header-footer/footer.css')}}">
             <link rel="stylesheet" href="{{ url('assets/css/shopping-car/car.css')}}">
+            <link rel="stylesheet" href="{{ url('assets/css/product.css')}}">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-
-        <!-- CSS & JS Files End-->
+        
+            <!-- CSS & JS Files End-->
     </head>
     <body class="text-bg-light">
         <!-- ***** Preloader Start ***** -->
@@ -76,7 +77,7 @@
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="/login" title="">
+                                        <a href="/inicio-de-sesion" title="">
                                             <i>
                                                 <img src="{{ url('assets/images/icon/iconUser.svg')}}" class="mx-sm-2 login-icono d-sm-none d-lg-block d-md-block" alt="">
                                             </i>
@@ -142,13 +143,13 @@
                                     <img class="logoPing pe-2" src="{{ url('assets/images/icon/logotipo1x.svg')}}">
                                 </div>
                                 <ul>
-                                    <li><a href="#">Ping Estampados Personalizados</a></li>
+                                    <li><a href="/">Ping Estampados Personalizados</a></li>
                                     <li><a href="#">pingep@gmail.com</a></li>
                                     <li><a href="#">+57 315 855 9229</a></li>
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-3 categorias--">
                             <h4>Tienda &amp; Categorías</h4>
                             <ul>
                                 <li><a href="#">Hombres</a></li>
@@ -157,15 +158,16 @@
                                 <li><a href="#">Otros</a></li>
                             </ul>
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-3 enlaces-de-la-pagina--">
                             <h4>Enlaces de la página</h4>
                             <ul>
                                 <li><a href="/ping/home">Inicio</a></li>
                                 <li><a href="/ping/contactanos">Contactanos</a></li>
                                 <li><a href="/ping/categorias">Categorías</a></li>
+                                <li><a href="/ping/registro">Registrate</a></li>
                             </ul>
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-3 ayuda-informacion">
                             <h4>Ayuda e Información</h4>
                             <ul>
                                 <li><a href="#">Help</a></li>
@@ -196,12 +198,14 @@
             <script src="{{ url('assets/js/accordions.js')}}"></script>
             <script src="{{ url('assets/js/datepicker.js')}}"></script>
             <script src="{{ url('assets/js/scrollreveal.min.js')}}"></script>
-            <script src="{{ url('assets/js/waypoints.min.js')}}"></script>
-            <script src="{{ url('assets/js/jquery.counterup.min.js')}}"></script>
+            <!-- <script src="{{ url('assets/js/waypoints.min.js')}}"></script> -->
+            <!-- <script src="{{ url('assets/js/jquery.counterup.min.js')}}"></script> -->
             <script src="{{ url('assets/js/imgfix.min.js')}}"></script> 
             <script src="{{ url('assets/js/slick.js')}}"></script> 
             <script src="{{ url('assets/js/lightbox.js')}}"></script> 
             <script src="{{ url('assets/js/isotope.js')}}"></script> 
+            <script src="{{ url('assets/js/quantity.js')}} "></script>
+
             
             <!-- Global Init -->
             <script src="{{ url('assets/js/custom.js')}}"></script>
