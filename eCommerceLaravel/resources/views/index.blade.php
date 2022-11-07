@@ -182,9 +182,7 @@
                                 
                                 <br>Diseño: <a href="" target="_parent" title="free css templates">TPS1-114</a></p>
                                 <ul>
-                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-whatsapp"></i></a></li>
+                                    <li><a href="https://github.com/Team-Carvajal"><i class="bi bi-github"></i></a></li>
                                 </ul>
                             </div>
                         </div>
