@@ -1,11 +1,16 @@
 @extends('index')
 @section('content')
-
 <style>
+    .img-product{
+        overflow: hidden;
+    }
     .img-product img{
         width: 100%;
         margin: auto;
         transition: .2s;
+    }
+    .img-product img:hover{
+        transform: scale(1.1);
     }
     .color{
         width: 20px;
@@ -31,6 +36,9 @@
     label[for="c-azul"]{
         background-color: #0000ff;
     }
+    .colorActive{
+        box-shadow: 0 0 1px 5px #00000040 ;
+    }
     label[for^="c-"]{
         width: 30px;
         height: 30px;
@@ -40,11 +48,8 @@
         filter: brightness(100%);
     }
     label[for^="c-"]:hover{
-        border: 1px solid #2a2a2a;
         cursor: pointer;
-        filter: brightness(70%);
-    }
-    label[for^="t-"]{
+        filter: brightness(95%);
     }
 
 </style>
@@ -73,36 +78,34 @@
                             <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod kon tempor incididunt ut labore.</span>
                             <div class="quantity-content">
                                 <div class="d-grid mb-3">
-                                    <span>Color:</span>
+                                    <span>Color: <span id="pcolor"></span></span>
                                     <div class="d-flex gap-2 mt-3">
-                                        <label for="c-negro"></label>
-                                        <label for="c-blanco"></label>
-                                        <label for="c-rojo"></label>
-                                        <label for="c-azul"></label>
-                                        <input hidden type="radio" name="color" id="c-negro">
-                                        <input hidden type="radio" name="color" id="c-blanco">
-                                        <input hidden type="radio" name="color" id="c-rojo">
-                                        <input hidden type="radio" name="color" id="c-azul">
+                                        <label class="shirtColor" for="c-negro"></label>
+                                        <label class="shirtColor" for="c-blanco"></label>
+                                        <input value="Negro" hidden type="radio" name="color" id="c-negro">
+                                        <input value="Blanco" hidden type="radio" name="color" id="c-blanco">
                                     </div>
                                 </div>
                                 <div class="d-grid">
-                                    <span>Talla:</span>
+                                    <span>Talla: <span id="ptalla"></span></span>
                                     <div class="d-flex gap-2 mt-3">
                                         <div>
-                                            <label class="btn btn-outline-danger" for="t-s">S</label>
-                                            <label class="btn btn-outline-danger" for="t-m">M</label>
-                                            <label class="btn btn-outline-danger" for="t-l">L</label>
-                                            <label class="btn btn-outline-danger" for="t-xs">XS</label>
-                                            <label class="btn btn-outline-danger" for="t-xl">XL</label>
-                                            <label class="btn btn-outline-danger" for="t-xxl">XXL</label>
+                                            <label class="btn btn-outline-danger shirtSize" for="t-S">S</label>
+                                            <label class="btn btn-outline-danger shirtSize" for="t-M">M</label>
+                                            <label class="btn btn-outline-danger shirtSize" for="t-L">L</label>
+                                            <label class="btn btn-outline-danger shirtSize" for="t-XS">XS</label>
+                                            <label class="btn btn-outline-danger shirtSize" for="t-XL">XL</label>
+                                            <label class="btn btn-outline-danger shirtSize" for="t-XXL">XXL</label>
 
                                         </div>
-                                        <input hidden type="radio" name="talla" id="t-s">
-                                        <input hidden type="radio" name="talla" id="t-m">
-                                        <input hidden type="radio" name="talla" id="t-l">
-                                        <input hidden type="radio" name="talla" id="t-xs">
-                                        <input hidden type="radio" name="talla" id="t-xl">
-                                        <input hidden type="radio" name="talla" id="t-xxl">
+                                        <div id="radio-talla">
+                                            <input hidden type="radio" name="talla" id="t-S"   value="S"  >
+                                            <input hidden type="radio" name="talla" id="t-M"   value="M"  >
+                                            <input hidden type="radio" name="talla" id="t-L"   value="L"  >
+                                            <input hidden type="radio" name="talla" id="t-XS"  value="XS" >
+                                            <input hidden type="radio" name="talla" id="t-XL"  value="XL" >
+                                            <input hidden type="radio" name="talla" id="t-XXL" value="XXL">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="d-grid d-lg-flex mt-4">
@@ -129,5 +132,55 @@
             </div>
         </div>
     </div>
+
+<script>
+    let pColor = document.querySelector('#pcolor');
+    let pTalla = document.querySelector('#ptalla');
+    let radioTalla = document.querySelector('#radio-talla');
+    if (document.querySelector('input[name="color"]')) {
+        document.querySelectorAll('input[name="color"]').forEach((elem) => {
+        elem.addEventListener("change", function(event) {
+            var item = event.target.value;
+            pColor.innerHTML = item;
+        });
+      });
+    }
+    if (document.querySelector('input[name="talla"]')) {
+        document.querySelectorAll('input[name="talla"]').forEach((elem) => {
+        elem.addEventListener("change", function(event) {
+            var tItem = event.target.value;
+            pTalla.innerHTML = tItem;
+            var talla = document.querySelector(`label[for='t-${tItem}']`);
+            // alert(talla.getAttribute("for"));
+        });
+      });
+    }
+
+    let shirtSize = document.querySelectorAll('label.shirtSize');
+    // For each button, register an event listener
+    shirtSize.forEach(function(elem){
+    elem.addEventListener("click", function(e){
+        // On click, remove the MyClass on ALL buttons
+        shirtSize.forEach(function(el){
+        el.classList.remove("active");
+        });
+        // Add the class on clicked one
+        e.target.classList.add("active");
+    })
+    })
+    let ShirtColor = document.querySelectorAll('label.shirtColor');
+    // For each button, register an event listener
+    ShirtColor.forEach(function(elem){
+    elem.addEventListener("click", function(e){
+        // On click, remove the MyClass on ALL buttons
+        ShirtColor.forEach(function(el){
+        el.classList.remove("colorActive");
+        });
+        // Add the class on clicked one
+        e.target.classList.add("colorActive");
+    })
+    })
+
+</script>
 
 @endsection
