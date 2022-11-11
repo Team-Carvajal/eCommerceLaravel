@@ -92,3 +92,11 @@
     </section>
 <!-- ***** Carousel Area Ends ***** -->
 
+
+
+<!-- @extends('index') -->
+<!-- @section('content') -->
+
+
+
+<!-- @endsection -->

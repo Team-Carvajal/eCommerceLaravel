@@ -1,6 +1,5 @@
 @extends('index')
 @section('content')
-
 <!-- ***** Main Banner Area Start ***** -->
     <div class="main-banner carousel-products espacio" id="top">
         <div class="container-fluid">
@@ -109,7 +108,6 @@
         </div>
     </div>
 <!-- ***** Main Banner Area End ***** -->
-
 <!-- ***** Carousel Area Starts ***** -->
     <section class="section carousel-products" id="men">
         <div class="container">
@@ -131,9 +129,9 @@
                                 <div class="thumb">
                                     <div class="hover-content">
                                         <ul>
-                                            <li><a href="/ping/producto"><i class="fa fa-eye"></i></a></li>
-                                            <li><a href="/ping/producto"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="/ping/producto"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <li><a href="/producto"><i class="fa fa-eye"></i></a></li>
+                                            <li><a href="/producto"><i class="fa fa-star"></i></a></li>
+                                            <li><a href="/producto"><i class="fa fa-shopping-cart"></i></a></li>
                                         </ul>
                                     </div>
                                     <img src="{{ url('assets/images/men-01.jpg')}}"alt="">
@@ -154,9 +152,9 @@
                                 <div class="thumb">
                                     <div class="hover-content">
                                         <ul>
-                                            <li><a href="/ping/producto"><i class="fa fa-eye"></i></a></li>
-                                            <li><a href="/ping/producto"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="/ping/producto"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <li><a href="/producto"><i class="fa fa-eye"></i></a></li>
+                                            <li><a href="/producto"><i class="fa fa-star"></i></a></li>
+                                            <li><a href="/producto"><i class="fa fa-shopping-cart"></i></a></li>
                                         </ul>
                                     </div>
                                     <img src="{{ url('assets/images/men-02.jpg')}}" alt="">
@@ -177,9 +175,9 @@
                                 <div class="thumb">
                                     <div class="hover-content">
                                         <ul>
-                                            <li><a href="/ping/producto"><i class="fa fa-eye"></i></a></li>
-                                            <li><a href="/ping/producto"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="/ping/producto"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <li><a href="/producto"><i class="fa fa-eye"></i></a></li>
+                                            <li><a href="/producto"><i class="fa fa-star"></i></a></li>
+                                            <li><a href="/producto"><i class="fa fa-shopping-cart"></i></a></li>
                                         </ul>
                                     </div>
                                     <img src="{{ url('assets/images/men-03.jpg')}} " alt="">
@@ -200,9 +198,9 @@
                                 <div class="thumb">
                                     <div class="hover-content">
                                         <ul>
-                                            <li><a href="/ping/producto"><i class="fa fa-eye"></i></a></li>
-                                            <li><a href="/ping/producto"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="/ping/producto"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <li><a href="/producto"><i class="fa fa-eye"></i></a></li>
+                                            <li><a href="/producto"><i class="fa fa-star"></i></a></li>
+                                            <li><a href="/producto"><i class="fa fa-shopping-cart"></i></a></li>
                                         </ul>
                                     </div>
                                     <img src="{{ url('assets/images/men-01.jpg')}} " alt="">
@@ -226,7 +224,6 @@
         </div>
     </section>
 <!-- ***** Carousel Area Ends ***** -->
-
 <!-- ***** Explore Area Starts ***** -->
     <section class="section" id="explore">
         <div class="container">
@@ -277,6 +274,5 @@
         </div>
     </section>
 <!-- ***** Explore Area Ends ***** -->
-
 
 @endsection

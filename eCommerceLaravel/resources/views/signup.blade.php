@@ -34,8 +34,8 @@
                                         <div class="mb-3">
                                             <select class="form-select mb-3" required>
                                                 <option selected disabled value="">Tipo de identificacion</option>
-                                                <option value="">Cedula de ciudadania</option> 
-                                                <option value="">Tarjeta de identidad</option> 
+                                                <option value="">Cedula de ciudadania</option>
+                                                <option value="">Tarjeta de identidad</option>
                                             </select>
                                         </div>
                                         <div class="mb-3">
@@ -50,12 +50,12 @@
                                         <div class=" row col-md-6 col-sm-6 mx-auto mb-5 container ">
                                             <input type="submit" class="btn btn-primary shadow-sm " value="Registrate" >
                                         </div>
-                                        
+
                                     </div>
 
                                     <div class="container mb-5 m">
                                         <a>Ya tienes una cuenta?</a>
-                                        <a href="/inicio-de-sesion" class="text-primary">Inicia sesión</a>
+                                        <a href="/login" class="text-primary">Inicia sesión</a>
                                     </div>
                             </div>
                         </div>

@@ -27,7 +27,7 @@
             <link rel="stylesheet" href="{{ url('assets/css/shopping-car/car.css')}}">
             <link rel="stylesheet" href="{{ url('assets/css/product.css')}}">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-        
+
             <!-- CSS & JS Files End-->
     </head>
     <body class="text-bg-light">
@@ -38,7 +38,7 @@
                     <div></div>
                     <div></div>
                 </div>
-            </div>  
+            </div>
         <!-- ***** Preloader End ***** -->
         <!-- ***** Header Area Start ***** -->
             <header class="header-area header-sticky shadow-sm position-fixed">
@@ -47,7 +47,7 @@
                         <div class="col-12">
                             <nav class="main-nav">
                                 <!-- ***** Logo Start ***** -->
-                                <a href="/ping/home" class="logo">
+                                <a href="/home" class="logo">
                                     <div class="logoPingCont d-grid">
                                         <div class="rounded-4 d-flex pe-3 px-3">
                                             <img class="logoPing pe-2" src="{{ url('assets/images/icon/isotipo1x.svg')}}">
@@ -56,28 +56,28 @@
                                     </div>
                                 </a>
                                 <ul class="nav">
-     
+
                                     <li>
                                         <a>
                                             <button type="button" class="btn btn-outline-ping search-bg" data-bs-toggle="modal" data-bs-target="#buscar" onclick="modalBuscar()">
                                                 <span class="font">
                                                     Buscar
-                                                </span>    
+                                                </span>
                                             </button>
                                         </a>
                                     </li>
                                     <li class="submenu font">
                                         <a href="javascript:;" class="">Ver más <i class="down ms-4"></i></a>
                                         <ul>
-                                            <li><a href="/ping/categorias"><i><img src="{{ url('assets/images/icon/border-all.svg')}}" width="14px" class="mx-2" alt=""></i>Categorias</a></li>
-                                            <li><a href="/ping/carrito"><i><img src="{{ url('assets/images/icon/cart2.svg')}}" width="14px" class="mx-2" alt=""></i>Carrito</a></li>
-                                            <li><a href="/ping/registro"><i><img src="{{ url('assets/images/icon/iconUser.svg')}}" width="14px" class="mx-2" alt=""></i>Registrate</a></li>
-                                            <!-- <li><a href="/ping/sobre-nosotros"><i><img src="{{ url('assets/images/icon/people-fill.svg')}}" width="14px" class="mx-2" alt=""></i>Sobre nosotros</a></li> -->
-                                            <li><a href="/ping/contactanos"><i><img src="{{ url('assets/images/icon/person-lines-fill.svg')}}" width="14px" class="mx-2" alt=""></i>Contactanos</a></li>
+                                            <li><a href="/categorias"><i><img src="{{ url('assets/images/icon/border-all.svg')}}" width="14px" class="mx-2" alt=""></i>Categorias</a></li>
+                                            <li><a href="/carrito"><i><img src="{{ url('assets/images/icon/cart2.svg')}}" width="14px" class="mx-2" alt=""></i>Carrito</a></li>
+                                            <li><a href="/registro"><i><img src="{{ url('assets/images/icon/iconUser.svg')}}" width="14px" class="mx-2" alt=""></i>Registrate</a></li>
+                                            <!-- <li><a href="/sobre-nosotros"><i><img src="{{ url('assets/images/icon/people-fill.svg')}}" width="14px" class="mx-2" alt=""></i>Sobre nosotros</a></li> -->
+                                            <li><a href="/contactanos"><i><img src="{{ url('assets/images/icon/person-lines-fill.svg')}}" width="14px" class="mx-2" alt=""></i>Contactanos</a></li>
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="/inicio-de-sesion" title="">
+                                        <a href="/login" title="">
                                             <i>
                                                 <img src="{{ url('assets/images/icon/iconUser.svg')}}" class="mx-sm-2 login-icono d-sm-none d-lg-block d-md-block" alt="">
                                             </i>
@@ -94,7 +94,7 @@
                                                     </i>
                                             </a>
                                         </li> -->
-                                </ul>        
+                                </ul>
                                 <a class='menu-trigger'>
                                     <span>Menu</span>
                                 </a>
@@ -161,10 +161,10 @@
                         <div class="col-lg-3 enlaces-de-la-pagina--">
                             <h4>Enlaces de la página</h4>
                             <ul>
-                                <li><a href="/ping/home">Inicio</a></li>
-                                <li><a href="/ping/contactanos">Contactanos</a></li>
-                                <li><a href="/ping/categorias">Categorías</a></li>
-                                <li><a href="/ping/registro">Registrate</a></li>
+                                <li><a href="/home">Inicio</a></li>
+                                <li><a href="/contactanos">Contactanos</a></li>
+                                <li><a href="/categorias">Categorías</a></li>
+                                <li><a href="/registro">Registrate</a></li>
                             </ul>
                         </div>
                         <div class="col-lg-3 ayuda-informacion">
@@ -178,9 +178,9 @@
                         </div>
                         <div class="col-lg-12">
                             <div class="under-footer">
-                                <p>Copyright © 2022 Ping Estampados Personalizados. All Rights Reserved. 
-                                
-                                <br>Diseño: <a href="" target="_parent" title="free css templates">TPS1-114</a></p>
+                                <p>Copyright © 2022 Ping Estampados Personalizados. All Rights Reserved.
+
+                                <br>Diseño: <a target="_parent" title="" class="text-ping">TPS1-114</a></p>
                                 <ul>
                                     <li><a href="https://github.com/Team-Carvajal"><i class="bi bi-github"></i></a></li>
                                 </ul>
@@ -198,18 +198,18 @@
             <script src="{{ url('assets/js/scrollreveal.min.js')}}"></script>
             <!-- <script src="{{ url('assets/js/waypoints.min.js')}}"></script> -->
             <!-- <script src="{{ url('assets/js/jquery.counterup.min.js')}}"></script> -->
-            <script src="{{ url('assets/js/imgfix.min.js')}}"></script> 
-            <script src="{{ url('assets/js/slick.js')}}"></script> 
-            <script src="{{ url('assets/js/lightbox.js')}}"></script> 
-            <script src="{{ url('assets/js/isotope.js')}}"></script> 
+            <script src="{{ url('assets/js/imgfix.min.js')}}"></script>
+            <script src="{{ url('assets/js/slick.js')}}"></script>
+            <script src="{{ url('assets/js/lightbox.js')}}"></script>
+            <script src="{{ url('assets/js/isotope.js')}}"></script>
             <script src="{{ url('assets/js/quantity.js')}} "></script>
 
-            
+
             <!-- Global Init -->
             <script src="{{ url('assets/js/custom.js')}}"></script>
-            
+
             <script>
-                
+
                 $('.modal').on('shown.bs.modal', function() {
                     $(this).css("z-index", parseInt($('.modal-backdrop').css('z-index')) + 1);
                 });
@@ -224,10 +224,10 @@
                     $("."+selectedClass).fadeIn();
                     $("#portfolio").fadeTo(50, 1);
                     }, 500);
-                    
+
                     });
                 });
-                
+
                 function modalBuscar(){
                     // alert('Hola');
                     }
@@ -235,6 +235,6 @@
 
             </script>
         <!-- Plugins -->
-        
+
     </body>
 </html>

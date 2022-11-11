@@ -25,11 +25,11 @@
                         <div class=" row col-md-6 col-sm-6 mx-auto mb-5 container ">
                             <input type="submit" class="btn btn-primary shadow-sm " value="Continuar" >
                         </div>
-                        
+
                     </div>
                     <div class="container mb-5 m">
                         <a>Aún no tiene una cuenta? </a>
-                        <a href="/ping/registro" class="text-primary"> Registrate aquí</a>
+                        <a href="/registro" class="text-primary"> Registrate aquí</a>
                     </div>
                 </div>
             </form>
@@ -39,4 +39,3 @@
         <img src="{{ url('assets\images\background-login-01.svg')}}" alt="">
     </div>
 @endsection
-    
