@@ -147,7 +147,7 @@ CREATE TABLE `managementpqrs` (
   `fechaPqrs` date NOT NULL,
   `state` varchar(1) NOT NULL,
   `typesPqrs_id` int(11) NOT NULL,
-  `users_id` bigint(11) UNSIGNED NOT NULL,
+  `users_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -469,7 +469,7 @@ ALTER TABLE `deliveries`
 -- Indices de la tabla `descountsettings`
 --
 ALTER TABLE `descountsettings`
-  ADD PRIMARY KEY (`id`,`descount`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `dimensionprint`
@@ -543,8 +543,8 @@ ALTER TABLE `products_categories`
 -- Indices de la tabla `products_descountsettings`
 --
 ALTER TABLE `products_descountsettings`
-  ADD PRIMARY KEY (`products_id`,`descountsettings_id`,`descountsettings_descount`),
-  ADD KEY `fk_products_has_descountsettings_descountsettings1` (`descountsettings_id`,`descountsettings_descount`);
+  ADD PRIMARY KEY (`products_id`,`descountsettings_id`),
+  ADD KEY `fk_products_has_descountsettings_descountsettings1` (`descountsettings_id`);
 
 --
 -- Indices de la tabla `products_shirtcolors`
@@ -625,19 +625,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `bills`
 --
 ALTER TABLE `bills`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `billstates`
 --
 ALTER TABLE `billstates`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `deliveries`
@@ -649,13 +649,13 @@ ALTER TABLE `deliveries`
 -- AUTO_INCREMENT de la tabla `descountsettings`
 --
 ALTER TABLE `descountsettings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `dimensionprint`
 --
 ALTER TABLE `dimensionprint`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `failed_jobs`
@@ -667,19 +667,19 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT de la tabla `managementpqrs`
 --
 ALTER TABLE `managementpqrs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `ordersbase`
 --
 ALTER TABLE `ordersbase`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `personal_access_tokens`
@@ -691,37 +691,37 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT de la tabla `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `shirtcolors`
 --
 ALTER TABLE `shirtcolors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `shirtsizes`
 --
 ALTER TABLE `shirtsizes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `shirttypes`
 --
 ALTER TABLE `shirttypes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `typesprint`
 --
 ALTER TABLE `typesprint`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
@@ -774,7 +774,7 @@ ALTER TABLE `products_categories`
 -- Filtros para la tabla `products_descountsettings`
 --
 ALTER TABLE `products_descountsettings`
-  ADD CONSTRAINT `fk_products_has_descountsettings_descountsettings1` FOREIGN KEY (`descountsettings_id`,`descountsettings_descount`) REFERENCES `descountsettings` (`id`, `descount`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_products_has_descountsettings_descountsettings1` FOREIGN KEY (`descountsettings_id`) REFERENCES `descountsettings` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_products_has_descountsettings_products1` FOREIGN KEY (`products_id`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
