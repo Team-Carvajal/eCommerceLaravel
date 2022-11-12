@@ -15,7 +15,6 @@ DROP TABLE IF EXISTS `ping`;
 CREATE DATABASE `ping`;
 USE `ping`;
 
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -33,7 +32,9 @@ USE `ping`;
 
 CREATE TABLE `aboutus` (
   `id` int(11) NOT NULL,
-  `text` varchar(500) NOT NULL,
+  `aboutus` varchar(500) NOT NULL,
+  `mission` varchar(500) NOT NULL,
+  `vision` varchar(500) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -46,10 +47,10 @@ CREATE TABLE `aboutus` (
 
 CREATE TABLE `bills` (
   `id` int(11) NOT NULL,
-  `billStates_id` int(5) NOT NULL,
+  `billState_id` int(5) NOT NULL,
   `paymentMethod_id` int(11) NOT NULL,
   `subTotal` int(11) DEFAULT NULL,
-  `users_id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -89,7 +90,7 @@ CREATE TABLE `categories` (
 CREATE TABLE `deliveries` (
   `id` int(11) NOT NULL,
   `direction` varchar(100) NOT NULL,
-  `bills_id` int(11) NOT NULL,
+  `bill_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -147,8 +148,8 @@ CREATE TABLE `managementpqrs` (
   `description` varchar(200) NOT NULL,
   `fechaPqrs` date NOT NULL,
   `state` varchar(1) NOT NULL,
-  `typesPqrs_id` int(11) NOT NULL,
-  `users_id` bigint(20) UNSIGNED NOT NULL,
+  `typePqrs_id` int(11) NOT NULL,
+  `user_id` bigint(11) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -174,9 +175,9 @@ CREATE TABLE `migrations` (
 CREATE TABLE `ordersbase` (
   `id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
-  `bills_id` int(11) NOT NULL,
+  `bill_id` int(11) NOT NULL,
   `dimensionPrint_id` int(11) NOT NULL,
-  `products_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -234,8 +235,8 @@ CREATE TABLE `personal_access_tokens` (
 CREATE TABLE `productcalification` (
   `id` int(11) NOT NULL,
   `calification` int(11) DEFAULT NULL,
-  `users_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `products_id` int(11) DEFAULT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -264,8 +265,8 @@ CREATE TABLE `products` (
 --
 
 CREATE TABLE `products_categories` (
-  `products_id` int(11) NOT NULL,
-  `categories_id` int(11) NOT NULL
+  `product_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -275,8 +276,8 @@ CREATE TABLE `products_categories` (
 --
 
 CREATE TABLE `products_descountsettings` (
-  `products_id` int(11) NOT NULL,
-  `descountsettings_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `descountsetting_id` int(11) NOT NULL,
   `descountsettings_descount` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -287,8 +288,8 @@ CREATE TABLE `products_descountsettings` (
 --
 
 CREATE TABLE `products_shirtcolors` (
-  `products_id` int(11) NOT NULL,
-  `shirtcolors_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `shirtcolor_id` int(11) NOT NULL,
   `image` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -299,8 +300,8 @@ CREATE TABLE `products_shirtcolors` (
 --
 
 CREATE TABLE `products_shirtsizes` (
-  `shirtsizes_id` int(11) NOT NULL,
-  `products_id` int(11) NOT NULL
+  `shirtsize_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -310,8 +311,8 @@ CREATE TABLE `products_shirtsizes` (
 --
 
 CREATE TABLE `products_shirttypes` (
-  `products_id` int(11) NOT NULL,
-  `shirttypes_id` int(11) NOT NULL
+  `product_id` int(11) NOT NULL,
+  `shirttype_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -402,7 +403,7 @@ CREATE TABLE `typesprint` (
 CREATE TABLE `uicode` (
   `id` int(11) NOT NULL,
   `file` varchar(200) NOT NULL,
-  `roles_id` int(11) NOT NULL,
+  `rol_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -421,7 +422,7 @@ CREATE TABLE `users` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `phone` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `roles_id` int(11) NOT NULL,
+  `rol_id` int(11) NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
@@ -443,9 +444,9 @@ ALTER TABLE `aboutus`
 --
 ALTER TABLE `bills`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `billStates_bills` (`billStates_id`),
+  ADD KEY `billStates_bills` (`billState_id`),
   ADD KEY `paymentMethods_bills` (`paymentMethod_id`),
-  ADD KEY `users_bills` (`users_id`);
+  ADD KEY `users_bills` (`user_id`);
 
 --
 -- Indices de la tabla `billstates`
@@ -464,7 +465,7 @@ ALTER TABLE `categories`
 --
 ALTER TABLE `deliveries`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `bills_deliveries` (`bills_id`);
+  ADD KEY `bills_deliveries` (`bill_id`);
 
 --
 -- Indices de la tabla `descountsettings`
@@ -489,8 +490,8 @@ ALTER TABLE `failed_jobs`
 --
 ALTER TABLE `managementpqrs`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `typesPqrs_magagementPqrs` (`typesPqrs_id`),
-  ADD KEY `users_managementPqrs` (`users_id`);
+  ADD KEY `typesPqrs_magagementPqrs` (`typePqrs_id`),
+  ADD KEY `users_managementPqrs` (`user_id`);
 
 --
 -- Indices de la tabla `migrations`
@@ -503,9 +504,9 @@ ALTER TABLE `migrations`
 --
 ALTER TABLE `ordersbase`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `bills_ordersBase` (`bills_id`),
+  ADD KEY `bills_ordersBase` (`bill_id`),
   ADD KEY `dimensionPrint_ordersBase` (`dimensionPrint_id`),
-  ADD KEY `products_ordersBase` (`products_id`);
+  ADD KEY `products_ordersBase` (`product_id`);
 
 --
 -- Indices de la tabla `paymentmethods`
@@ -524,8 +525,8 @@ ALTER TABLE `personal_access_tokens`
 --
 ALTER TABLE `productcalification`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `products_productCalification` (`products_id`),
-  ADD KEY `users_productCalification` (`users_id`);
+  ADD KEY `products_productCalification` (`product_id`),
+  ADD KEY `users_productCalification` (`user_id`);
 
 --
 -- Indices de la tabla `products`
@@ -537,36 +538,36 @@ ALTER TABLE `products`
 -- Indices de la tabla `products_categories`
 --
 ALTER TABLE `products_categories`
-  ADD PRIMARY KEY (`products_id`,`categories_id`),
-  ADD KEY `fk_products_has_categories_categories1` (`categories_id`);
+  ADD PRIMARY KEY (`product_id`,`category_id`),
+  ADD KEY `fk_products_has_categories_categories1` (`category_id`);
 
 --
 -- Indices de la tabla `products_descountsettings`
 --
 ALTER TABLE `products_descountsettings`
-  ADD PRIMARY KEY (`products_id`,`descountsettings_id`),
-  ADD KEY `fk_products_has_descountsettings_descountsettings1` (`descountsettings_id`);
+  ADD PRIMARY KEY (`product_id`,`descountsetting_id`,`descountsettings_descount`),
+  ADD KEY `fk_products_has_descountsettings_descountsettings1` (`descountsetting_id`,`descountsettings_descount`);
 
 --
 -- Indices de la tabla `products_shirtcolors`
 --
 ALTER TABLE `products_shirtcolors`
-  ADD PRIMARY KEY (`products_id`,`shirtcolors_id`),
-  ADD KEY `fk_products_has_shirtcolors_shirtcolors1` (`shirtcolors_id`);
+  ADD PRIMARY KEY (`product_id`,`shirtcolor_id`),
+  ADD KEY `fk_products_has_shirtcolors_shirtcolors1` (`shirtcolor_id`);
 
 --
 -- Indices de la tabla `products_shirtsizes`
 --
 ALTER TABLE `products_shirtsizes`
-  ADD PRIMARY KEY (`shirtsizes_id`,`products_id`),
-  ADD KEY `fk_shirtsizes_products_products1` (`products_id`);
+  ADD PRIMARY KEY (`shirtsize_id`,`product_id`),
+  ADD KEY `fk_shirtsizes_products_products1` (`product_id`);
 
 --
 -- Indices de la tabla `products_shirttypes`
 --
 ALTER TABLE `products_shirttypes`
-  ADD PRIMARY KEY (`products_id`,`shirttypes_id`),
-  ADD KEY `fk_products_has_shirttypes_shirttypes1` (`shirttypes_id`);
+  ADD PRIMARY KEY (`product_id`,`shirttype_id`),
+  ADD KEY `fk_products_has_shirttypes_shirttypes1` (`shirttype_id`);
 
 --
 -- Indices de la tabla `roles`
@@ -609,14 +610,14 @@ ALTER TABLE `typesprint`
 --
 ALTER TABLE `uicode`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `rol_UICode` (`roles_id`);
+  ADD KEY `rol_UICode` (`rol_id`);
 
 --
 -- Indices de la tabla `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `roles_users` (`roles_id`);
+  ADD KEY `roles_users` (`rol_id`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -626,19 +627,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `bills`
 --
 ALTER TABLE `bills`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `billstates`
 --
 ALTER TABLE `billstates`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `deliveries`
@@ -650,13 +651,13 @@ ALTER TABLE `deliveries`
 -- AUTO_INCREMENT de la tabla `descountsettings`
 --
 ALTER TABLE `descountsettings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `dimensionprint`
 --
 ALTER TABLE `dimensionprint`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `failed_jobs`
@@ -668,19 +669,19 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT de la tabla `managementpqrs`
 --
 ALTER TABLE `managementpqrs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `ordersbase`
 --
 ALTER TABLE `ordersbase`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `personal_access_tokens`
@@ -692,37 +693,37 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT de la tabla `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `shirtcolors`
 --
 ALTER TABLE `shirtcolors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `shirtsizes`
 --
 ALTER TABLE `shirtsizes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `shirttypes`
 --
 ALTER TABLE `shirttypes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `typesprint`
 --
 ALTER TABLE `typesprint`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
@@ -732,84 +733,84 @@ ALTER TABLE `users`
 -- Filtros para la tabla `bills`
 --
 ALTER TABLE `bills`
-  ADD CONSTRAINT `billStates_bills` FOREIGN KEY (`billStates_id`) REFERENCES `billstates` (`id`),
+  ADD CONSTRAINT `billStates_bills` FOREIGN KEY (`billState_id`) REFERENCES `billstates` (`id`),
   ADD CONSTRAINT `paymentMethods_bills` FOREIGN KEY (`paymentMethod_id`) REFERENCES `paymentmethods` (`id`),
-  ADD CONSTRAINT `users_bills` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `users_bills` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Filtros para la tabla `deliveries`
 --
 ALTER TABLE `deliveries`
-  ADD CONSTRAINT `bills_deliveries` FOREIGN KEY (`bills_id`) REFERENCES `bills` (`id`);
+  ADD CONSTRAINT `bills_deliveries` FOREIGN KEY (`bill_id`) REFERENCES `bills` (`id`);
 
 --
 -- Filtros para la tabla `managementpqrs`
 --
 ALTER TABLE `managementpqrs`
-  ADD CONSTRAINT `typesPqrs_magagementPqrs` FOREIGN KEY (`typesPqrs_id`) REFERENCES `typespqrs` (`id`),
-  ADD CONSTRAINT `users_managementPqrs` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `typesPqrs_magagementPqrs` FOREIGN KEY (`typePqrs_id`) REFERENCES `typespqrs` (`id`),
+  ADD CONSTRAINT `users_managementPqrs` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Filtros para la tabla `ordersbase`
 --
 ALTER TABLE `ordersbase`
-  ADD CONSTRAINT `bills_ordersBase` FOREIGN KEY (`bills_id`) REFERENCES `bills` (`id`),
+  ADD CONSTRAINT `bills_ordersBase` FOREIGN KEY (`bill_id`) REFERENCES `bills` (`id`),
   ADD CONSTRAINT `dimensionPrint_ordersBase` FOREIGN KEY (`dimensionPrint_id`) REFERENCES `dimensionprint` (`id`),
-  ADD CONSTRAINT `products_ordersBase` FOREIGN KEY (`products_id`) REFERENCES `products` (`id`);
+  ADD CONSTRAINT `products_ordersBase` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 
 --
 -- Filtros para la tabla `productcalification`
 --
 ALTER TABLE `productcalification`
-  ADD CONSTRAINT `products_productCalification` FOREIGN KEY (`products_id`) REFERENCES `products` (`id`),
-  ADD CONSTRAINT `users_productCalification` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `products_productCalification` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
+  ADD CONSTRAINT `users_productCalification` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Filtros para la tabla `products_categories`
 --
 ALTER TABLE `products_categories`
-  ADD CONSTRAINT `fk_products_has_categories_categories1` FOREIGN KEY (`categories_id`) REFERENCES `categories` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_products_has_categories_products1` FOREIGN KEY (`products_id`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_products_has_categories_categories1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_products_has_categories_products1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `products_descountsettings`
 --
 ALTER TABLE `products_descountsettings`
-  ADD CONSTRAINT `fk_products_has_descountsettings_descountsettings1` FOREIGN KEY (`descountsettings_id`) REFERENCES `descountsettings` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_products_has_descountsettings_products1` FOREIGN KEY (`products_id`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_products_has_descountsettings_descountsettings1` FOREIGN KEY (`descountsetting_id`,`descountsettings_descount`) REFERENCES `descountsettings` (`id`, `descount`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_products_has_descountsettings_products1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `products_shirtcolors`
 --
 ALTER TABLE `products_shirtcolors`
-  ADD CONSTRAINT `fk_products_has_shirtcolors_products1` FOREIGN KEY (`products_id`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_products_has_shirtcolors_shirtcolors1` FOREIGN KEY (`shirtcolors_id`) REFERENCES `shirtcolors` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_products_has_shirtcolors_products1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_products_has_shirtcolors_shirtcolors1` FOREIGN KEY (`shirtcolor_id`) REFERENCES `shirtcolors` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `products_shirtsizes`
 --
 ALTER TABLE `products_shirtsizes`
-  ADD CONSTRAINT `fk_shirtsizes_products_products1` FOREIGN KEY (`products_id`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_shirtsizes_products_shirtsizes1` FOREIGN KEY (`shirtsizes_id`) REFERENCES `shirtsizes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_shirtsizes_products_products1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_shirtsizes_products_shirtsizes1` FOREIGN KEY (`shirtsize_id`) REFERENCES `shirtsizes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `products_shirttypes`
 --
 ALTER TABLE `products_shirttypes`
-  ADD CONSTRAINT `fk_products_has_shirttypes_products1` FOREIGN KEY (`products_id`) REFERENCES `products` (`id`),
-  ADD CONSTRAINT `fk_products_has_shirttypes_shirttypes1` FOREIGN KEY (`shirttypes_id`) REFERENCES `shirttypes` (`id`);
+  ADD CONSTRAINT `fk_products_has_shirttypes_products1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
+  ADD CONSTRAINT `fk_products_has_shirttypes_shirttypes1` FOREIGN KEY (`shirttype_id`) REFERENCES `shirttypes` (`id`);
 
 --
 -- Filtros para la tabla `uicode`
 --
 ALTER TABLE `uicode`
-  ADD CONSTRAINT `rol_UICode` FOREIGN KEY (`roles_id`) REFERENCES `roles` (`id`);
+  ADD CONSTRAINT `rol_UICode` FOREIGN KEY (`rol_id`) REFERENCES `roles` (`id`);
 
 --
 -- Filtros para la tabla `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `roles_users` FOREIGN KEY (`roles_id`) REFERENCES `roles` (`id`);
+  ADD CONSTRAINT `roles_users` FOREIGN KEY (`rol_id`) REFERENCES `roles` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
