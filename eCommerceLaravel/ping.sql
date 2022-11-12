@@ -421,7 +421,7 @@ CREATE TABLE `users` (
   `birthDate` date DEFAULT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `phone` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(20) COLLATE utf8mb4_unicode_ci NULL,
   `rol_id` int(11) NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -812,6 +812,7 @@ ALTER TABLE `uicode`
 ALTER TABLE `users`
   ADD CONSTRAINT `roles_users` FOREIGN KEY (`rol_id`) REFERENCES `roles` (`id`);
 COMMIT;
+ALTER TABLE `users` CHANGE `rol_id` `rol_id` INT(11) NOT NULL DEFAULT '2';
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
