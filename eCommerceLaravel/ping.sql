@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-11-2022 a las 02:16:48
+-- Tiempo de generación: 13-11-2022 a las 02:49:22
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -11,7 +11,7 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-DROP TABLE IF EXISTS `ping`;
+DROP DATABASE IF EXISTS `ping`;
 CREATE DATABASE `ping`;
 USE `ping`;
 
@@ -47,13 +47,25 @@ CREATE TABLE `aboutus` (
 
 CREATE TABLE `bills` (
   `id` int(11) NOT NULL,
-  `billState_id` int(5) NOT NULL,
-  `paymentMethod_id` int(11) NOT NULL,
+  `billState_id` int(5) NOT NULL DEFAULT 1,
+  `paymentMethod_id` int(11) NOT NULL DEFAULT 1,
   `subTotal` int(11) DEFAULT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `bills`
+--
+
+INSERT INTO `bills` (`id`, `billState_id`, `paymentMethod_id`, `subTotal`, `user_id`, `created_at`, `updated_at`) VALUES
+(2, 1, 1, NULL, 5, NULL, NULL),
+(3, 1, 1, NULL, 4, NULL, NULL),
+(4, 4, 1, NULL, 3, NULL, NULL),
+(5, 3, 1, 100000, 4, NULL, NULL),
+(6, 1, 1, 27000, 3, NULL, NULL),
+(7, 3, 1, 25000, 5, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -68,6 +80,15 @@ CREATE TABLE `billstates` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `billstates`
+--
+
+INSERT INTO `billstates` (`id`, `state`, `created_at`, `updated_at`) VALUES
+(1, 'Carrito', NULL, NULL),
+(3, 'Entregado', NULL, NULL),
+(4, 'En espera', NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -80,6 +101,16 @@ CREATE TABLE `categories` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(5, 'Mujeres', NULL, NULL),
+(6, 'Hombres', NULL, NULL),
+(7, 'Jovenes', NULL, NULL),
+(8, 'Niños', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -95,6 +126,14 @@ CREATE TABLE `deliveries` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `deliveries`
+--
+
+INSERT INTO `deliveries` (`id`, `direction`, `bill_id`, `created_at`, `updated_at`) VALUES
+(1, 'calle 40 $ 32 - 15 norte', 7, NULL, NULL),
+(2, 'Carrera 16 # 23-89 sur', 6, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -109,6 +148,14 @@ CREATE TABLE `descountsettings` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `descountsettings`
+--
+
+INSERT INTO `descountsettings` (`id`, `descriptionDescount`, `descount`, `applyDate`, `created_at`, `updated_at`) VALUES
+(5, 'Sin descuento', 0, '0000-00-00', NULL, NULL),
+(6, 'Por Navidad', 10, '2022-11-20', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -154,6 +201,13 @@ CREATE TABLE `managementpqrs` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `managementpqrs`
+--
+
+INSERT INTO `managementpqrs` (`id`, `description`, `fechaPqrs`, `state`, `typePqrs_id`, `user_id`, `created_at`, `updated_at`) VALUES
+(2, 'la página funciona re bien :]', '2022-11-12', '0', 6, 4, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -176,11 +230,22 @@ CREATE TABLE `ordersbase` (
   `id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
   `bill_id` int(11) NOT NULL,
-  `dimensionPrint_id` int(11) NOT NULL,
+  `dimensionPrint_id` int(11) DEFAULT NULL,
   `product_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `ordersbase`
+--
+
+INSERT INTO `ordersbase` (`id`, `quantity`, `bill_id`, `dimensionPrint_id`, `product_id`, `created_at`, `updated_at`) VALUES
+(9, 9, 4, NULL, 4, NULL, NULL),
+(10, 10, 2, NULL, 4, NULL, NULL),
+(11, 3, 6, NULL, 3, NULL, NULL),
+(12, 2, 3, NULL, 4, NULL, NULL),
+(13, 2, 3, NULL, 3, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -206,6 +271,14 @@ CREATE TABLE `paymentmethods` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `paymentmethods`
+--
+
+INSERT INTO `paymentmethods` (`id`, `method`, `created_at`, `updated_at`) VALUES
+(1, 'payPal', NULL, NULL),
+(2, 'PSE', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -258,6 +331,14 @@ CREATE TABLE `products` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `products`
+--
+
+INSERT INTO `products` (`id`, `name`, `price`, `description`, `garanty`, `quantity`, `created_at`, `updated_at`) VALUES
+(3, 'camisa roblox', 15000, 'camisa con personajes de roblox', NULL, 15, NULL, NULL),
+(4, 'Subway Surfers', 15000, 'camisa con personajes de subway surfers y sus escenarios', 15, 5, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -269,6 +350,17 @@ CREATE TABLE `products_categories` (
   `category_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `products_categories`
+--
+
+INSERT INTO `products_categories` (`product_id`, `category_id`) VALUES
+(3, 6),
+(3, 7),
+(3, 8),
+(4, 7),
+(4, 8);
+
 -- --------------------------------------------------------
 
 --
@@ -277,9 +369,16 @@ CREATE TABLE `products_categories` (
 
 CREATE TABLE `products_descountsettings` (
   `product_id` int(11) NOT NULL,
-  `descountsetting_id` int(11) NOT NULL,
-  `descountsettings_descount` float NOT NULL
+  `descountsetting_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `products_descountsettings`
+--
+
+INSERT INTO `products_descountsettings` (`product_id`, `descountsetting_id`) VALUES
+(3, 5),
+(4, 5);
 
 -- --------------------------------------------------------
 
@@ -293,6 +392,16 @@ CREATE TABLE `products_shirtcolors` (
   `image` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `products_shirtcolors`
+--
+
+INSERT INTO `products_shirtcolors` (`product_id`, `shirtcolor_id`, `image`) VALUES
+(3, 5, NULL),
+(3, 6, NULL),
+(4, 6, NULL),
+(4, 7, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -304,6 +413,16 @@ CREATE TABLE `products_shirtsizes` (
   `product_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `products_shirtsizes`
+--
+
+INSERT INTO `products_shirtsizes` (`shirtsize_id`, `product_id`) VALUES
+(5, 4),
+(7, 3),
+(8, 3),
+(8, 4);
+
 -- --------------------------------------------------------
 
 --
@@ -314,6 +433,16 @@ CREATE TABLE `products_shirttypes` (
   `product_id` int(11) NOT NULL,
   `shirttype_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `products_shirttypes`
+--
+
+INSERT INTO `products_shirttypes` (`product_id`, `shirttype_id`) VALUES
+(3, 5),
+(3, 7),
+(4, 5),
+(4, 6);
 
 -- --------------------------------------------------------
 
@@ -327,6 +456,14 @@ CREATE TABLE `roles` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `roles`
+--
+
+INSERT INTO `roles` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'Aministrador', NULL, NULL),
+(2, 'Cliente', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -342,6 +479,15 @@ CREATE TABLE `shirtcolors` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `shirtcolors`
+--
+
+INSERT INTO `shirtcolors` (`id`, `name`, `color`, `created_at`, `updated_at`) VALUES
+(5, 'Azul', '#0000ff', NULL, NULL),
+(6, 'Rojo', '#ff0000', NULL, NULL),
+(7, 'Verde', '#00ff00', NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -354,6 +500,17 @@ CREATE TABLE `shirtsizes` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `shirtsizes`
+--
+
+INSERT INTO `shirtsizes` (`id`, `sizes`, `created_at`, `updated_at`) VALUES
+(5, 'XXL', NULL, NULL),
+(6, 'L', NULL, NULL),
+(7, 'M', NULL, NULL),
+(8, 'S', NULL, NULL),
+(9, 'XL', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -368,6 +525,15 @@ CREATE TABLE `shirttypes` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `shirttypes`
+--
+
+INSERT INTO `shirttypes` (`id`, `types`, `created_at`, `updated_at`) VALUES
+(5, 'Algodon', NULL, NULL),
+(6, 'Licra', NULL, NULL),
+(7, 'Seda', NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -381,6 +547,18 @@ CREATE TABLE `typespqrs` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `typespqrs`
+--
+
+INSERT INTO `typespqrs` (`id`, `typesPqrs`, `created_at`, `updated_at`) VALUES
+(1, 'Peticion', NULL, NULL),
+(2, 'Queja', NULL, NULL),
+(3, 'Reclamo', NULL, NULL),
+(4, 'Sugerencia', NULL, NULL),
+(5, 'Pregunta', NULL, NULL),
+(6, 'Felicitación', NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -393,6 +571,17 @@ CREATE TABLE `typesprint` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `typesprint`
+--
+
+INSERT INTO `typesprint` (`id`, `typesPrint`, `created_at`, `updated_at`) VALUES
+(1, 'Sublimación', NULL, NULL),
+(2, 'Vinilo Impreso', NULL, NULL),
+(3, 'Serigrafia', NULL, NULL),
+(4, 'Transfer', NULL, NULL),
+(5, 'Laser (DTF)', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -421,13 +610,22 @@ CREATE TABLE `users` (
   `birthDate` date DEFAULT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `phone` varchar(20) COLLATE utf8mb4_unicode_ci NULL,
-  `rol_id` int(11) NOT NULL,
+  `phone` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `rol_id` int(11) NOT NULL DEFAULT 2,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `lastName`, `birthDate`, `email`, `email_verified_at`, `phone`, `rol_id`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(3, 'Daniel Mauricio', NULL, NULL, 'damn-man@yahoo.es', NULL, NULL, 2, '$2y$10$vnPqYVtdqZTV3E1Wflr7luqjxv4UFmBZySVtU1w7H91jTKof.eSoq', NULL, '2022-11-13 04:23:51', '2022-11-13 04:23:51'),
+(4, 'Gerardo', 'Gonzales', '2011-09-16', 'gerardo15@gmail.com', NULL, '3189234589', 2, '$2a$12$UVUbt0NThImIF4gXD7RLJehGW1wS8fEs.4O7xeepeJmanTM3RvI/e', NULL, '2022-11-13 01:09:43', '2022-11-13 01:09:43'),
+(5, 'María Alejandra', 'Castillo Sierra', '2000-05-28', 'mariale@hotmail.com', NULL, '3224838312', 1, '$2a$12$V8wa9NoPLiRyrplGM.gRmOsZaE6givcQRZ.zw8I0ITg1FefV/1UKK', NULL, '2022-11-13 01:09:43', '2022-11-13 01:09:43');
 
 --
 -- Índices para tablas volcadas
@@ -545,8 +743,8 @@ ALTER TABLE `products_categories`
 -- Indices de la tabla `products_descountsettings`
 --
 ALTER TABLE `products_descountsettings`
-  ADD PRIMARY KEY (`product_id`,`descountsetting_id`,`descountsettings_descount`),
-  ADD KEY `fk_products_has_descountsettings_descountsettings1` (`descountsetting_id`,`descountsettings_descount`);
+  ADD PRIMARY KEY (`product_id`,`descountsetting_id`) USING BTREE,
+  ADD KEY `fk_products_has_descountsettings_descountsettings1` (`descountsetting_id`) USING BTREE;
 
 --
 -- Indices de la tabla `products_shirtcolors`
@@ -627,31 +825,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `bills`
 --
 ALTER TABLE `bills`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `billstates`
 --
 ALTER TABLE `billstates`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `deliveries`
 --
 ALTER TABLE `deliveries`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `descountsettings`
 --
 ALTER TABLE `descountsettings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `dimensionprint`
@@ -669,7 +867,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT de la tabla `managementpqrs`
 --
 ALTER TABLE `managementpqrs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `migrations`
@@ -681,7 +879,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT de la tabla `ordersbase`
 --
 ALTER TABLE `ordersbase`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `personal_access_tokens`
@@ -693,37 +891,37 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT de la tabla `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `shirtcolors`
 --
 ALTER TABLE `shirtcolors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `shirtsizes`
 --
 ALTER TABLE `shirtsizes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `shirttypes`
 --
 ALTER TABLE `shirttypes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `typesprint`
 --
 ALTER TABLE `typesprint`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restricciones para tablas volcadas
@@ -776,43 +974,30 @@ ALTER TABLE `products_categories`
 -- Filtros para la tabla `products_descountsettings`
 --
 ALTER TABLE `products_descountsettings`
-  ADD CONSTRAINT `fk_products_has_descountsettings_descountsettings1` FOREIGN KEY (`descountsetting_id`,`descountsettings_descount`) REFERENCES `descountsettings` (`id`, `descount`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_products_has_descountsettings_products1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `products_descountsettings_descountsettings` FOREIGN KEY (`descountsetting_id`) REFERENCES `descountsettings` (`id`),
+  ADD CONSTRAINT `products_descountsettings_products` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 
 --
 -- Filtros para la tabla `products_shirtcolors`
 --
 ALTER TABLE `products_shirtcolors`
-  ADD CONSTRAINT `fk_products_has_shirtcolors_products1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_products_has_shirtcolors_shirtcolors1` FOREIGN KEY (`shirtcolor_id`) REFERENCES `shirtcolors` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `products_shirtcolors_products` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
+  ADD CONSTRAINT `products_shirtcolors_shirtcolors` FOREIGN KEY (`shirtcolor_id`) REFERENCES `shirtcolors` (`id`);
 
 --
 -- Filtros para la tabla `products_shirtsizes`
 --
 ALTER TABLE `products_shirtsizes`
-  ADD CONSTRAINT `fk_shirtsizes_products_products1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_shirtsizes_products_shirtsizes1` FOREIGN KEY (`shirtsize_id`) REFERENCES `shirtsizes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `products_shirtsizes_products` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
+  ADD CONSTRAINT `products_shirtsizes_shirtsizes` FOREIGN KEY (`shirtsize_id`) REFERENCES `shirtsizes` (`id`);
 
 --
 -- Filtros para la tabla `products_shirttypes`
 --
 ALTER TABLE `products_shirttypes`
-  ADD CONSTRAINT `fk_products_has_shirttypes_products1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
-  ADD CONSTRAINT `fk_products_has_shirttypes_shirttypes1` FOREIGN KEY (`shirttype_id`) REFERENCES `shirttypes` (`id`);
-
---
--- Filtros para la tabla `uicode`
---
-ALTER TABLE `uicode`
-  ADD CONSTRAINT `rol_UICode` FOREIGN KEY (`rol_id`) REFERENCES `roles` (`id`);
-
---
--- Filtros para la tabla `users`
---
-ALTER TABLE `users`
-  ADD CONSTRAINT `roles_users` FOREIGN KEY (`rol_id`) REFERENCES `roles` (`id`);
+  ADD CONSTRAINT `products_shirttypes_products` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
+  ADD CONSTRAINT `products_shirttypes_shirttypes` FOREIGN KEY (`shirttype_id`) REFERENCES `shirttypes` (`id`);
 COMMIT;
-ALTER TABLE `users` CHANGE `rol_id` `rol_id` INT(11) NOT NULL DEFAULT '2';
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
