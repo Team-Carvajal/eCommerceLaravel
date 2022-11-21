@@ -22,11 +22,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::resource('/',HomeController::class);
-Route::resource('/home',HomeController::class);
-Route::resource('/perfil',ProfileController::class);
+Route::get('/home', [HomeController::class, 'index']);
+
+
+Route::get('/perfil', [ProfileController::class, 'index']);
+
 Route::resource('/login',LoginController::class);
 Route::resource('/registro',SignupController::class);
-Route::resource('/categorias',CategoryController::class);
+
+Route::get('/categorias',[CategoryController::class, 'index']);
+
+
 Route::resource('/productos', ProductController::class);
-Route::resource('/contactanos', ContactusController::class);
+
+Route::get('/contactanos', [ContactusController::class, 'index']);
+
+
 Route::resource('/carrito', ShoppingcarController::class);
