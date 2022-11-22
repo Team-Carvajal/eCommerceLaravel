@@ -5,8 +5,11 @@
 
     <div class="vh-100 d-grid">
         <div class="blur  col-10 col-md-8 col-lg-5 col-sm-8 shadow rounded-2em m-auto">
-            <form >
+            <form method="POST" action="{{ route('authentication') }}" >
                 <div class="d-grid">
+
+                    @csrf
+
                     <!-- <a href="/"><i class="bi bi-arrow-left-circle-fill bg-muted fs-1 position-absolute mt-1"></i></a> -->
                     <a href="/"><i class="bi bi-arrow-left fs-2 position-absolute mt-3 ms-3"></i></a>
                     <div class="mb-5 mt-5" >
@@ -16,11 +19,11 @@
                     <div class="col-12 mx-auto">
                         <div class="mb-3 d-flex">
                             <span class="bg-transparent input-group-text border-0 position-absolute" id="basic-addon1"><i class="bi bi-envelope text-muted"></i></span>
-                            <input required type="mail" class="form-control ps-5" placeholder="Correo" aria-label="Username" aria-describedby="basic-addon1">
+                            <input required type="mail" name="email" class="form-control ps-5" placeholder="Correo" aria-label="Username" aria-describedby="basic-addon1">
                         </div>
                         <div class="mb-4 d-flex">
                             <span class="bg-transparent input-group-text border-0 position-absolute" id="basic-addon1"><i class="bi bi-lock-fill text-muted"></i></span>
-                            <input required type="password" class="form-control ps-5" placeholder="Contraseña" aria-label="Username" aria-describedby="basic-addon1">
+                            <input required type="password" name="password" class="form-control ps-5" placeholder="Contraseña" aria-label="Username" aria-describedby="basic-addon1">
                         </div>
                         <div class=" row col-md-6 col-sm-6 mx-auto mb-5 container ">
                             <input type="submit" class="btn btn-primary shadow-sm " value="Continuar" >

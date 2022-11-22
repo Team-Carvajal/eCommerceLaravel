@@ -27,8 +27,19 @@ Route::get('/home', [HomeController::class, 'index']);
 
 Route::get('/perfil', [ProfileController::class, 'index']);
 
-Route::resource('/login',LoginController::class);
-Route::resource('/registro',SignupController::class);
+
+
+//Login
+Route::get('/login', [LoginController::class, 'index']);
+Route::post('login', [LoginController::class, 'login'])->name('authentication');
+
+Route::get('/registro', [SignupController::class, 'index']);
+Route::post('/registro', [SignupController::class, 'store'])->name('save');
+
+
+
+
+
 
 Route::get('/categorias',[CategoryController::class, 'index']);
 

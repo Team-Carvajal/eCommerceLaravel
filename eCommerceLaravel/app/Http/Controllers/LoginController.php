@@ -2,84 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\login;
+
+
+use App\Models\signup;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class LoginController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
+{   
+
+    public function index(){
         return view('login');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\login  $login
-     * @return \Illuminate\Http\Response
-     */
-    public function show(login $login)
-    {
-        //
-    }
+    public function login(Request $request){
+    $credentials = $request->validate([
+        'email' => ['required', 'email'],
+        'password' => ['required'],
+    ]);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\login  $login
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(login $login)
-    {
-        //
-    }
+    if (Auth::attempt($credentials)) {
+        $request->session()->regenerate();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\login  $login
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, login $login)
-    {
-        //
+        return redirect()->intended('/');
     }
+}
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\login  $login
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(login $login)
-    {
-        //
-    }
 }

@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class signup extends Model
 {
     use HasFactory;
+
+    protected $table = 'users';
+
+    protected $fillable = [
+            'name',
+            'lastName',
+            'email',
+            'phone',
+            'roles_id',
+            'password',
+    ];
 }
