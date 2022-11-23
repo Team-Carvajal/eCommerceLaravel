@@ -1,5 +1,35 @@
 @extends('index')
 @section('content')
+
+<script>
+  function editar(){
+
+document.getElementById('nombre').readOnly = false;
+document.getElementById('apellidos').readOnly = false;
+document.getElementById('correo').readOnly = false;
+document.getElementById('fecha').readOnly = false;
+document.getElementById('celular').readOnly = false;    
+document.getElementById('editar').style.display = "none";    
+document.getElementById('cancelar').style.display = "inline-block";    
+
+
+}
+
+function cancelar(){
+
+document.getElementById('nombre').readOnly = true;
+document.getElementById('apellidos').readOnly =true;
+document.getElementById('correo').readOnly = true;
+document.getElementById('fecha').readOnly = true;
+document.getElementById('celular').readOnly = true;    
+document.getElementById('editar').style.display = "inline-block";    
+document.getElementById('cancelar').style.display = "none";    
+
+
+}
+
+
+</script>
 <div class="container pt-5 mt-5">
     <div class="main-body pt-4 ">
             <div class="row gutters-sm">
@@ -23,29 +53,35 @@
                         <div class="container">                      
                             <form >
                                 <div class="form-group">
-                                    <label class="letra">Nombre completo:</label>
-                                    <input type="text" class="form-control letra" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" readonly>
+                                    <label class="letra">Nombres:</label>
+                                    <input type="text" class="form-control letra" id="nombre" aria-describedby="emailHelp" placeholder="" readonly>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                  <label class="letra">apellidos:</label>
+                                  <input type="text" class="form-control letra" id="apellidos" aria-describedby="emailHelp" placeholder="" readonly>
                                 </div>
                                 <br>
                                 <div class="form-group">
                                     <label class="letra">Correo electronico:</label>
-                                    <input type="text" class="form-control letra" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" readonly>
+                                    <input type="text" class="form-control letra" id="correo" aria-describedby="emailHelp" placeholder="" readonly>
                                 </div>
                                 <br>
                                 <div class="form-group">
                                     <label class="letra">Fecha de nacimiento:</label>
-                                    <input type="datetime" class="form-control letra" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" readonly>
+                                    <input type="datetime" class="form-control letra" id="fecha" aria-describedby="emailHelp" placeholder="" readonly>
                                 </div>
                                 <br>
                                 <div class="form-group">
-                                    <label class="letra">Movil:</label>
-                                    <input type="text" class="form-control letra" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" readonly>
+                                    <label class="letra">celular:</label>
+                                    <input type="text" class="form-control letra" id="celular" aria-describedby="emailHelp" placeholder="" readonly>
                                 </div>
                             </form>
                             <br>
                             <div class="col-sm-12">
-                            <a class="btn btn-outline-ping" target="__blank" ><i class="bi bi-pen-fill"></i></a>
-                            <a class="btn btn-outline-primary" target="__blank"><i class="bi bi-send-fill"></i></a>
+                            <button onclick ="editar()" id ="editar" class="btn btn-outline-ping"><i class="bi bi-pen-fill"></i></button>
+                            <button onclick ="cancelar()" id ="cancelar" style="display: none" class="btn btn-outline-ping"><i class="bi bi-x-lg"></i></button>
+                            <button id ="enviar" class="btn btn-outline-primary"><i class="bi bi-send-fill"></i></button>
                             </div>
                         </div>                       
                       </div>
