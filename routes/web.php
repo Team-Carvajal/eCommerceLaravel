@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactusController;
+use App\Http\Controllers\DetailProductController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
@@ -37,7 +38,7 @@ Route::post('/registro', [SignupController::class, 'store'])->name('save');
 
 Route::resource('/categorias',CategoryController::class);
 Route::get('/productos', [ProductController::class, 'index']);
-Route::get('/{categoria}/{shirttype}/{producto}', [ProductController::class, 'show']);
+Route::get('/{categoria}/{shirttype}/{producto}', [DetailProductController::class, 'show']);
 
 Route::resource('/contactanos', ContactusController::class);
 
