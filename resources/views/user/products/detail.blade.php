@@ -41,11 +41,11 @@
         width: 20px;
     }
 
-    <?php foreach ($color as $colors){ ?>
+    @php foreach ($color as $colors){
     .colores label[for="c-<?php echo $colors->name; ?>"]{
         background-color: {{$colors->color}};
     }
-    <?php } ?>
+    } @endphp
 
     .colorActive{
         box-shadow: 0 0 1px 5px #00000040 ;
