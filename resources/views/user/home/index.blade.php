@@ -19,8 +19,7 @@
                             </div>
                             {{-- @foreach ($joincolor as $joinimage ) --}}
                                 {{-- @if ($joinimage->product_id == 3 && $joinimage->shirtcolor_id == 2 ) --}}
-                                    <?php $rand = rand(1,6) ?>
-                                    <img src="{{ url('assets/images/productosparatesteo/00'.$rand . '.jpg')}}" alt="" class="banner-1">
+                                    <img src="{{ url('assets/images/productosparatesteo/00.jpg')}}" alt="" class="banner-1">
                                 {{-- @endif --}}
                             {{-- @endforeach --}}
                         </div>

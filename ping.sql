@@ -336,12 +336,12 @@ CREATE TABLE `products` (
 -- Volcado de datos para la tabla `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `price`, `description`, `garanty`, `quantity`, `created_at`, `updated_at`) VALUES
-(1, 'Camisa de Koro Sensei Assassination Classroom', 55000, '', NULL, 12, '2022-11-16 06:49:01', '2022-11-16 06:49:01'),
-(2, 'Camisa de Goku Dragon ball', 55000, '', NULL, 10, '2022-11-16 07:21:52', '2022-11-16 07:21:52'),
-(3, 'Camisa Luffy Five Gear One Piece', 55000, '', NULL, 10, '2022-11-16 19:10:19', '2022-11-16 19:10:19'),
-(4, 'Camisa Saitama One Punch Man', 55000, '', NULL, 10, '2022-11-16 19:11:21', '2022-11-16 19:11:21'),
-(5, 'Camisa texto Beach', 55000, NULL, NULL, 5, '2022-11-17 08:28:12', '2022-11-17 08:28:13');
+INSERT INTO `products` VALUES
+    (1,'Koro Sensei Assassination Classroom',55000,'Te extrañamos profesor <3',NULL,12,'2022-11-16 06:49:01','2022-11-16 06:49:01'),
+    (2,'Goku Dragon ball',55000,'',NULL,10,'2022-11-16 07:21:52','2022-11-16 07:21:52'),
+    (3,'Luffy Nika Five Gear One Piece',55000,'',NULL,10,'2022-11-16 19:10:19','2022-11-16 19:10:19'),
+    (4,'Saitama One Punch Man',55000,'',NULL,10,'2022-11-16 19:11:21','2022-11-16 19:11:21'),
+    (5,'Camisa texto Beach',55000,NULL,NULL,5,'2022-11-17 08:28:12','2022-11-17 08:28:13');
 
 -- --------------------------------------------------------
 
@@ -402,15 +402,15 @@ CREATE TABLE `products_shirtcolors` (
 -- Volcado de datos para la tabla `products_shirtcolors`
 --
 
-INSERT INTO `products_shirtcolors` (`product_id`, `shirtcolor_id`, `image`) VALUES
-(1, 3, '1153467002.jpg'),
-(2, 1, '3057875722.jpg'),
-(2, 2, '4062048018.jpg'),
-(2, 6, '3381335575.jpg'),
-(3, 1, '2003813554.jpg'),
-(3, 2, '2253497583.jpg'),
-(4, 2, '2505438710.jpg'),
-(5, 1, '8407492372.jpg');
+INSERT INTO `products_shirtcolors` VALUES (1,3,'1153467002.jpg'),
+    (2,1,'3057875722.jpg'),
+    (2,2,'4062048018.jpg'),
+    (2,6,'3381335575.jpg'),
+    (3,1,'2003813554.jpg'),
+    (3,2,'2253497583.jpg'),
+    (4,2,'2505438710.jpg'),
+    (5,1,'8407492372.jpg');
+
 
 -- --------------------------------------------------------
 
@@ -418,7 +418,7 @@ INSERT INTO `products_shirtcolors` (`product_id`, `shirtcolor_id`, `image`) VALU
 -- Estructura de tabla para la tabla `products_shirtsizes`
 --
 
-CREATE TABLE `products_shirtsizes` (
+CREATE TABLE `products_shirtsizes`(
   `product_id` int(11) NOT NULL,
   `shirtsize_id` int(11) NOT NULL,
   `stock` int(11) NOT NULL
@@ -428,11 +428,12 @@ CREATE TABLE `products_shirtsizes` (
 -- Volcado de datos para la tabla `products_shirtsizes`
 --
 
-INSERT INTO `products_shirtsizes` (`shirtsize_id`, `product_id`, `stock`) VALUES
-(5, 4, 10),
-(7, 3, 10),
-(8, 3, 10),
-(8, 4, 10);
+INSERT INTO `products_shirtsizes` VALUES
+    (1,2),
+    (2,2),
+    (3,1),
+    (3,2),
+    (5,2);
 
 --
 -- Estructura de tabla para la tabla `products_typesprint`
@@ -447,12 +448,6 @@ CREATE TABLE `products_typesprint` (
 --
 -- Volcado de datos para la tabla `products_shirtsizes`
 --
-
-INSERT INTO `products_typesprint` ( `product_id`, `typeprint_id`,`stock`) VALUES
-(5, 4, 10),
-(7, 3, 10),
-(8, 3, 10),
-(8, 4, 10);
 
 -- --------------------------------------------------------
 
@@ -470,11 +465,6 @@ CREATE TABLE `products_shirttypes` (
 -- Volcado de datos para la tabla `products_shirttypes`
 --
 
-INSERT INTO `products_shirttypes` (`product_id`, `shirttype_id`, `stock`) VALUES
-(3, 5, 8),
-(3, 7, 8),
-(4, 5, 8),
-(4, 6, 8);
 
 -- --------------------------------------------------------
 
@@ -516,14 +506,15 @@ CREATE TABLE `shirtcolors` (
 -- Volcado de datos para la tabla `shirtcolors`
 --
 
+INSERT INTO `shirtcolors` VALUES
+    (1,'blanco','#ffffff','2022-11-17 00:18:50','2022-11-17 00:18:50'),
+    (2,'negro','#000000','2022-11-17 00:19:33','2022-11-17 00:19:33'),
+    (3,'amarillo','#ffff00','2022-11-17 00:20:00','2022-11-17 00:20:00'),
+    (4,'rojo','#ff0000','2022-11-17 00:21:00','2022-11-17 00:21:00'),
+    (5,'azul','#0000ff','2022-11-17 00:27:53','2022-11-17 00:27:53'),
+    (6,'naranja','#ff8000','2022-11-17 07:17:10','2022-11-17 07:17:10'),
+    (7,'verde','#00bb2d','2022-11-21 22:26:44','2022-11-21 22:26:44');
 
-INSERT INTO `shirtcolors` (`id`, `name`, `color`, `created_at`, `updated_at`) VALUES
-(1, 'blanco', '#ffffff', '2022-11-17 00:18:50', '2022-11-17 00:18:50'),
-(2, 'negro', '#000000', '2022-11-17 00:19:33', '2022-11-17 00:19:33'),
-(3, 'amarillo', '#ffff00', '2022-11-17 00:20:00', '2022-11-17 00:20:00'),
-(4, 'rojo', '#ff0000', '2022-11-17 00:21:00', '2022-11-17 00:21:00'),
-(5, 'azul', '#0000ff', '2022-11-17 00:27:53', '2022-11-17 00:27:53'),
-(6, 'naranja', '#ff8000', '2022-11-17 07:17:10', '2022-11-17 07:17:10');
 
 -- --------------------------------------------------------
 
@@ -542,12 +533,14 @@ CREATE TABLE `shirtsizes` (
 -- Volcado de datos para la tabla `shirtsizes`
 --
 
-INSERT INTO `shirtsizes` (`id`, `size`, `created_at`, `updated_at`) VALUES
-(5, 'XXL', NULL, NULL),
-(6, 'L', NULL, NULL),
-(7, 'M', NULL, NULL),
-(8, 'S', NULL, NULL),
-(9, 'XL', NULL, NULL);
+INSERT INTO `shirtsizes` VALUES
+(1,'S','2022-11-21 20:53:57','2022-11-21 20:54:16'),
+(2,'M','2022-11-21 20:57:42','2022-11-21 20:57:50'),
+(3,'L','2022-11-21 20:56:15','2022-11-21 20:56:15'),
+(4,'XS','2022-11-21 20:58:16','2022-11-21 20:58:16'),
+(5,'XL','2022-11-21 21:01:24','2022-11-21 21:01:24'),
+(6,'XXL','2022-11-21 21:01:24','2022-11-21 21:01:24');
+
 
 -- --------------------------------------------------------
 
@@ -566,10 +559,9 @@ CREATE TABLE `shirttypes` (
 -- Volcado de datos para la tabla `shirttypes`
 --
 
-INSERT INTO `shirttypes` (`id`, `type`, `created_at`, `updated_at`) VALUES
-(5, 'Camisa cuello redondo', NULL, NULL),
-(6, 'Camisa cuello en v', NULL, NULL),
-(7, 'Seda', NULL, NULL);
+INSERT INTO `shirttypes` VALUES
+    (1,'camiseta cuello redondo','2022-11-21 21:47:03','2022-11-21 21:47:03');
+
 
 -- --------------------------------------------------------
 
