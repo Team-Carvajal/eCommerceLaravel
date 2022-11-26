@@ -41,11 +41,11 @@
         width: 20px;
     }
 
-    @php foreach ($color as $colors){
+    <?php foreach ($color as $colors){ ?>
     .colores label[for="c-<?php echo $colors->name; ?>"]{
         background-color: {{$colors->color}};
     }
-    } @endphp
+    <?php } ?>
 
     .colorActive{
         box-shadow: 0 0 1px 5px #00000040 ;
@@ -63,7 +63,9 @@
         filter: brightness(95%);
     }
 
-
+    a:hover{
+        text-decoration: underline !important;
+    }
 
 
 </style>
@@ -84,11 +86,18 @@
 
 
 {{-- ///////////////////// --}}
+@php
+$shirtcolor_id = "";
+$shirtcolor_name = [];
+$shirtcolor_image = [];
+@endphp
 
         <div class="mb-4  float-start fs-6">
-            <a href="/categorias" class="text-dark">Categorias</a>
-            <a href="/{{$categoryname}}" class="text-dark">>{{$categoryname}}</a>
-            <a href="/{{$categoryname}}/{{str_replace(' ' , '-', (strtolower($shirttype . "/" . $product)))}}" class="text-dark">>{{str_replace(' ' , '-', (ucfirst($shirttype)))}}</a>
+            <a  href="/categorias" class="text-dark">Categorias</a>
+            /
+            <a  href="/{{$categoryname}}" class="text-dark">{{$categoryname}}</a>
+            /
+            <a class="text-dark">{{str_replace(' ' , '-', (ucfirst($shirttype) . "-" . $product))}}</a>
         </div>
             <div class=" d-md-grid d-grid d-lg-flex container-fluid">
                 <div class=" col-lg-6 col-md-10 col-sm-12 col-12 mx-auto d-grid mb-md-5 mb-5">
@@ -97,23 +106,18 @@
                             @foreach ($color as $colors)
                             @foreach( $productcolor as $procolor)
                                     @if ($procolor->shirtcolor_id == $colors->id)
-                                    <label class="shirtColor miniatura mb-2 me-2" for="c-{{$colors->name}}">
-                                        <img src="{{ url('assets/images/productosparatesteo/'. $procolor->image) }} " alt="" class="{{$colors->name . "" . $colors->id }}">
-                                    </label>
-                                        {{-- <label class="shirtColor" for="c-{{$colors->name}}"></label> --}}
-                                        {{-- <input value="{{ucfirst($colors->name)}}" hidden type="radio" name="color" id="c-{{$colors->name}}"> --}}
+                                        {{-- <label class="shirtColor miniatura mb-2 me-2" for="c-{{$colors->name}}"> --}}
+                                            {{-- <img src="{{ url('assets/images/productosparatesteo/'. $procolor->image) }} " alt="" class="{{$colors->name . "" . $colors->id }}"> --}}
+                                        {{-- </label> --}}
+                                        @php $shirtcolor_name[] = $colors->name @endphp
+                                        @php $shirtcolor_image[] = $procolor->image @endphp
                                     @endif
                             @endforeach
                             @endforeach
                         </div>
                         <div class="col-10 img-product mx-auto left-images">
-                            @foreach ($color as $colors)
-                            @foreach( $productcolor as $procolor)
-                                    @if ($procolor->shirtcolor_id == $colors->id)
-                                        <img src="{{ url('assets/images/productosparatesteo/'. $procolor->image) }} " alt="">
-                                    @endif
-                            @endforeach
-                            @endforeach
+                            {{-- {{($procolor->shirtcolor_id)}} --}}
+                            <img src="{{ url('assets/images/productosparatesteo/'. $shirtcolor_image[0])}} " alt="" id="imageview">
                         </div>
                     </div>
                 </div>
@@ -172,7 +176,7 @@
                                     </div>
                                     <div class="quantity buttons_added col-6 d-grid">
                                         <div class="mx-lg-auto mx-md-auto">
-                                            <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
+                                            <input type="button" value="-" class="minus" onclick="minquant()" ><input type="number" step="1" min="1" max="{{$products->quantity}}" id="quantity" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus" onclick="maxquant()">
                                         </div>
                                         <div class="d-grid mt-2">
                                             <span class="fs-6 text-lg-center text-md-center">({{$products->quantity}}) Unidades disponibles</span>
@@ -181,7 +185,7 @@
                                 </div>
                             </div>
                             <div class="total">
-                                <h4 class="mb-3">Total: ${{number_format($products->price, 0, ',', '.')}}</h4>
+                                <h4 class="mb-3" id="total">Total : ${{number_format($products->price, 0, ',', '.')}}</h4>
                                 <div class="main-border-button text-center "><a href="#">Añadir al carrito</a></div>
                             </div>
                         </div>
@@ -191,18 +195,44 @@
         </div>
     </div>
 
-
-
-
 <script>
     let pColor = document.querySelector('#pcolor');
+
     let color = document.querySelector('#color');
+
     let pTalla = document.querySelector('#ptalla');
+
+    let imageview = document.querySelector('#imageview');
+
     let radioTalla = document.querySelector('#radio-talla');
+
+    let quantity = document.querySelector('#quantity');
+
+    let total = document.querySelector('#total');
+
+    let quant;
+
+    var item;
+
+    function maxquant(){
+        quant = parseInt(quantity.value)+1;
+        if(quant <= {{$products->quantity}}){
+            // console.log({{$products->price}}*quant);
+            total.innerHTML = ("Total : $" + Intl.NumberFormat('es-ES'). format(Math.round({{$products->price}}) * quant));
+        }
+    }
+    function minquant(){
+        quant = parseInt(quantity.value)-1;
+        if(quant > 0){
+            total.innerHTML = ("Total : $" + Intl.NumberFormat('es-ES'). format(Math.round({{$products->price}})));
+        }
+        // console.log({{$products->price}}/quant)
+    }
+
     if (document.querySelector('input[name="color"]')) {
         document.querySelectorAll('input[name="color"]').forEach((elem) => {
         elem.addEventListener("change", function(event) {
-            var item = event.target.value;
+            item = event.target.value;
             pColor.innerHTML = item;
             color.setAttribute('value', item);
         });
@@ -219,6 +249,8 @@
       });
     }
 
+
+
     let shirtSize = document.querySelectorAll('label.shirtSize');
     // For each button, register an event listener
     shirtSize.forEach(function(elem){
@@ -231,6 +263,7 @@
         e.target.classList.add("active");
     })
     })
+
     let ShirtColor = document.querySelectorAll('label.shirtColor');
     // For each button, register an event listener
     ShirtColor.forEach(function(elem){
@@ -241,6 +274,7 @@
         });
         // Add the class on clicked one
         e.target.classList.add("colorActive");
+        // imageview.src = "item";
     })
     })
 
