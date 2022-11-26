@@ -30,7 +30,13 @@ class HomeController extends Controller
      */
     public function show()
     {
-        return view('user.home.index');
+        $category = Category::all();
+        foreach($category as $product => $productCategory){
+            $productCategory = Product::whereRelation('categories', 'id', '=', '1')->get();
+        }
+
+        // dd($productCategory->toArray());
+        return view('user.home.index', compact('category'));
     }
 
 }

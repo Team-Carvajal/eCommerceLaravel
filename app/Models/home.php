@@ -10,6 +10,6 @@ use App\Models\category;
 class home extends Model
 {
     use HasFactory;
-
+    
 
 }

@@ -17,18 +17,14 @@
                                     <a href="/contactanos">Escribenos</a>
                                 </div>
                             </div>
-                            {{-- @foreach ($joincolor as $joinimage ) --}}
-                                {{-- @if ($joinimage->product_id == 3 && $joinimage->shirtcolor_id == 2 ) --}}
                                     <img src="{{ url('assets/images/productosparatesteo/00.jpg')}}" alt="" class="banner-1">
-                                {{-- @endif --}}
-                            {{-- @endforeach --}}
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="right-content">
                         <div class="row">
-                            @foreach ($productbanner as $categories)
+                            @foreach ($category as $categories)
                                 @if ($categories->id <= 3)
                                     <div class="col-lg-6">
                                         <div class="right-first-image">
@@ -84,14 +80,13 @@
 
 <!-- ***** Main Banner Area End ***** -->
 <!-- ***** Carousel Area Starts ***** -->
-{{-- @isset ($joincolor) --}}
-    {{-- {{$cantidad = count($joincolor)}} --}}
-    {{-- @foreach ($joincolor as $ca ) --}}
-        {{-- {{($ca->shirtcolor_id)}} --}}
-    {{-- @endforeach --}}
-    {{-- {{$joincolor}} --}}
+@php
+    $pro = "";
+    $image = "";
+@endphp
+
 {{-- @endisset --}}
-    @foreach ($productbanner as $categories)
+    @foreach ($category as $categories)
         <section class="section carousel-products" id="men">
             <div class="container">
                 <div class="row">
@@ -109,33 +104,22 @@
                         <div class="men-item-carousel">
                             <div class="owl-men-item owl-carousel">
 
-                                @foreach ($joincolor as $joc)
-                                        @foreach ($product as $pro)
-                                            @if($joc->product_id == $pro->id)
-                                                @foreach ($pro->JoinCategories as $ca)
-                                                    @if ($categories->id == $ca->prodcategories->category_id)
-                                                        @if ($ca->prodcategories->product_id == $pro->id)
-                                                            <div class="item">
-                                                                <div class="thumb">
-                                                                    <div class="hover-content">
-                                                                        <ul>
-                                                                            <li><a href="/producto/{{str_replace(' ' , '-', (strtolower($pro->name)))}}"><i class="fa fa-eye"></i></a></li>
-                                                                            <li><a href="/producto"><i class="fa fa-shopping-cart"></i></a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <img src="{{ url('assets/images/productosparatesteo/'.$joc->image)}}"alt="" class="pd-carousel">
-                                                                </div>
-                                                                <div class="down-content bg-transparent">
-                                                                        <h4 class="pe-3">{{$pro->name}}</h4>
-                                                                    <span>${{number_format($pro->price, 0, ',', '.')}}</span>
-                                                                </div>
-                                                            </div>
-                                                        @endif
-                                                    @endif
-                                                @endforeach
-                                            @endif
-                                        @endforeach
-                                @endforeach
+                                <div class="item">
+                                    <div class="thumb">
+                                        <div class="hover-content">
+                                            <ul>
+                                                <li><a href="/producto/{{str_replace(' ' , '-', (strtolower($pro)))}}"><i class="fa fa-eye"></i></a></li>
+                                                <li><a href="/producto"><i class="fa fa-shopping-cart"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <img src="{{ url('assets/images/productosparatesteo/'.$image)}}"alt="" class="pd-carousel">
+                                    </div>
+                                    <div class="down-content bg-transparent">
+                                            <h4 class="pe-3">{{$pro}}</h4> {{--nombre--}}
+                                        {{-- <span>${{number_format($pro, 0, ',', '.')}}</span> precio --}}
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
