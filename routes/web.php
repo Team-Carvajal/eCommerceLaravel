@@ -36,8 +36,9 @@ Route::get('/registro', [SignupController::class, 'index']);
 Route::post('/registro', [SignupController::class, 'store'])->name('save');
 
 
-Route::resource('/categorias',CategoryController::class);
-Route::get('/productos', [ProductController::class, 'index']);
+Route::resource('/categorias', CategoryController::class);
+Route::get('/{categoria}', [ProductController::class, 'bycategory']);
+
 Route::get('/{categoria}/{shirttype}/{producto}', [DetailProductController::class, 'show']);
 
 Route::resource('/contactanos', ContactusController::class);

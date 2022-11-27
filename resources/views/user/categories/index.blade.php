@@ -1,98 +1,70 @@
 @extends('user.layouts.index')
 @section('title', 'Categorias')
 @section('content')
-
-<!-- ***** Main Banner Area Start ***** -->
-<div class="main-banner carousel-products espacio" id="top">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="right-content">
-                        <div class="col-lg-6">
-                            <div class="right-first-image">
-                                <div class="thumb">
-                                    <div class="inner-content">
-                                        <h4>Mujer</h4>
-                                        <span>Lo mejor para las chicas</span>
-                                    </div>
-                                    <div class="hover-content">
-                                        <div class="inner">
-                                            <h4>Women</h4>
-                                            <p>Lorem ipsum dolor sit amet, conservisii ctetur adipiscing elit incid.</p>
-                                            <div class="main-border-button">
-                                                <a href="#">Discover More</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <img src="{{ url('assets/images/women-03.jpg')}}" class="banner-2">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="right-first-image">
-                                <div class="thumb">
-                                    <div class="inner-content">
-                                        <h4>Hombre</h4>
-                                        <span>Lo mejor para los caballeros</span>
-                                    </div>
-                                    <div class="hover-content">
-                                        <div class="inner">
-                                            <h4>Men</h4>
-                                            <p>Lorem ipsum dolor sit amet, conservisii ctetur adipiscing elit incid.</p>
-                                            <div class="main-border-button">
-                                                <a href="#">Discover More</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <img src="{{ url('assets/images/men-03.jpg')}}" class="banner-2">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="right-first-image">
-                                <div class="thumb">
-                                    <div class="inner-content">
-                                        <h4>Niños</h4>
-                                        <span>Viste con tus personajes favoritos!</span>
-                                    </div>
-                                    <div class="hover-content">
-                                        <div class="inner">
-                                            <h4>Kids</h4>
-                                            <p>Lorem ipsum dolor sit amet, conservisii ctetur adipiscing elit incid.</p>
-                                            <div class="main-border-button">
-                                                <a href="#">Discover More</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <img src="{{ url('assets/images/single-product-02.jpg')}}" class="banner-2">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="right-first-image">
-                                <div class="thumb">
-                                    <div class="inner-content">
-                                        <h4>Otros</h4>
-                                        <span>Soprendete con nuestros productos!</span>
-                                    </div>
-                                    <div class="hover-content">
-                                        <div class="inner">
-                                            <h4>Accessories</h4>
-                                            <p>Lorem ipsum dolor sit amet, conservisii ctetur adipiscing elit incid.</p>
-                                            <div class="main-border-button">
-                                                <a href="#">Discover More</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <img src="{{ url('assets/images/baner-right-image-04.jpg')}}" class="banner-2">
-                                </div>
-                            </div>
-                        </div>
+<style>
+    .section-heading span{
+        text-shadow: 0 0 0px #000000 !important;
+    }
+    .main-banner{
+        padding-top: 0px !important;
+    }
+</style>
+<!-- ***** Categories Area Start ***** -->
+<div class="espacio" id="top">
+    <section class="section" id="products">
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-heading">
+                        <h2>CATEGORIAS</h2>
+                        <span>Ropa para todas las edades</span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="main-banner mt-5" id="top">
+            <div class="container">
+                <div class="col-md-12">
+                    <div class="right-content">
+                        <div class="row">
+
+                        @foreach($data as $category)
+                            <div class="col-lg-6">
+                                <div class="right-first-image">
+                                    <div class="thumb">
+                                        <div class="inner-content">
+                                            <h4>{{ $category->name}}</h4>
+                                            <span>{{ $category->description }}</span>
+                                        </div>
+                                        <div class="hover-content">
+                                            <div class="inner">
+                                                <h4>{{ $category->name}}</h4>
+                                                <p>{{ $category->description }}</p>
+                                                <div class="main-border-button">
+                                                    <a href="{{ url(strtolower ($category->name)) }}">Ver Productos</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @if($category->image)
+                                        <img src="{{ url('assets/images/'.$category->image)}}">
+                                        @else
+                                        <img src="{{ url('assets/images/categorydefault.jpg')}}">
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+
+                    </div>
+                </div>
+
+
+            </div>
+         </div>
+     </div>
+    </section>
+
 </div>
-<!-- ***** Main Banner Area End ***** -->
+<!-- ***** Categories Area Ends ***** -->
 
 @endsection

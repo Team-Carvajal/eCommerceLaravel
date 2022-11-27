@@ -1,8 +1,8 @@
 
-/* 
+/*
 ---------------------------------------------
 Products Page
---------------------------------------------- 
+---------------------------------------------
 */
 
 .page-heading {
@@ -13,73 +13,73 @@ Products Page
     background-size: cover;
     background-repeat: no-repeat;
   }
-  
+
   .page-heading .inner-content {
     padding: 150px 0px;
     text-align: center;
   }
-  
+
   .page-heading .inner-content h2 {
     font-size: 52px;
     color: #fff;
     font-weight: 700;
     margin-bottom: 15px;
   }
-  
+
   .page-heading .inner-content span {
     font-size: 16px;
     font-weight: 500;
     color: #fff;
     font-style: italic;
   }
-  
+
   #products .section-heading {
     text-align: center;
-    margin-bottom: 60px;
+    /* margin-bottom: 60px; */
     margin-top: 80px;
   }
-  
+
   #products .item {
     margin-bottom: 30px;
   }
-  
+
   #products .item .thumb img {
     width: 100%;
     overflow: hidden;
   }
-  
+
   #products .item .down-content {
     padding-top: 20px;
     position: relative;
     z-index: 3;
     background-color: #fff;
   }
-  
+
   #products .item .down-content h4 {
     font-size: 22px;
     color: #2a2a2a;
     font-weight: 700;
     margin-bottom: 8px;
   }
-  
+
   #products .item .down-content span {
     font-size: 18px;
     color: #a1a1a1;
     font-weight: 500;
     display: block;
   }
-  
+
   #products .item .down-content ul.stars {
     position: absolute;
     right: 0;
     top: 20px;
   }
-  
+
   #products .item .down-content ul.stars li {
     display: inline;
     font-size: 13px;
   }
-  
+
   #products .item .thumb .hover-content {
     position: absolute;
     z-index: 2;
@@ -90,22 +90,22 @@ Products Page
     visibility: hidden;
     transition: all .5s;
   }
-  
+
   #products .item .thumb:hover .hover-content {
     bottom: 30px;
     opacity: 1;
     visibility: visible;
   }
-  
+
   #products .item .thumb {
     position: relative;
   }
-  
+
   #products .item .thumb .hover-content ul li {
     display: inline;
     margin: 0px 10px;
   }
-  
+
   #products .item .thumb .hover-content ul li a {
     width: 50px;
     height: 50px;
@@ -115,22 +115,22 @@ Products Page
     color: #2a2a2a;
     background-color: #fff;
   }
-  
+
   #products .pagination {
     margin-top: 30px;
     margin-bottom: 40px;
   }
-  
+
   #products .pagination ul {
     text-align: center;
     width: 100%;
   }
-  
+
   #products .pagination ul li {
     display: inline;
     margin: 0px 5px;
   }
-  
+
   #products .pagination ul li a {
     width: 44px;
     height: 44px;
@@ -142,25 +142,25 @@ Products Page
     font-weight: 500;
     color: #2a2a2a;
   }
-  
+
   #products .pagination ul li a:hover,
   #products .pagination ul li.active a {
     background-color: #2a2a2a;
     color: #fff;
   }
-  
-  
-  
-  /* 
+
+
+
+  /*
   ---------------------------------------------
   Single Product Page
-  --------------------------------------------- 
+  ---------------------------------------------
   */
-  
+
   #product {
     margin-top: 80px;
   }
-  
+
   #product .left-images img {
     width: 100%;
     overflow: hidden;
@@ -170,20 +170,20 @@ Products Page
     display: block;
     position: absolute;
     left: -50px;
-  } 
+  }
   #product .right-content {
     position: relative;
     z-index: 3;
     /* background-color: #fff; */
   }
-  
+
   #product .right-content h4 {
     font-size: 22px;
     color: #2a2a2a;
     font-weight: 700;
     margin-bottom: 0px;
   }
-  
+
   #product .right-content span.price {
     font-size: 18px;
     color: #a1a1a1;
@@ -193,18 +193,18 @@ Products Page
     border-bottom: 1px solid #eee;
     padding-bottom: 20px;
   }
-  
+
   #product .right-content ul.stars {
     position: absolute;
     right: 0;
     top: 0;
   }
-  
+
   #product .right-content ul.stars li {
     display: inline;
     font-size: 13px;
   }
-  
+
   #product .right-content span {
     font-size: 14px;
     color: #aaaaaa;
@@ -212,24 +212,24 @@ Products Page
     display: block;
     margin-top: 25px;
   }
-  
+
   #product .right-content .quote {
     margin-top: 25px;
   }
-  
+
   #product .right-content .quote i {
     float: left;
     font-size: 32px;
     margin-right: 15px;
     margin-top: 10px;
   }
-  
+
   #product .right-content .quote p {
     font-style: italic;
     color: #2a2a2a;
     font-weight: 500;
   }
-  
+
   #product .right-content p {
     font-size: 14px;
     color: #aaaaaa;
@@ -237,7 +237,7 @@ Products Page
     display: block;
     margin-top: 25px;
   }
-  
+
   .quantity-content {
     margin-top: 30px;
     padding-top: 30px;
@@ -247,16 +247,16 @@ Products Page
     padding-bottom: 30px;
     margin-bottom: 30px;
   }
-  
+
   .quantity-content .left-content {
     float: left;
     margin-right: 30px;
   }
-  
+
   .quantity-content .right-content {
     text-align: right;
   }
-  
+
   .quantity-content .left-content h6 {
     padding-top: 7px;
     font-size: 20px;
@@ -265,31 +265,31 @@ Products Page
     position: relative;
     z-index: 11;
   }
-  
+
   .total h4 {
     float: left;
     font-size: 20px;
     margin-top: 10px;
     color: #aaa!important;
   }
-  
+
   .total .main-border-button {
     text-align: right;
   }
-  
+
   .total .main-border-button a {
     border-color: #2a2a2a;
     color: #2a2a2a;
   }
-  
+
   .total .main-border-button a:hover {
     color: #fff;
     background-color: #2a2a2a;
   }
-  
+
   .quantity {
     display: inline-block; }
-   
+
    .quantity .input-text.qty {
     width: 35px;
     height: 39px;
@@ -298,20 +298,20 @@ Products Page
     background-color: transparent;
     border: 1px solid #efefef;
    }
-   
+
    .quantity.buttons_added {
     text-align: left;
     position: relative;
     white-space: nowrap;
     vertical-align: top; }
-   
+
    .quantity.buttons_added input {
     display: inline-block;
     margin: 0;
     vertical-align: top;
     box-shadow: none;
    }
-   
+
    .quantity.buttons_added .minus,
    .quantity.buttons_added .plus {
     padding: 7px 10px 8px;
@@ -319,25 +319,24 @@ Products Page
     background-color: #ffffff;
     border: 1px solid #efefef;
     cursor:pointer;}
-   
+
    .quantity.buttons_added .minus {
     border-right: 0; }
-   
+
    .quantity.buttons_added .plus {
     border-left: 0; }
-   
+
    .quantity.buttons_added .minus:hover,
    .quantity.buttons_added .plus:hover {
     background: #eeeeee; }
-   
+
    .quantity input::-webkit-outer-spin-button,
    .quantity input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     -moz-appearance: none;
     margin: 0; }
-    
+
     .quantity.buttons_added .minus:focus,
    .quantity.buttons_added .plus:focus {
     outline: none; }
-  
-  
+

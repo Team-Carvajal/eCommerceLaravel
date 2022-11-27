@@ -17,9 +17,14 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('user.products.index');
     }
 
+    public function byCategory($name)
+    {
+        $category = Category::select('id')->where('name', $name)->first();
+        $data = Product::where('category_idCategory', $category->id)->get();
+        return view('user.products.index', compact('data'));
+    }
     /**
      * Display the specified resource.
      *
