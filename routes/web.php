@@ -28,7 +28,7 @@ Route::get('/home', [HomeController::class, 'show']);
 // Route::get('/home', [HomeController::class, 'joinproduct']);
 // Route::resource('/perfil',ProfileController::class);
 Route::get('/perfil/{profile}', [ProfileController::class, 'edit'])->middleware('auth');
-Route::put('perfil/{profile}', [ProfileController::class, 'update'])->name('profile.update');
+Route::post('perfil/update/{profile}', [ProfileController::class, 'update'])->name('profile/update/{profile}');
 
 //Login
 Route::get('/login', [LoginController::class, 'index']);

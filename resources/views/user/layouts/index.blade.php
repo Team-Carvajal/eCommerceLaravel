@@ -6,7 +6,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
-        <title>Ping Estampados Personalizados</title>
+        <title>Ping - @yield('title')</title>
         <!-- CSS & JS Files Start-->
             <link rel="icon" href="{{ url('assets/images/icon/isotipo1x.svg') }}" type="image/x-icon">
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>

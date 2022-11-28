@@ -47,8 +47,6 @@ class ProfileController extends Controller
     public function show($profile)
     {
 
-        return view('user.profile.index', compact('profile'));
-
     }
 
     /**
@@ -73,8 +71,16 @@ class ProfileController extends Controller
      */
     public function update(Request $request, Profile $profile)
     {
-        $profile = Profile::find(session('id'));
-        return $request;
+        // $profile = Profile::find(session('id'));
+        $profile->name = $request->name;
+        $profile->lastName = $request->lastName;
+        $profile->birthDate = $request->birthDate;
+        $profile->phone = $request->phone;
+        $profile->save();
+        return redirect('/perfil'. "/" . session('id'));
+        // dd($profile->toArray());
+
+        // return $request->all();
 
     }
 
@@ -89,3 +95,4 @@ class ProfileController extends Controller
         //
     }
 }
+//
