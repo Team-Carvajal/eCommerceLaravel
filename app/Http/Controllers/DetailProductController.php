@@ -19,12 +19,11 @@ class DetailProductController extends Controller
         $joincolorimage = DB::select('select * from products_shirtcolors');
         return view('user.products.index', compact('product', 'joincolor', 'joincolorimage', 'productbanner'));
     }
-    public function show($categoryname, $product, $colorstart)
+    public function show($categoryname, $product)
     {
 
     product::where('name', str_replace('-' , ' ', (strtolower($product))))->firstOrFail();
     category::where('name', $categoryname)->firstOrFail();
-
 
     $category = Category::select('*')->where('name', $categoryname)->first();
     $categoryproduct = DB::select('select * from products_categories where category_id = ' . $category->id);
@@ -46,7 +45,7 @@ class DetailProductController extends Controller
     // dd($shirttypes);
     // dd($products, $categoryproduct, $color, $size, $productsize, $productcolor);
 
-    return view('user.products.detail', compact('product', 'products', 'color', 'size', 'productsize', 'productcolor', 'categoryname', 'category', 'colorstart'));
+    return view('user.products.detail', compact('product', 'products', 'color', 'size', 'productsize', 'productcolor', 'categoryname', 'category'));
 
 
     }

@@ -1,50 +1,41 @@
 @extends('user.layouts.index')
-@section('title', '')
+@section('title', ucfirst($name))
 @section('content')
 
 <!-- ***** Products Area Starts ***** -->
-    <section class="section" id="products">
+    <section class="section espacio pt-5 " id="products">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-heading">
-                    @foreach ($data as $category)
-                        <h2>{{ $category->name}}</h2>
+                        <h2>{{$name}}</h2>
                         <span>Ropa a tu gusto</span>
-                @endforeach
-
                     </div>
                 </div>
             </div>
         </div>
-        <div class="container">
+        <div class="container ">
             <div class="row">
 
                 @foreach ($data as $product)
-                <div class="col-lg-4">
+                <div class="col-lg-4 mt-5">
                     <div class="item">
                         <div class="thumb">
                             <div class="hover-content">
                                 <ul>
-                                    <li><a href="single-product.html"><i class="fa fa-eye"></i></a></li>
+                                    <li><a href="{{$name . '/' . str_replace(' ' , '-', (strtolower($product->product_name)))}}"><i class="fa fa-eye"></i></a></li>
                                     <!-- <li><a href="single-product.html"><i class="fa fa-star"></i></a></li> -->
 
                                     <!-- AQUI CARRITO  -->
-                                    <li><a href="single-product.html"><i class="fa fa-shopping-cart"></i></a></li>
+                                    <li><a href=""><i class="fa fa-shopping-cart"></i></a></li>
                                 </ul>
                             </div>
-                            <img src="assets/images/men-01.jpg" alt="">
+
+                            <img src="{{'assets/images/productosparatesteo/'. $product->product_image }}" alt="">
                         </div>
-                        <div class="down-content">
-                            <h4>{{ $product->name}}</h4>
+                        <div class="down-content bg-transparent">
+                            <h4>{{ $product->product_name}}</h4>
                             <span>$ {{ $product->price}}</span>
-                            <ul class="stars">
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                            </ul>
                         </div>
                     </div>
                 </div>
