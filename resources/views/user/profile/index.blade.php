@@ -12,9 +12,7 @@ document.getElementById('fecha').readOnly = false;
 document.getElementById('celular').readOnly = false;
 document.getElementById('editar').style.display = "none";
 document.getElementById('cancelar').style.display = "inline-block";
-
-
-document.getElementById('cancelar').style.display = "inline-block";
+document.getElementById('enviar').style.display = "inline-block";
 
 }
 
@@ -26,6 +24,7 @@ document.getElementById('fecha').readOnly = true;
 document.getElementById('celular').readOnly = true;
 document.getElementById('editar').style.display = "inline-block";
 document.getElementById('cancelar').style.display = "none";
+document.getElementById('enviar').style.display = "none";
 }
 
 function enviar(){
@@ -70,29 +69,29 @@ document.getElementById('cancelar').style.display = "none";
 
                                 <div class="form-group">
                                     <label class="letra">Nombres:</label>
-                                    <input type="text" class="form-control letra" id="nombre" name="name" aria-describedby="emailHelp" placeholder=""  value="{{$profile->name}}" readOnly>
+                                    <input type="text" class="form-control letra" id="nombre" name="name" aria-describedby="emailHelp" placeholder=""  value="{{$profile->name}}" readOnly required>
                                 </div>
                                 <div class="form-group">
                                   <label class="letra">Apellidos:</label>
-                                  <input type="text" class="form-control letra" id="apellidos" name="lastName" aria-describedby="emailHelp" placeholder=""  value="{{$profile->lastName}}" readOnly>
+                                  <input type="text" class="form-control letra" id="apellidos" name="lastName" aria-describedby="emailHelp" placeholder=""  value="{{$profile->lastName}}" readOnly required>
                                 </div>
                                 <div class="form-group">
                                     <label class="letra">Correo electronico:</label>
-                                    <input type="text" class="form-control letra" id="correo" name="email" aria-describedby="emailHelp" placeholder=""  value="{{$profile->email}}" readOnly>
+                                    <input type="text" class="form-control letra" id="correo" name="email" aria-describedby="emailHelp" placeholder=""  value="{{$profile->email}}" readOnly required>
                                 </div>
                                 <div class="form-group">
                                     <label class="letra">Fecha de cumpleaños:</label>
-                                    <input type="date" class="form-control letra" id="fecha" name="birthDate" aria-describedby="emailHelp" placeholder=""  value="{{$profile->birthDate}}" readOnly>
+                                    <input type="date" class="form-control letra" id="fecha" name="birthDate" aria-describedby="emailHelp" placeholder=""  value="{{$profile->birthDate}}" readOnly required>
                                 </div>
                                 <div class="form-group">
                                     <label class="letra">Celular:</label>
-                                    <input type="text" class="form-control letra" id="celular" name="phone" aria-describedby="emailHelp" placeholder=""  value="{{$profile->phone}}" readOnly>
+                                    <input type="text" class="form-control letra" id="celular" name="phone" aria-describedby="emailHelp" placeholder=""  value="{{$profile->phone}}" readOnly required>
                                 </div>
                             </form>
                                 <div class="col-sm-12">
-                                    <button onclick ="editar()" id ="editar" class="btn btn-outline-ping"><i class="bi bi-pen-fill"></i></button>
-                                    <button onclick ="cancelar()" id ="cancelar" style="display: none" class="btn btn-outline-ping"><i class="bi bi-x-lg"></i></button>
-                                    <button type="submit" onclick="enviar()" id ="enviar" class="btn btn-outline-primary" form="profile"><i class="bi bi-send-fill"></i></button>
+                                    <button onclick ="editar()" id ="editar" class="btn btn-outline-ping"><i class="bi bi-pen-fill" ></i> Editar</button>
+                                    <button onclick ="cancelar()" id ="cancelar" style="display: none" class="btn btn-outline-ping"><i class="bi bi-x-lg"> Cancelar</i></button>
+                                    <button type="submit" onclick="enviar()" id ="enviar" style="display: none" class="btn btn-outline-success" form="profile"><i class="bi bi-check2-all" width="1 em" height="1 em"> Enviar</i></button>
                                 </div>
                         </div>
                       </div>
