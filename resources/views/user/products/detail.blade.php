@@ -1,7 +1,6 @@
 @extends('user.layouts.index')
 <?php $product = str_replace('-' , ' ', (ucfirst($product)))?>
-<?php $shirttype = str_replace('-' , ' ', (ucfirst($shirttype)))?>
-@section('title', $shirttype . "-" . $product )
+@section('title', $product )
 @section('content')
 <style>
     .img-product{
@@ -87,9 +86,10 @@
 
 {{-- ///////////////////// --}}
 @php
-$shirtcolor_id = "";
-$shirtcolor_name = [];
-$shirtcolor_image = [];
+    $shirtcolor_id = "";
+    // $shirtcolor_name = [];
+    $shirtcolor_image = [];
+    $price = $products->price;
 @endphp
 
         <div class="mb-4  float-start fs-6">
@@ -97,27 +97,23 @@ $shirtcolor_image = [];
             /
             <a  href="/{{$categoryname}}" class="text-dark">{{$categoryname}}</a>
             /
-            <a class="text-dark">{{str_replace(' ' , '-', (ucfirst($shirttype) . "-" . $product))}}</a>
+            <a class="text-dark">{{str_replace(' ' , '-', $product)}}</a>
         </div>
             <div class=" d-md-grid d-grid d-lg-flex container-fluid">
                 <div class=" col-lg-6 col-md-10 col-sm-12 col-12 mx-auto d-grid mb-md-5 mb-5">
                     <div class="d-flex">
-                        <div class="d-inline">
+
+                        <div class="col-10 img-product mx-auto left-images">
                             @foreach ($color as $colors)
                             @foreach( $productcolor as $procolor)
                                     @if ($procolor->shirtcolor_id == $colors->id)
-                                        {{-- <label class="shirtColor miniatura mb-2 me-2" for="c-{{$colors->name}}"> --}}
-                                            {{-- <img src="{{ url('assets/images/productosparatesteo/'. $procolor->image) }} " alt="" class="{{$colors->name . "" . $colors->id }}"> --}}
-                                        {{-- </label> --}}
-                                        @php $shirtcolor_name[] = $colors->name @endphp
-                                        @php $shirtcolor_image[] = $procolor->image @endphp
+                                        {{-- @php $shirtcolor_name[] = $colors->name @endphp --}}
+                                        {{-- @php $shirtcolor_image[$procolor->shirtcolor_id] = $procolor->image @endphp --}}
+                                        @php $shirtcolor_image[$colors->name] = $procolor->image @endphp
                                     @endif
                             @endforeach
                             @endforeach
-                        </div>
-                        <div class="col-10 img-product mx-auto left-images">
-                            {{-- {{($procolor->shirtcolor_id)}} --}}
-                            <img src="{{ url('assets/images/productosparatesteo/'. $shirtcolor_image[0])}} " alt="" id="imageview">
+                            <img src="{{ url('assets/images/productosparatesteo/'. $procolor->image )}}" alt="" id="imageview">
                         </div>
                     </div>
                 </div>
@@ -125,15 +121,9 @@ $shirtcolor_image = [];
                     <div class="d-grid">
                         <div class="right-content col-12 col-sm-12 mx-auto">
                             <div class="mb-5">
-                                {{-- <ul class="stars d-flex float-end gap-1">
-                                    <li><i class="fa fa-star text-ping"></i></li>
-                                    <li><i class="fa fa-star text-ping"></i></li>
-                                    <li><i class="fa fa-star text-ping"></i></li>
-                                    <li><i class="fa fa-star text-ping"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                </ul> --}}
-                                <h3 class="mb-2">{{$shirttype . "-" . $product}}</h3>
-                                <span class="price">${{number_format($products->price, 0, ',', '.')}}</span>
+
+                                <h3 class="mb-2">{{$product}}</h3>
+                                <span class="price">${{number_format($price, 0, ',', '.')}}</span>
                             </div>
                             <span>{{$products->description}}</span>
                             <div class="quantity-content">
@@ -185,7 +175,7 @@ $shirtcolor_image = [];
                                 </div>
                             </div>
                             <div class="total">
-                                <h4 class="mb-3" id="total">Total : ${{number_format($products->price, 0, ',', '.')}}</h4>
+                                {{-- <h4 class="mb-3" id="total">Total : ${{number_format($price, 0, ',', '.')}}</h4> --}}
                                 <div class="main-border-button text-center "><a href="#">Añadir al carrito</a></div>
                             </div>
                         </div>
@@ -194,9 +184,10 @@ $shirtcolor_image = [];
             </div>
         </div>
     </div>
+    {!! print_r ($shirtcolor_image) !!}
 
 <script>
-    let pColor = document.querySelector('#pcolor');
+    let pColor = document.querySelector('#pcolor'),
 
     let color = document.querySelector('#color');
 
@@ -212,21 +203,15 @@ $shirtcolor_image = [];
 
     let quant;
 
+    let quantityValue;
+
     var item;
 
     function maxquant(){
         quant = parseInt(quantity.value)+1;
-        if(quant <= {{$products->quantity}}){
-            // console.log({{$products->price}}*quant);
-            total.innerHTML = ("Total : $" + Intl.NumberFormat('es-ES'). format(Math.round({{$products->price}}) * quant));
-        }
     }
     function minquant(){
         quant = parseInt(quantity.value)-1;
-        if(quant > 0){
-            total.innerHTML = ("Total : $" + Intl.NumberFormat('es-ES'). format(Math.round({{$products->price}})));
-        }
-        // console.log({{$products->price}}/quant)
     }
 
     if (document.querySelector('input[name="color"]')) {
@@ -235,6 +220,7 @@ $shirtcolor_image = [];
             item = event.target.value;
             pColor.innerHTML = item;
             color.setAttribute('value', item);
+            // imageview.setAttribute('src', item);
         });
       });
     }
@@ -254,30 +240,34 @@ $shirtcolor_image = [];
     let shirtSize = document.querySelectorAll('label.shirtSize');
     // For each button, register an event listener
     shirtSize.forEach(function(elem){
-    elem.addEventListener("click", function(e){
-        // On click, remove the MyClass on ALL buttons
-        shirtSize.forEach(function(el){
-        el.classList.remove("active");
-        });
-        // Add the class on clicked one
-        e.target.classList.add("active");
-    })
+        elem.addEventListener("click", function(e){
+            // On click, remove the MyClass on ALL buttons
+            shirtSize.forEach(function(el){
+            el.classList.remove("active");
+            });
+            // Add the class on clicked one
+            e.target.classList.add("active");
+        })
     })
 
     let ShirtColor = document.querySelectorAll('label.shirtColor');
     // For each button, register an event listener
     ShirtColor.forEach(function(elem){
-    elem.addEventListener("click", function(e){
-        // On click, remove the MyClass on ALL buttons
-        ShirtColor.forEach(function(el){
-        el.classList.remove("colorActive");
-        });
-        // Add the class on clicked one
-        e.target.classList.add("colorActive");
-        // imageview.src = "item";
+        elem.addEventListener("click", function(e){
+            // On click, remove the MyClass on ALL buttons
+            ShirtColor.forEach(function(el)
+            {
+                el.classList.remove("colorActive");
+            });
+            // Add the class on clicked one
+            e.target.classList.add("colorActive");
+        })
     })
-    })
+
+
 
 </script>
 
 @endsection
+
+{{-- imageview.src = `{{ url('assets/images/productosparatesteo/'. $shirtcolor_image[${item}] )}}`; --}}

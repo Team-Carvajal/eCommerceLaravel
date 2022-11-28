@@ -12,9 +12,8 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($profile)
     {
-        return view('user.profile.index');
 
     }
 
@@ -45,9 +44,11 @@ class ProfileController extends Controller
      * @param  \App\Models\profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function show(profile $profile)
+    public function show($profile)
     {
-        //
+
+        return view('user.profile.index', compact('profile'));
+
     }
 
     /**
@@ -56,9 +57,11 @@ class ProfileController extends Controller
      * @param  \App\Models\profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function edit(profile $profile)
+    public function edit(Profile $profile)
     {
-        //
+        $profile = profile::where('id', session('id'))->firstOrFail();
+
+        return view('user.profile.index', compact('profile'));
     }
 
     /**
@@ -68,9 +71,11 @@ class ProfileController extends Controller
      * @param  \App\Models\profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, profile $profile)
+    public function update(Request $request, Profile $profile)
     {
-        //
+        $profile = Profile::find(session('id'));
+        return $request;
+
     }
 
     /**

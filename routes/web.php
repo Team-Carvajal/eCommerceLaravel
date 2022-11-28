@@ -26,7 +26,9 @@ Route::get('/', [HomeController::class, 'show']);
 Route::get('/home', [HomeController::class, 'show']);
 
 // Route::get('/home', [HomeController::class, 'joinproduct']);
-Route::resource('/perfil',ProfileController::class);
+// Route::resource('/perfil',ProfileController::class);
+Route::get('/perfil/{profile}', [ProfileController::class, 'edit'])->middleware('auth');
+Route::put('perfil/{profile}', [ProfileController::class, 'update'])->name('profile.update');
 
 //Login
 Route::get('/login', [LoginController::class, 'index']);
@@ -35,11 +37,14 @@ Route::post('login', [LoginController::class, 'login'])->name('authentication');
 Route::get('/registro', [SignupController::class, 'index']);
 Route::post('/registro', [SignupController::class, 'store'])->name('save');
 
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::get('/reset-password', [LoginController::class, 'index']);
 
 Route::resource('/categorias', CategoryController::class);
 Route::get('/{categoria}', [ProductController::class, 'bycategory']);
 
-Route::get('/{categoria}/{shirttype}/{producto}', [DetailProductController::class, 'show']);
+Route::get('/{categoria}/{producto}/{color}', [DetailProductController::class, 'show']);
 
 Route::resource('/contactanos', ContactusController::class);
 

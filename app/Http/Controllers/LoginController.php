@@ -7,6 +7,8 @@ namespace App\Http\Controllers;
 use App\Models\signup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+
 
 
 class LoginController extends Controller
@@ -25,10 +27,37 @@ class LoginController extends Controller
     ]);
 
     if (Auth::attempt($credentials)) {
-        $request->session()->regenerate();
 
-        return redirect()->intended('/');
+
+
+      $request->session()->regenerate();
+
+       $user = Auth::user();
+
+
+      //dd($user);
+
+      session(['name' => "{$user['name']}"]);
+
+      session(['email' => "{$user['email']}"]);
+      session(['id' => "{$user['id']}"]);
+
+      return redirect()->intended('/');
+
+    }else{
+        return redirect('login');
     }
+
+
 }
+
+    public function logout(){
+
+         Session::flush();
+
+          Auth::logout();
+
+        return redirect('/');
+    }
 
 }

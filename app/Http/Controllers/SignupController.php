@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\signup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+
 
 
 class SignupController extends Controller
@@ -41,14 +43,16 @@ class SignupController extends Controller
 
         $user = new signup;
 
-        $user->name = $data['name'];
-        $user->lastName = $data['lastName'];
-        $user->email = $data['email'];
-        $user->rol_id = 2;
-        $user->password = Hash::make($data['password']);
-        $user->phone = $data['phone'];
-        $user->birthdate = $data['birthDay'];
-        $user->save();
+            $user->name = $data['name'];
+            $user->lastName = $data['lastName'];
+            $user->email = $data['email'];
+            $user->rol_id = 2;
+            $user->password = Hash::make($data['password']);
+            $user->phone = $data['phone'];
+            $user->birthdate = $data['birthDay'];
+            $user->save();
+
+            return redirect('/');
     }
 
     /**
@@ -70,7 +74,7 @@ class SignupController extends Controller
      */
     public function edit(signup $signup)
     {
-        //
+
     }
 
     /**

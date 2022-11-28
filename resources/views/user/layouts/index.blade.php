@@ -6,7 +6,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
-        <title>Ping - @yield('title')</title>
+        <title>Ping Estampados Personalizados</title>
         <!-- CSS & JS Files Start-->
             <link rel="icon" href="{{ url('assets/images/icon/isotipo1x.svg') }}" type="image/x-icon">
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -27,7 +27,20 @@
             <link rel="stylesheet" href="{{ url('assets/css/shopping-car/car.css')}}">
             <link rel="stylesheet" href="{{ url('assets/css/product.css')}}">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-
+            <style>
+                    a.textfloat:hover::after {
+                    content: "Perfil";
+                    position: absolute;
+                    font-size: 12px;
+                    top: 130%;
+                    left: -30px;
+                    padding: 0 40px;
+                    border-radius: 1em;
+                    border: 1px solid white;
+                    color: #f0f0f0;
+                    background-color: #3d3d3d;
+                    }
+            </style>
             <!-- CSS & JS Files End-->
     </head>
     <body class="text-bg-light">
@@ -57,6 +70,12 @@
                                 </a>
                                 <ul class="nav">
 
+                                    {{-- <li class="m-auto"> --}}
+                                        {{-- <span class="font m-auto"> --}}
+                                            {{-- {{session('name')}} --}}
+                                        {{-- </span> --}}
+
+                                    </li>
                                     <li>
                                         <a>
                                             <button type="button" class="btn btn-outline-ping search-bg" data-bs-toggle="modal" data-bs-target="#buscar" onclick="modalBuscar()">
@@ -66,17 +85,42 @@
                                             </button>
                                         </a>
                                     </li>
+
+
                                     <li class="submenu font">
                                         <a href="javascript:;" class="">Ver más <i class="down ms-4"></i></a>
                                         <ul>
                                             <li><a href="/categorias"><i><img src="{{ url('assets/images/icon/border-all.svg')}}" width="14px" class="mx-2" alt=""></i>Categorias</a></li>
                                             <li><a href="/carrito"><i><img src="{{ url('assets/images/icon/cart2.svg')}}" width="14px" class="mx-2" alt=""></i>Carrito</a></li>
+
+@unless(Auth::check())
+
                                             <li><a href="/registro"><i><img src="{{ url('assets/images/icon/iconUser.svg')}}" width="14px" class="mx-2" alt=""></i>Registrate</a></li>
+@endunless
                                             <!-- <li><a href="/sobre-nosotros"><i><img src="{{ url('assets/images/icon/people-fill.svg')}}" width="14px" class="mx-2" alt=""></i>Sobre nosotros</a></li> -->
                                             <li><a href="/contactanos"><i><img src="{{ url('assets/images/icon/person-lines-fill.svg')}}" width="14px" class="mx-2" alt=""></i>Contactanos</a></li>
+
+                                            @auth
+                                                <li><a href="/logout"><i><img src="{{ url('assets/images/icon/person-lines-fill.svg')}}" width="14px" class="mx-2" alt=""></i>Salir</a></li>
+                                            @endauth
+
                                         </ul>
                                     </li>
+
+@if(Auth::check())
                                     <li>
+                                        {{-- <a href="{{"/perfil" . "/" . str_replace(' ' , '-', (strtolower(session('name'))))}} " title="" class="textfloat"> --}}
+                                        <a href="{{"/perfil" . "/" . session('id') }} " title="" class="textfloat">
+                                            <i>
+                                                <img src="{{ url('assets/images/icon/iconUser.svg')}}" class="mx-sm-2 login-icono d-sm-none d-lg-block d-md-block" alt="">
+                                            </i>
+                                            <span class="d-lg-none d-md-none">
+                                               Ingresa a tu perfil
+                                            </span>
+                                        </a>
+                                    </li>
+@else
+                                        <li>
                                         <a href="/login" title="">
                                             <i>
                                                 <img src="{{ url('assets/images/icon/iconUser.svg')}}" class="mx-sm-2 login-icono d-sm-none d-lg-block d-md-block" alt="">
@@ -86,7 +130,10 @@
                                             </span>
                                         </a>
                                     </li>
-                                        <!-- <li class="d-grid">
+@endif
+
+
+                                      <!-- <li class="d-grid">
                                             <a href="/login" class="m-auto">
                                                     <i class="d-flex">
                                                         <img src="{{ url('assets/images/icon/iconUser.svg')}}" width="14px" class="mx-sm-2" alt="">
@@ -133,63 +180,63 @@
             @yield('content')
         <!-- ***** Body Banner Area End ***** -->
         <!-- ***** Footer Start ***** -->
-            <footer >
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <div class="first-item">
-                                <div class="logo">
-                                    <img class="logoPing pe-2" src="{{ url('assets/images/icon/isotipo1x.svg')}}">
-                                    <img class="logoPing pe-2" src="{{ url('assets/images/icon/logotipo1x.svg')}}">
-                                </div>
-                                <ul>
-                                    <li><a href="/">Ping Estampados Personalizados</a></li>
-                                    <li><a href="#" id="correo">pingep@gmail.com</a></li>
-                                    <li><a href="#" id="whatsapp">+57 315 855 9229</a></li>
-                                </ul>
+        <footer >
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="first-item">
+                            <div class="logo">
+                                <img class="logoPing pe-2" src="{{ url('assets/images/icon/isotipo1x.svg')}}">
+                                <img class="logoPing pe-2" src="{{ url('assets/images/icon/logotipo1x.svg')}}">
                             </div>
-                        </div>
-                        <div class="col-lg-3 categorias--">
-                            <h4>Tienda &amp; Categorías</h4>
                             <ul>
-                                <li><a href="#">Hombres</a></li>
-                                <li><a href="#">Mujeres</a></li>
-                                <li><a href="#">Niños</a></li>
-                                <li><a href="#">Otros</a></li>
+                                <li><a href="/">Ping Estampados Personalizados</a></li>
+                                <li><a href="#" id="correo">pingep@gmail.com</a></li>
+                                <li><a href="#" id="whatsapp">+57 315 855 9229</a></li>
                             </ul>
                         </div>
-                        <div class="col-lg-3 enlaces-de-la-pagina--">
-                            <h4>Enlaces de la página</h4>
-                            <ul>
-                                <li><a href="/home">Inicio</a></li>
+                    </div>
+                    <div class="col-lg-3 categorias--">
+                        <h4>Tienda &amp; Categorías</h4>
+                        <ul>
+                            <li><a href="#">Hombres</a></li>
+                            <li><a href="#">Mujeres</a></li>
+                            <li><a href="#">Niños</a></li>
+                            <li><a href="#">Otros</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 enlaces-de-la-pagina--">
+                        <h4>Enlaces de la página</h4>
+                        <ul>
+                            <li><a href="/home">Inicio</a></li>
 
-                                <li><a href="/categorias">Categorías</a></li>
-                                <li><a href="/registro">Registrate</a></li>
-                                <li><a href="/">Inicia sesión</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-3 ayuda-informacion">
-                            <h4>Ayuda e Información</h4>
-                            <ul>
-                                <li><a href="" id="helpwha">Ayuda</a></li>
-                                <li><a href="/contactanos#about-us">Sobre nosotros</a></li>
-                                <li><a href="/contactanos">Contactanos</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="under-footer">
-                                <p>Copyright © 2022 Ping Estampados Personalizados. All Rights Reserved.
+                            <li><a href="/categorias">Categorías</a></li>
+                            <li><a href="/registro">Registrate</a></li>
+                            <li><a href="/">Inicia sesión</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 ayuda-informacion">
+                        <h4>Ayuda e Información</h4>
+                        <ul>
+                            <li><a href="" id="helpwha">Ayuda</a></li>
+                            <li><a href="/contactanos#about-us">Sobre nosotros</a></li>
+                            <li><a href="/contactanos">Contactanos</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="under-footer">
+                            <p>Copyright © 2022 Ping Estampados Personalizados. All Rights Reserved.
 
-                                <br>Diseño: <a target="_parent" title="" class="text-ping">TPS1-114</a></p>
-                                <ul>
-                                    <li><a href="https://github.com/Team-Carvajal"><i class="bi bi-github"></i></a></li>
-                                </ul>
-                            </div>
+                            <br>Diseño: <a target="_parent" title="" class="text-ping">TPS1-114</a></p>
+                            <ul>
+                                <li><a href="https://github.com/Team-Carvajal"><i class="bi bi-github"></i></a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-            </footer>
-        <!-- ***** Footer End ***** -->
+            </div>
+        </footer>
+    <!-- ***** Footer End ***** -->
         <!-- Plugins -->
             <script src="{{ url('assets/js/popper.js')}}"></script>
             <script src="{{ url('assets/js/owl-carousel.js')}}"></script>
@@ -204,6 +251,14 @@
             <script src="{{ url('assets/js/isotope.js')}}"></script>
             <script src="{{ url('assets/js/quantity.js')}} "></script>
 
+            <script>
+            document.querySelector("").addEventListener("keypress", function (evt) {
+            if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
+            {
+                evt.preventDefault();
+            }
+            });
+            </script>
 
             <!-- Global Init -->
             <script src="{{ url('assets/js/custom.js')}}"></script>
@@ -234,18 +289,18 @@
 
 
             </script>
-            <script>
+                        <script>
 
-                $('#helpwha').click(function(){
+                            $('#helpwha').click(function(){
 
-                    let num = '+573158559229';
-                    let msg = 'Hola, necesito hacer una consulta';
+                                let num = '+573158559229';
+                                let msg = 'Hola, necesito hacer una consulta';
 
-                    var win = window.open(`https://wa.me/${num}?text=${msg}`, '_blank');
+                                var win = window.open(`https://wa.me/${num}?text=${msg}`, '_blank');
 
-                });
+                            });
 
-            </script>
+                        </script>
         <!-- Plugins -->
 
     </body>
