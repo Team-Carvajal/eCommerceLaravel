@@ -14,7 +14,6 @@ class ContactusController extends Controller
      */
     public function index()
     {
-        return view('user.contactus.index');
     }
 
     /**
@@ -46,6 +45,7 @@ class ContactusController extends Controller
      */
     public function show(contactus $contactus)
     {
+        return view('user.contactus.index');
         //
     }
 

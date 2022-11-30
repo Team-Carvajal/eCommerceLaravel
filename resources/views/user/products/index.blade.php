@@ -14,33 +14,31 @@
                 </div>
             </div>
         </div>
-        <div class="container ">
+        <div class="container pt-5">
             <div class="row">
 
-                @foreach ($data as $product)
-                <div class="col-lg-4 mt-5">
+            @foreach ($data as $product)
+                <div class="col-lg-4">
                     <div class="item">
                         <div class="thumb">
                             <div class="hover-content">
                                 <ul>
-                                    <li><a href="{{$name . '/' . str_replace(' ' , '-', (strtolower($product->product_name)))}}"><i class="fa fa-eye"></i></a></li>
+                                    <li><a href="{{$name . '/' . str_replace(' ' , '-', (strtolower($product->name)))}}"><i class="fa fa-eye"></i></a></li>
                                     <!-- <li><a href="single-product.html"><i class="fa fa-star"></i></a></li> -->
 
                                     <!-- AQUI CARRITO  -->
-                                    <li><a href=""><i class="fa fa-shopping-cart"></i></a></li>
+                                    <li><a href="/ping/carrito"><i class="fa fa-shopping-cart"></i></a></li>
                                 </ul>
                             </div>
-
-                            <img src="{{'assets/images/productosparatesteo/'. $product->product_image }}" alt="">
+                            <img src="assets/images/men-01.jpg" alt="">
                         </div>
-                        <div class="down-content bg-transparent">
-                            <h4>{{ $product->product_name}}</h4>
+                        <div class="down-content centradito">
+                            <h4>{{ $product->name}}</h4>
                             <span>$ {{ $product->price}}</span>
                         </div>
                     </div>
                 </div>
-
-                @endforeach
+            @endforeach
 
 
 

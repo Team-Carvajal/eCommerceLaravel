@@ -46,6 +46,6 @@ Route::get('/{categoria}', [ProductController::class, 'bycategory']);
 
 Route::get('/{categoria}/{producto}', [DetailProductController::class, 'show']);
 
-Route::resource('/contactanos', ContactusController::class);
+Route::get('/contactanos', ContactusController::class)->name('contactanos');
 
 Route::resource('/carrito', ShoppingcarController::class);
