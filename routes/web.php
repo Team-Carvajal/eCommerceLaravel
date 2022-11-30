@@ -41,12 +41,17 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/reset-password', [LoginController::class, 'index']);
 
-Route::resource('/categorias', CategoryController::class);
-Route::get('/categoria/{categoria}', [ProductController::class, 'bycategory']);
+Route::get('/categorias',[ProductController::class, 'categories'])->name('/categorias');
+Route::get('/categoria/{category}',[ProductController::class, 'byCategory'])->name('/categorias/{category}');
 
-Route::get('/{categoria}/{producto}', [DetailProductController::class, 'show']);
+Route::get('/categoria/{categoria}/{producto}', [DetailProductController::class, 'show']);
 
 // Route::get('/contactanos', ContactUsController::class);
 Route::get('/contactanos', [ContactUsController::class, 'index']);
 
-Route::resource('/carrito', ShoppingcarController::class);
+Route::get('/carrito/nuevo', [ShoppingcarController::class, 'newbill']);
+Route::get('/carrito', [ShoppingcarController::class, 'index']);
+Route::post('/carrito/agregar', [ShoppingcarController::class, 'store']);
+Route::post('/carrito/Pago', [ShoppingcarController::class, 'order']);
+Route::get('/carrito/remover/{id}', [ShoppingcarController::class, 'destroy']);
+Route::post('/carrito/actualizar/{id}', [ShoppingcarController::class, 'update']);

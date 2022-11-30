@@ -9,14 +9,17 @@ use App\Models\shirtcolors;
 use Illuminate\Support\Facades\DB;
 
 
-class product extends Model
+class Product extends Model
 {
     use HasFactory;
 
-    public function categories(){
-        return $this->belongsToMany(category::class, 'products_categories', 'product_id', 'category_id');
+    public function categories (){
+        return $this->belongsToMany(Category::class, "products_categories", "product_id", "category_id");
     }
 
+    public function colors (){
+        return $this->belongsToMany(Shirtcolor::class, "products_shirtcolors", "product_id", "shirtcolor_id")
+        ->as("product_color")
+            ->withPivot("image");
+    }
 }
-
-// DB::table('products_shirtcolors')

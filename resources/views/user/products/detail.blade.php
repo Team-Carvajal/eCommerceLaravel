@@ -72,19 +72,6 @@
 <div class="mt-5 pt-5 container-fluid">
     <div class="mt-4 container-fluid">
 
-{{-- ///////////////////// --}}
-{{-- <div>
-    <input type="text" value="" id="color">
-    <span id="colo" class=""></span>
-    <input type="button" value="" onclick="ver()">
-</div>
-
-<script>
-    var Colorvalue = document.querySelector("#color");
-</script> --}}
-
-
-{{-- ///////////////////// --}}
 @php
     $shirtcolor_id = "";
     // $shirtcolor_name = [];
@@ -95,7 +82,7 @@
         <div class="mb-4  float-start fs-6">
             <a  href="/categorias" class="text-dark">Categorias</a>
             /
-            <a  href="/{{$categoryname}}" class="text-dark">{{$categoryname}}</a>
+            <a  href="/categoria/{{$categoryname}}" class="text-dark">{{$categoryname}}</a>
             /
             <a class="text-dark">{{str_replace(' ' , '-', $product)}}</a>
         </div>
@@ -119,6 +106,7 @@
                         </div>
                     </div>
                 </div>
+            <form action="{{url('/carrito/agregar')}}" method="post" id="product">
                 <div class=" col-lg-6 col-md-10 col-sm-12 col-12 mx-auto  d-grid">
                     <div class="d-grid">
                         <div class="right-content col-12 col-sm-12 mx-auto">
@@ -128,7 +116,6 @@
                             </div>
                             <span>{{$products->description}}</span>
                             <div class="quantity-content">
-                                <form action="" method="get" id="product">
                                     <div class="d-grid mb-3">
                                         <span>Color: <span id="pcolor"></span></span>
                                         <div class="d-flex gap-2 mt-3 colores">
@@ -175,17 +162,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
-                            <div class="total">
-                                {{-- <h4 class="mb-3" id="total">Total : ${{number_format($price, 0, ',', '.')}}</h4> --}}
-                                <div class="main-border-button text-center ">
-                                    <button class="btn text-center btn-outline-dark py-2 px-4" form="product">Añadir al carrito</button>
+                                </div>
+                                <div class="total">
+                                    {{-- <h4 class="mb-3" id="total">Total : ${{number_format($price, 0, ',', '.')}}</h4> --}}
+                                    <div class="main-border-button text-center ">
+                                        <button class="btn text-center btn-outline-dark py-2 px-4" form="product" >Añadir al carrito</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

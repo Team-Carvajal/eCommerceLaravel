@@ -19,18 +19,23 @@ class ProductController extends Controller
      */
     public function byCategory($name)
     {
-        //
-        $category = Category::select('id')->where('name', $name)->firstOrFail();
-        // $category = Category::select('id')->where('name', $name)->first();
-        $data = Product::select('products.*')
-        ->join('products_categories', 'products.id', '=', 'products_categories.product_id')
-        ->where('products_categories.category_id', $category->id)
-        ->get();
+        $data = Product::with("categories")
+            ->whereRelation("categories", "name" ,"=", $name)
+            ->get();
 
-     //     select a.name,a.price,a.description from  products a
-     //    inner join products_categories b on a.id = b.product_id where  b.category_id=5;
+            if(count($data) == 0){
+                echo "no existe la categoria". $name;
+            }
+            else{
+                return view ('user.products.index', compact('data', 'name'));
+            }
 
-        return view ('user.products.index', compact('data', 'name'));
+    }
+
+    public function categories(){
+
+        $data=Category::all();
+        return view ('user.categories.index', compact('data'));
 
     }
 
