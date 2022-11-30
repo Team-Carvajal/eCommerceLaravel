@@ -19,6 +19,7 @@
                 @foreach($data as $products)
                 @foreach($products->colors as $detail)
                 @if ($loop->first)
+
                     <div class="col-lg-4 ">
                         <form action="{{url('/carrito/agregar')}}" method="post">
                             @csrf
@@ -27,9 +28,9 @@
                                     <div class="hover-content">
                                         <ul>
                                             <li><a href="{{$name . '/' . str_replace(' ' , '-', (strtolower($products->name)))}}"><i class="fa fa-eye"></i></a></li>
-
                                             <!-- AQUI CARRITO  -->
-                                            <li><a href="/ping/carrito"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <li ></i>
+                                            <li><a><button type="submit" class="bg-transparent border-0" ><i class="fa fa-shopping-cart"></i></button></i></a></li>
                                         </ul>
                                     </div>
                                     @if(isset($detail->product_color->image))
@@ -44,6 +45,9 @@
                                     <h4 class="">{{$products->name}}</h4>
                                     <input type="hidden" value="{{$products->price}}" name="product_price">
                                     <span> {{$products->price}}</span>
+                                    <div class="col-5">
+                                        <input type="hidden" name="quantity" class="col-12" value=1 maxlength="11">
+                                    </div>
                                 </div>
                             </div>
                         </form>

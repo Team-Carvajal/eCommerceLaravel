@@ -52,7 +52,7 @@ class ShoppingcarController extends Controller
             $bill=new Bill;
             $bill->billState_id=1;
             $bill->paymentMethod_id=1;
-            $bill->user_id= session('id');
+            $bill->user_id=3;
             $bill->save();
 
         }
@@ -63,7 +63,7 @@ class ShoppingcarController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\user.shoppingcar  $shoppingcar
+     * @param  \App\Models\shoppingcar  $shoppingcar
      * @return \Illuminate\Http\Response
      */
     public function show( $shoppingcar)
