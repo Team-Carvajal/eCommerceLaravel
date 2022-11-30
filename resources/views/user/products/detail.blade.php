@@ -78,6 +78,14 @@
     $shirtcolor_image = [];
     $price = $products->price;
 @endphp
+@foreach ($color as $colors)
+@foreach( $productcolor as $procolor)
+        @if ($procolor->shirtcolor_id == $colors->id)
+            @php $shirtcolor_image[ucfirst($colors->name)] = $procolor->image @endphp
+            @php $shirtcolor_image[$colors->id] = $procolor->image @endphp
+        @endif
+@endforeach
+@endforeach
 
         <div class="mb-4  float-start fs-6">
             <a  href="/categorias" class="text-dark">Categorias</a>
@@ -89,27 +97,15 @@
             <div class=" d-md-grid d-grid d-lg-flex container-fluid">
                 <div class=" col-lg-6 col-md-10 col-sm-12 col-12 mx-auto d-grid mb-md-5 mb-5">
                     <div class="d-flex">
-
                         <div class="col-10 img-product mx-auto left-images">
-                            @foreach ($color as $colors)
-                            @foreach( $productcolor as $procolor)
-                                    @if ($procolor->shirtcolor_id == $colors->id)
-                                        {{-- @php $shirtcolor_name[] = $colors->name @endphp --}}
-                                        {{-- @php $shirtcolor_image[$procolor->shirtcolor_id] = $procolor->image @endphp --}}
-
-                                        @php $shirtcolor_image[ucfirst($colors->name)] = $procolor->image @endphp
-                                        @php $shirtcolor_image[$colors->id] = $procolor->image @endphp
-                                    @endif
-                            @endforeach
-                            @endforeach
                             <img src="{{ url('assets/images/productosparatesteo/'. $procolor->image )}}" alt="" id="imageview">
                         </div>
                     </div>
                 </div>
-            <form action="{{url('/carrito/agregar')}}" method="post" id="product">
                 <div class=" col-lg-6 col-md-10 col-sm-12 col-12 mx-auto  d-grid">
                     <div class="d-grid">
                         <div class="right-content col-12 col-sm-12 mx-auto">
+                            <form action="{{url('/carrito/agregar')}}" method="post" id="product">
                             <div class="mb-5">
                                 <h3 class="mb-2">{{$product}}</h3>
                                 <span class="price">${{number_format($price, 0, ',', '.')}}</span>
@@ -170,9 +166,9 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                            </form>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
