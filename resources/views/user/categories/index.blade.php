@@ -41,7 +41,7 @@
                                                 <h4>{{ $category->name}}</h4>
                                                 <p>{{ $category->description }}</p>
                                                 <div class="main-border-button">
-                                                    <a href="{{ url(strtolower ($category->name)) }}">Ver Productos</a>
+                                                    <a href="{{ url(strtolower ('categoria/' . $category->name)) }}">Ver Productos</a>
                                                 </div>
                                             </div>
                                         </div>

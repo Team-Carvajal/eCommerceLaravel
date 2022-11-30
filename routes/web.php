@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ContactusController;
+use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\DetailProductController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
@@ -42,10 +42,11 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/reset-password', [LoginController::class, 'index']);
 
 Route::resource('/categorias', CategoryController::class);
-Route::get('/{categoria}', [ProductController::class, 'bycategory']);
+Route::get('/categoria/{categoria}', [ProductController::class, 'bycategory']);
 
 Route::get('/{categoria}/{producto}', [DetailProductController::class, 'show']);
 
-Route::get('/contactanos', ContactusController::class)->name('contactanos');
+// Route::get('/contactanos', ContactUsController::class);
+Route::get('/contactanos', [ContactUsController::class, 'index']);
 
 Route::resource('/carrito', ShoppingcarController::class);
