@@ -49,10 +49,10 @@ Route::get('/categoria/{categoria}/{producto}', [DetailProductController::class,
 // Route::get('/contactanos', ContactUsController::class);
 Route::get('/contactanos', [ContactUsController::class, 'index']);
 
-Route::get('/carrito/nuevo', [ShoppingcarController::class, 'newbill']);
-Route::get('/carrito', [ShoppingcarController::class, 'index']);
+Route::get('/carrito/nuevo', [ShoppingcarController::class, 'newbill'])->middleware('auth');
+Route::get('/carrito', [ShoppingcarController::class, 'index'])->middleware('auth');
 Route::post('/carrito/agregar', [ShoppingcarController::class, 'store'])->middleware('auth');
-Route::post('/carrito/Pago', [ShoppingcarController::class, 'order']);
-Route::get('/carrito/remover/{id}', [ShoppingcarController::class, 'destroy']);
-Route::post('/carrito/actualizar/{id}', [ShoppingcarController::class, 'update']);
-Route::get('/carrito/actualizar/{id}/{cant}', [ShoppingcarController::class, 'updateSubtotal']);
+Route::post('/carrito/Pago', [ShoppingcarController::class, 'order'])->middleware('auth');
+Route::get('/carrito/remover/{id}', [ShoppingcarController::class, 'destroy'])->middleware('auth');
+Route::post('/carrito/actualizar/{id}', [ShoppingcarController::class, 'update'])->middleware('auth');
+Route::get('/carrito/actualizar/{id}/{cant}', [ShoppingcarController::class, 'updateSubtotal'])->middleware('auth');

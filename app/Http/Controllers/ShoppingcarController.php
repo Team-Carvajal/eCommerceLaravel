@@ -20,12 +20,17 @@ class ShoppingcarController extends Controller
 
         $data=Bill::with("orders")
             ->withCount("orders")
-            ->where( "user_id","=", session('id'))
+            ->where( "user_id","=", Auth::id())
             ->where("billstate_id", "=", 1)
             ->get();
-        
 
-        return view('user.shoppingcar.index', compact("data"));
+            foreach($data as $order){
+                if(count($order->first()->orders))
+                    return view('user.shoppingcar.index', compact("data"));
+                else
+                    return redirect('/categorias');
+            }
+
     }
 
     /**
@@ -53,6 +58,7 @@ class ShoppingcarController extends Controller
             $bill=Bill::firstOrCreate(['user_id' => Auth::id()]);
 
         }
+
         return redirect(redirect()->getUrlGenerator()->previous());
 
     }
@@ -109,7 +115,7 @@ class ShoppingcarController extends Controller
         $product = Product::find($id);
         $subtotal = $product->price * $cant;
 
-        $bill = Bill::where('user_id', 3)->where('billState_id', 1)->first();
+        $bill = Bill::where('user_id', Auth::id() )->where('billState_id', 1)->first();
 
         Orderbase::where('bill_id', $bill->id)
             ->where('product_id',  $id)
@@ -158,7 +164,6 @@ class ShoppingcarController extends Controller
 
         $lastBill->subTotal=Orderbase::where('bill_id', '=', $lastBill->id)->sum('product_price');
         $lastBill->update();
-
         }
 
     // Aqui tambien poner la ruta de donde vino la petición

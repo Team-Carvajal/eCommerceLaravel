@@ -91,7 +91,9 @@
                                         <a href="javascript:;" class="">Ver más <i class="down ms-4"></i></a>
                                         <ul>
                                             <li><a href="/categorias"><i><img src="{{ url('assets/images/icon/border-all.svg')}}" width="14px" class="mx-2" alt=""></i>Categorias</a></li>
+@if(Auth::check())
                                             <li><a href="/carrito"><i><img src="{{ url('assets/images/icon/cart2.svg')}}" width="14px" class="mx-2" alt=""></i>Carrito</a></li>
+@endif
 
 @unless(Auth::check())
 

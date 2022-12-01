@@ -11,7 +11,7 @@
               <div class="card-body p-4">
                 <div class="row">
                   <div class="col-lg-7">
-                    <h5 class="mb-3"><a href="#!" class="text-body"><i
+                    <h5 class="mb-3"><a  class="text-body"><i
                           class="fas fa-long-arrow-alt-left me-2"></i>Carrito de compras</a></h5>
                     <hr>
                     <div class="d-flex justify-content-between align-items-center mb-4">
@@ -33,41 +33,41 @@
                     </div>
 
                     {{-- Inicio de card --}}
+
                     @foreach($bill->orders as $order)
                     @foreach($order->products as $product)
-                    <div class="card mb-3 shadow-sm">
-                      <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                          <div class="d-flex flex-row align-items-center">
-                            <div>
-                            <img
-                                src="{{ url('assets/images/icon/isotipo1x.svg')}}"
-                                class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
+                        <div class="card mb-3 shadow-sm">
+                            <div class="card-body">
+                                <div class=" justify-content-between">
+                                    <div class="d-flex flex-row align-items-center">
+                                        <div>
+                                            <img src="{{ url('assets/images/icon/isotipo1x.svg')}}" class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
+                                        </div>
+                                        <div class="ms-3">
+                                            <h5 class="">{{$product->name}}</h5>
+                                            @if (strlen($product->description) < 60)
+                                                <p class="small mb-0">{{ $product->description }} </p>
+                                            @else
+                                                <p class="small mb-0" title="{{$product->description}}">{{substr($product->description, 0 , 60) . "..." }} </p>
+                                            @endif
+                                                <h5 class="fw-normal mb-0 fs-6">${{$product->price}}</h5>
+                                        </div>
+                                    </div>
+                                    <div class="align-items-center float-start mt-3">
+                                        <div style="width: 140px;" class="d-flex align-items-center gap-2">
+                                            <span>Total:</span>
+                                            <span>$</span>
+                                            <h5 class="fw-normal fs-6  subTotal" >{{number_format($bill->subTotal , 0 , ',', '.'); }}</h5>
+                                            <input type="number" name="quantity" class="col-6 quantity" value="{{$order->quantity}}" maxlength="11" min="1" >
+                                            <input type="hidden" class="productId" value="{{$product->id}}">
+                                        </div>
+                                    </div>
+                                    <div class="float-end">
+                                        <a href="{{ url('/carrito/remover/'.$product->id) }}" class="btn btn-outline-dark mt-2"><i class="bi bi-trash-fill"></i></a>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="ms-3">
-                              <h5 class="">{{$product->name}}</h5>
-                              @if (strlen($product->description) < 40)
-                                <p class="small mb-0">{{ $product->description }} </p>
-                                @else
-                                <p class="small mb-0" title="{{$product->description}}">{{substr($product->description, 0 , 40) . "..." }} </p>
-                              @endif
-                              <h5 class="fw-normal mb-0 fs-6 mt-3 subTotal" >$ {{ number_format($bill->subTotal , 0 , ',', '.'); }}</h5>
-                            </div>
-                          </div>
-                          <div class="d-flex flex-row align-items-center">
-                            <form action="{{ url('/carrito/actualizar/'.$product->id) }}" method="post">
-                              @csrf
-                              <div style="width: 140px;" class="d-flex align-items-center gap-2">
-                                <h5 class="fw-normal mb-0 fs-6">${{$product->price}}</h5>
-                                <input type="number" name="quantity" class="col-6 quantity" value="{{$order->quantity}}" maxlength="11" min="1" >
-                                <input type="hidden" class="productId" value="{{$product->id}}">
-                            </div>
-                            <a href="{{ url('/carrito/remover/'.$product->id) }}" class="btn btn-outline-dark float-right mt-2"><i class="bi bi-trash-fill"></i></a>
-                        </form>
-                          </div>
                         </div>
-                      </div>
-                    </div>
                     @endforeach
                     @endforeach
                     {{-- Fin de Card --}}
@@ -120,9 +120,9 @@
         </div>
       </div>
       @endforeach
-    </section>
+</section>
 
-    <script>
+<script>
       // let quantity = document.querySelector('.quantity');
 
 
@@ -139,11 +139,11 @@
         var cant = $(this).val();
 
         $.get('/carrito/actualizar/' + id + '/' + cant, function (data){
-          document.querySelector('.subTotal').innerHTML = '$ ' + Intl.NumberFormat('es-ES').format(data);
+          document.querySelector('.subTotal').innerHTML = Intl.NumberFormat('es-ES').format(data);
         })
 
     });
 
 
-    </script>
+</script>
 @endsection
