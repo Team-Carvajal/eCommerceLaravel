@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\signup;
+use App\Models\profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -21,15 +23,7 @@ class SignupController extends Controller
         return view('user.signup.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -52,51 +46,30 @@ class SignupController extends Controller
             $user->birthdate = $data['birthDay'];
             $user->save();
 
-            return redirect('/');
+            $credentials = $request->validate([
+                'email' => ['required', 'email'],
+                'password' => ['required'],
+            ]);
+
+            if (Auth::attempt($credentials)) {
+                
+                $request->session()->regenerate();
+                $user = Auth::user();
+                session(['id' => "{$user['id']}"]);
+/*
+                if(signup::where('email', '=', $credentials['email'])->exists()){
+                    $message = 'El usuario esta registrado';
+                    return view('/', compact('message'));
+                }
+*/       
+                return redirect()->intended('/');
+
+            }else{
+                return redirect('/');
+            }
+
+            
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\signup  $signup
-     * @return \Illuminate\Http\Response
-     */
-    public function show(signup $signup)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\signup  $signup
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(signup $signup)
-    {
-
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\signup  $signup
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, signup $signup)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\signup  $signup
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(signup $signup)
-    {
-        //
-    }
+   
 }

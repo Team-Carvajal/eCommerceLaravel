@@ -15,7 +15,7 @@
                         <div class="col-12 mx-auto">
                                     <div class="mb-3 d-flex">
                                         <span class="bg-transparent input-group-text border-0 position-absolute" id="basic-addon1"><i class="bi bi-person-fill text-muted"></i></span>
-                                        <input required type="text" class="form-control ps-5" name="name" placeholder="Nombres" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input required type="text" class="form-control ps-5" name="name" placeholder="Nombres" aria-label="Username" aria-describedby="basic-addon1" autofocus>
                                     </div>
                                     <div class="mb-3 d-flex">
                                         <span class="bg-transparent input-group-text border-0 position-absolute" id="basic-addon1"><i class="bi bi-person-fill text-muted"></i></span>
