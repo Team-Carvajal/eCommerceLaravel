@@ -24,7 +24,7 @@ class ProductController extends Controller
             ->get();
 
             if(count($data) == 0){
-                echo "no existe la categoria". $name;
+                return view ('user.error.productCategory', compact('name'));
             }
             else{
                 return view ('user.products.index', compact('data', 'name'));

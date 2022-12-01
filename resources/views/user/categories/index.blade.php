@@ -29,7 +29,7 @@
                         <div class="row">
 
                         @foreach($data as $category)
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <div class="right-first-image">
                                     <div class="thumb">
                                         <div class="inner-content">

@@ -20,9 +20,10 @@ class ShoppingcarController extends Controller
 
         $data=Bill::with("orders")
             ->withCount("orders")
-            ->where( "user_id","=", 3)
+            ->where( "user_id","=", session('id'))
             ->where("billstate_id", "=", 1)
             ->get();
+        
 
         return view('user.shoppingcar.index', compact("data"));
     }

@@ -2,9 +2,30 @@
 @section('title', ucfirst($name))
 @section('content')
 
+<style>
+        a:hover{
+        text-decoration: underline !important;
+        }
+        .carousel-products {
+            padding-top: 50px !important;
+            padding-bottom: 50px !important;
+            border-bottom: 3px dotted #eee !important;
+        }
+</style>
+
 <!-- ***** Products Area Starts ***** -->
     <section class="section espacio pt-5 " id="products">
         <div class="container">
+            <section class="section carousel-products">
+                {{-- Inicio de enlaces--}}
+                <div class="mb-4  float-start fs-6">
+                    <a  href="/categoria" class="text-dark">Categorias</a>
+                    /
+                    <a class="text-dark">{{$name}}</a   >
+                </div>
+                {{-- Fin de enlaces--}}
+            </section>
+
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-heading">
@@ -29,8 +50,7 @@
                                         <ul>
                                             <li><a href="{{$name . '/' . str_replace(' ' , '-', (strtolower($products->name)))}}"><i class="fa fa-eye"></i></a></li>
                                             <!-- AQUI CARRITO  -->
-                                            <li ></i>
-                                            <li><a><button type="submit" class="bg-transparent border-0" ><i class="fa fa-shopping-cart"></i></button></i></a></li>
+                                            {{-- <li><a><button type="submit" class="bg-transparent border-0" ><i class="fa fa-shopping-cart"></i></button></i></a></li> --}}
                                         </ul>
                                     </div>
                                     @if(isset($detail->product_color->image))

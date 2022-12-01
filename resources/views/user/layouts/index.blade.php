@@ -199,10 +199,10 @@
                     <div class="col-lg-3 categorias--">
                         <h4>Tienda &amp; Categorías</h4>
                         <ul>
-                            <li><a href="#">Hombres</a></li>
-                            <li><a href="#">Mujeres</a></li>
-                            <li><a href="#">Niños</a></li>
-                            <li><a href="#">Otros</a></li>
+                            <li><a href="/categoria/hombres">Hombres</a></li>
+                            <li><a href="/categoria/mujeres">Mujeres</a></li>
+                            <li><a href="/categoria/ninos">Niños</a></li>
+                            <li><a href="/categorias">Otros</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-3 enlaces-de-la-pagina--">
