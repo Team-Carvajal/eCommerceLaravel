@@ -45,23 +45,26 @@
                                 class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
                             </div>
                             <div class="ms-3">
-                              <h5>{{$product->name}}</h5>
-                              <p class="small mb-0">{{$product->description}}  </p>
+                              <h5 class="">{{$product->name}}</h5>
+                              @if (strlen($product->description) < 40)
+                                <p class="small mb-0">{{ $product->description }} </p>
+                                @else
+                                <p class="small mb-0" title="{{$product->description}}">{{substr($product->description, 0 , 40) . "..." }} </p>
+                              @endif
+                              <h5 class="fw-normal mb-0 fs-6 mt-3">Total:  ${{$product->price}}</h5>
                             </div>
                           </div>
                           <div class="d-flex flex-row align-items-center">
                             <form action="{{ url('/carrito/actualizar/'.$product->id) }}" method="post">
                               @csrf
-                            <div style="width: 140px;" class="d-grid">
-                              <h5 class="fw-normal mb-0">${{$product->price}}</h5>
-                              <h5 class="fw-normal mb-0">${{$order->product_price}}</h5>
+                              <div style="width: 140px;" class="d-flex align-items-center gap-2">
+                                <h5 class="fw-normal mb-0 fs-6">${{$product->price}}</h5>
+                                <input type="number" name="quantity" class="col-6 quantity" value="{{$order->quantity}}" maxlength="11" min="1" >
+                                <input type="hidden" class="productId" value="{{$product->id}}">
                             </div>
-                            <div style="width: 140px;" class="d-grid">
-                              <input type="number" name="quantity" class="col-7" value={{$order->quantity}} maxlength="11">
-                            </div>
-                            <button type="submit" style="color: #ffffff;" class="fas fa-trash-alt">🎇</button>
-                            <a href="{{ url('/carrito/remover/'.$product->id) }}" style="color: #ffffff;"><i class="fas fa-trash-alt">💣</i></a>
-                          </form>
+                            {{-- <button type="submit" style="color: #ffffff;" class="fas fa-trash-alt">🎇</button> --}}
+                            <a href="{{ url('/carrito/remover/'.$product->id) }}" class="btn btn-outline-dark float-right mt-2"><i class="bi bi-trash-fill"></i></a>
+                        </form>
                           </div>
                         </div>
                       </div>
@@ -82,7 +85,7 @@
                         <hr class="my-4">
                         <div class="d-flex justify-content-between ">
                           <p class="mb-2">Subtotal</p>
-                          <p class="mb-2">{{ $bill->subTotal }} $</p>
+                          <p class="mb-2" id="subTotal"> $ {{ number_format($bill->subTotal , 0 , ',', '.'); }}</p>
                         </div>
                         <div class="d-flex justify-content-between">
                           <p class="mb-2">Shipping</p>
@@ -118,4 +121,29 @@
       </div>
       @endforeach
     </section>
+
+    <script>
+      // let quantity = document.querySelector('.quantity');
+
+
+      // quantity.addEventListener("input", e=> {
+      //   // console.log(parseFloat(quantity.value) * {{$product->price}});
+      //   document.querySelector('#subTotal').innerHTML = '$' + Intl.NumberFormat('es-ES').format(parseFloat(quantity.value) * {{$product->price}});
+
+
+      // })
+
+      $('.quantity').change(function(){
+
+        var id  = $(this).parent().find('.productId').val();
+        var cant = $(this).val();
+
+        $.get('/carrito/actualizar/' + id + '/' + cant, function (data){
+          document.querySelector('#subTotal').innerHTML = '$ ' + Intl.NumberFormat('es-ES').format(data);
+        })
+
+    });
+
+
+    </script>
 @endsection

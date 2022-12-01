@@ -51,7 +51,8 @@ Route::get('/contactanos', [ContactUsController::class, 'index']);
 
 Route::get('/carrito/nuevo', [ShoppingcarController::class, 'newbill']);
 Route::get('/carrito', [ShoppingcarController::class, 'index']);
-Route::post('/carrito/agregar', [ShoppingcarController::class, 'store']);
+Route::post('/carrito/agregar', [ShoppingcarController::class, 'store'])->middleware('auth');
 Route::post('/carrito/Pago', [ShoppingcarController::class, 'order']);
 Route::get('/carrito/remover/{id}', [ShoppingcarController::class, 'destroy']);
 Route::post('/carrito/actualizar/{id}', [ShoppingcarController::class, 'update']);
+Route::get('/carrito/actualizar/{id}/{cant}', [ShoppingcarController::class, 'updateSubtotal']);

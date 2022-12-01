@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Orderbase;
+use App\Models\Product;
 use App\Models\Bill;
 use Illuminate\Http\Request;
+use Auth;
 
 class ShoppingcarController extends Controller
 {
@@ -18,7 +20,7 @@ class ShoppingcarController extends Controller
 
         $data=Bill::with("orders")
             ->withCount("orders")
-            ->where( "user_id","=", session('id'))
+            ->where( "user_id","=", 3)
             ->where("billstate_id", "=", 1)
             ->get();
 
@@ -43,17 +45,11 @@ class ShoppingcarController extends Controller
      */
     public function newbill()
     {
-        $lastBill=Bill::where('user_id', "=", session('id'))
-            ->where('billState_id', "=", 1)
-            ->exists();
+       $lastBill=$this->bill();
 
         if($lastBill == false){
 
-            $bill=new Bill;
-            $bill->billState_id=1;
-            $bill->paymentMethod_id=1;
-            $bill->user_id=3;
-            $bill->save();
+            $bill=Bill::firstOrCreate(['user_id' => Auth::id()]);
 
         }
         return redirect(redirect()->getUrlGenerator()->previous());
@@ -79,9 +75,7 @@ class ShoppingcarController extends Controller
      */
     public function order( $shoppingcar)
     {
-        $Bill=Bill::where('user_id', "=", session('id'))
-            ->where('billState_id', "=", 1)
-            ->first();
+        $Bill=$this->bill();
 
         $Bill->billState_id=2;
         $Bill->update();
@@ -92,9 +86,7 @@ class ShoppingcarController extends Controller
 
     public function update(Request $request, $id)
     {
-        $Bill=Bill::where('user_id', "=", session('id'))
-            ->where('billState_id', "=", 1)
-            ->first();
+        $Bill=$this->bill();
 
         $inCar=Orderbase::where('bill_id', '=', $Bill->id)
             ->where('product_id', '=', $id)
@@ -103,10 +95,28 @@ class ShoppingcarController extends Controller
         $inCar->quantity=$request->quantity;
         $inCar->product_price=($request->quantity * $inCar->product_price);
         $Bill->subTotal=Orderbase::where('bill_id', '=', $Bill->id)->sum('product_price');
+
         $Bill->update();
         $inCar->update();
 
         return redirect(redirect()->getUrlGenerator()->previous());
+
+    }
+
+    public function updateSubtotal ($id, $cant)
+    {
+        $product = Product::find($id);
+        $subtotal = $product->price * $cant;
+
+        $bill = Bill::where('user_id', 3)->where('billState_id', 1)->first();
+
+        Orderbase::where('bill_id', $bill->id)
+            ->where('product_id',  $id)
+            ->update(['quantity' => $cant]);
+
+        $bill->update(['subTotal' => $subtotal]);
+
+        echo $subtotal;
 
     }
 
@@ -120,9 +130,7 @@ class ShoppingcarController extends Controller
      */
     public function store(Request $request){
 
-        $lastBill=Bill::where('user_id', "=", session('id'))
-            ->where('billState_id', "=", 1)
-            ->first();
+        $lastBill=$this->bill();
 
         $lastProduct=Orderbase::where("product_id", "=", $request->product_id)
             ->where("bill_id", "=", $lastBill->id)
@@ -168,13 +176,23 @@ class ShoppingcarController extends Controller
     public function destroy($id){
 
     $product=Orderbase::where('product_id', '=', $id)->first();
-    $bill=Bill::find($product->bill_id);
+    $bill=$this->bill();
     $bill->subTotal=Orderbase::where('bill_id','=', $bill->id)->sum('product_price');
     $bill->update();
     $product->delete();
 
 
      return redirect(redirect()->getUrlGenerator()->previous());
+
+    }
+
+
+    private function bill(){
+
+        return Bill::where('user_id', "=", Auth::id())
+            ->where('billState_id', "=", 1)
+            ->first();
+
 
     }
 
