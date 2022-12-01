@@ -107,6 +107,7 @@ CREATE TABLE `billstates` (
 
 LOCK TABLES `billstates` WRITE;
 /*!40000 ALTER TABLE `billstates` DISABLE KEYS */;
+INSERT INTO `billstates`(`id`, `state`, `created_at`, `updated_at`) VALUES ('1','Carrito',null,null),('2','Pagado',null,null),('3','En espera',null,null);
 /*!40000 ALTER TABLE `billstates` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -315,6 +316,7 @@ CREATE TABLE `ordersbase` (
   `bill_id` int(11) NOT NULL,
   `dimensionPrint_id` int(11) DEFAULT NULL,
   `product_id` int(11) NOT NULL,
+  `product_price` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -381,6 +383,7 @@ CREATE TABLE `paymentmethods` (
 
 LOCK TABLES `paymentmethods` WRITE;
 /*!40000 ALTER TABLE `paymentmethods` DISABLE KEYS */;
+INSERT INTO `paymentmethods`(`id`, `method`, `created_at`, `updated_at`) VALUES (1,'Paypal',null,null);
 /*!40000 ALTER TABLE `paymentmethods` ENABLE KEYS */;
 UNLOCK TABLES;
 

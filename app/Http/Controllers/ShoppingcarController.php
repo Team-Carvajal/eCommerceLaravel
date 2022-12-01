@@ -87,7 +87,7 @@ class ShoppingcarController extends Controller
         $Bill->billState_id=2;
         $Bill->update();
 
-        newbill();
+        $this->newbill();
 
     }
 
@@ -137,7 +137,7 @@ class ShoppingcarController extends Controller
      */
     public function store(Request $request){
 
-        $lastBill=$this->bill();
+        $lastBill=Bill::firstOrCreate(['user_id' => Auth::id()]);
 
         $lastProduct=Orderbase::where("product_id", "=", $request->product_id)
             ->where("bill_id", "=", $lastBill->id)
@@ -182,10 +182,10 @@ class ShoppingcarController extends Controller
     public function destroy($id){
 
     $product=Orderbase::where('product_id', '=', $id)->first();
+    $product->delete();
     $bill=$this->bill();
     $bill->subTotal=Orderbase::where('bill_id','=', $bill->id)->sum('product_price');
     $bill->update();
-    $product->delete();
 
 
      return redirect(redirect()->getUrlGenerator()->previous());

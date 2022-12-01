@@ -16,7 +16,7 @@ class Bill extends Model
         "user_id"
     ];
     public function orders(){
-        return $this->hasMany(Orderbase::class, "bill_id", "id");
+        return $this->hasMany(Orderbase::class);
     }
 
     public function states(){

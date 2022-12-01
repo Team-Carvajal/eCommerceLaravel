@@ -123,15 +123,6 @@
 </section>
 
 <script>
-      // let quantity = document.querySelector('.quantity');
-
-
-      // quantity.addEventListener("input", e=> {
-      //   // console.log(parseFloat(quantity.value) * {{$product->price}});
-      //   document.querySelector('#subTotal').innerHTML = '$' + Intl.NumberFormat('es-ES').format(parseFloat(quantity.value) * {{$product->price}});
-
-
-      // })
 
       $('.quantity').change(function(){
 

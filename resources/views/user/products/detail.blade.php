@@ -119,7 +119,7 @@
                                 <div class="mb-5">
                                     <h3 class="mb-2">{{$product}}</h3>
                                     <span class="price">${{number_format($price, 0, ',', '.')}}</span>
-                                    <input type="hidden" value="{{$price}}"> {{--Envia--}}
+                                    <input type="hidden" value="{{$price}}" name="product_price"> {{--Envia--}}
                                     <input type="hidden" name="product_id" value="{{$procolor->product_id}}"> {{--Envia--}}
                                 </div>
 
