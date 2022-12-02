@@ -97,7 +97,7 @@
         </div>
         {{-- Fin de enlaces--}}
 
-            <div class=" d-md-grid d-grid d-lg-flex container-fluid">
+            <div class=" d-md-grid d-grid d-lg-flex container-fluid ">
 
                 <div class=" col-lg-6 col-md-10 col-sm-12 col-12 mx-auto d-grid mb-md-5 mb-5">
                     <div class="d-flex">
@@ -107,9 +107,9 @@
                     </div>
                 </div>
 
-                <div class=" col-lg-6 col-md-10 col-sm-12 col-12 mx-auto  d-grid">
+                <div class=" col-lg-6 col-md-10 col-sm-12 col-12 mx-auto d-grid ">
 
-                    <div class="d-grid">
+                    <div class="d-grid bg-white pt-5 rounded shadow-sm p-3">
 
                         <div class="right-content col-12 col-sm-12 mx-auto">
 
@@ -161,7 +161,7 @@
                                             </div>
 
                                         </div>
-                                <form action="" method="get" class="row">
+                                <form action="{{url('/carrito/agregar')}}" method="post">
                                         <div class="d-grid d-lg-flex mt-4">
                                             <div class="col-12 col-sm-12 col-lg-6 d-grid">
                                                 <span class="fs-6 my-auto">Cantidad:</span>
@@ -188,7 +188,10 @@
                                 </div>
 
 
-                                    {{-- @csrf --}}
+                                    @csrf
+                                {{-- --input price && productID-- --}}
+                                <input type="hidden" required name="nameproduct" value="{{$product}}">
+                                {{-- --input price && productID-- --}}
                                 {{-- --input price && productID-- --}}
                                 <input type="hidden" required name="product_id" value="{{$procolor->product_id}}">
                                 <input type="hidden" required value="{{$price}}" name="product_price">
@@ -213,7 +216,58 @@
             </div>
         </div>
     </div>
+@php $limitProduct = count($category->products) <= 8 && count($category->products) >= 4 @endphp
 
+@if ($limitProduct)
+    <section class="section carousel-products">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="section-heading">
+                        <h2>Más productos para {{$category->name}}</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="men-item-carousel">
+                        <div class="owl-men-item owl-carousel">
+
+                            @foreach($category->products as $product)
+                            @php
+                                $rand = rand(0, count($product->colors)-1);
+                            @endphp
+                                @foreach($product->colors as $key => $img)
+                                @if($rand == $key)
+                                        <div class="item bg-white p-3 pb-4 rounded shadow-sm">
+                                            <div class="thumb">
+                                                <div class="hover-content">
+                                                    <ul>
+                                                        <li><a href="{{'/' . 'categoria/' . $category->name . '/' . str_replace(' ' , '-', (strtolower($product->name)))}}"><i class="fa fa-eye"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                                <img src="{{ url('assets/images/productos/'. $img->product_color->image )}}" alt="" class="pd-carousel">
+                                            </div>
+                                            <div class="down-content bg-transparent">
+                                                <h4 class="pe-3">{{$product->name}}</h4>
+                                                <span>$ {{ $product->price}}</span>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            @endforeach
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @endif
+
+{{-- Start code scripts --}}
 <script>
 
     let pColor = document.querySelector('#pcolor');

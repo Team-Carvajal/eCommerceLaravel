@@ -112,11 +112,11 @@
                                 @endphp
                                     @foreach($product->colors as $key => $img)
                                     @if($rand == $key)
-                                            <div class="item">
+                                            <div class="item bg-white p-3 pb-4 rounded shadow-sm">
                                                 <div class="thumb">
                                                     <div class="hover-content">
                                                         <ul>
-                                                            <li><a href="{{'categoria/' . $category->name . '/' . str_replace(' ' , '-', (strtolower($product->name)))}}"><i class="fa fa-eye"></i></a></li>
+                                                            <li><a href="{{'/' . 'categoria/' . $category->name . '/' . str_replace(' ' , '-', (strtolower($product->name)))}}"><i class="fa fa-eye"></i></a></li>
                                                             {{-- <li><a href="/producto"><i class="fa fa-shopping-cart"></i></a></li> --}}
                                                         </ul>
                                                     </div>
@@ -124,7 +124,7 @@
                                                 </div>
                                                 <div class="down-content bg-transparent">
                                                     <h4 class="pe-3">{{$product->name}}</h4>
-                                                    <span>$ {{ $product->price}}</span>
+                                                    <span class="fs-6">$ {{ $product->price}}</span>
                                                 </div>
                                             </div>
                                         @endif

@@ -145,12 +145,23 @@ class ShoppingcarController extends Controller
 
         if($lastProduct == null){
 
-            $insert=new Orderbase;
+            $detail = [
+                'product_id' => $request->product_id,
+                'nameproduct' => $request->nameproduct,
+                'idColor' => $request->idColor,
+                'nameColor' => $request->nameColor,
+                'idSize' => $request->idSize,
+                'nameSize' => $request->nameSize,
+                'product_price' => $request->product_price,
+                'quantity' => $request->quantity
+            ];
 
+            $insert=new Orderbase;
             $insert->product_id=$request->product_id;
             $insert->product_price=($request->product_price * $request->quantity);
+            $insert->detail=(json_encode($detail));
             $insert->bill_id=$lastBill->id;
-            $insert->quantity=$request->quantity;
+            // dd($insert->toArray(), $request->all(), $detail);
             $insert->save();
 
             $lastBill->subTotal=Orderbase::where('bill_id', '=', $lastBill->id)->sum('product_price');
