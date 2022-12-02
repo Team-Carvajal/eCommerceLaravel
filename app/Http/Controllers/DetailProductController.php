@@ -39,6 +39,7 @@ class DetailProductController extends Controller
 
     $productsize = DB::select('select * from products_shirtsizes where product_id =' . $products->id); /* */
     $size = DB::select('select * from shirtsizes'); /* */
+    // dd($size, $productsize);
 
     $shirttypes = DB::select('select * from products_shirttypes where product_id =' . $products->id);
 

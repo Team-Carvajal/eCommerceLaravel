@@ -253,14 +253,14 @@
             <script src="{{ url('assets/js/isotope.js')}}"></script>
             <script src="{{ url('assets/js/quantity.js')}} "></script>
 
-            <script>
+            {{-- <script>
             document.querySelector("").addEventListener("keypress", function (evt) {
             if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
             {
                 evt.preventDefault();
             }
             });
-            </script>
+            </script> --}}
 
             <!-- Global Init -->
             <script src="{{ url('assets/js/custom.js')}}"></script>

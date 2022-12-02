@@ -77,6 +77,7 @@
     // $shirtcolor_name = [];
     $shirtcolor_image = [];
     $price = $products->price;
+    $stock = [];
 @endphp
 @foreach ($color as $colors)
 @foreach( $productcolor as $procolor)
@@ -112,15 +113,18 @@
 
                         <div class="right-content col-12 col-sm-12 mx-auto">
 
-                            <form action="{{url('/carrito/agregar')}}" method="post" id="product">
+                            {{-- <form action="{{url('/carrito/agregar')}}" method="post" id="product"> --}}
+                            <form action="" method="get">
 
                                 @csrf
 
                                 <div class="mb-5">
                                     <h3 class="mb-2">{{$product}}</h3>
                                     <span class="price">${{number_format($price, 0, ',', '.')}}</span>
-                                    <input type="hidden" value="{{$price}}" name="product_price"> {{--Envia--}}
+                                    {{----input price && productID----}}
+                                    <input type="hidden" value="{{$price}}" name="product_price">
                                     <input type="hidden" name="product_id" value="{{$procolor->product_id}}"> {{--Envia--}}
+                                    {{----input price && productID----}}
                                 </div>
 
                                 <span>{{$products->description}}</span>
@@ -130,16 +134,18 @@
                                         <div class="d-grid mb-3">
                                             <span>Color: <span id="pcolor"></span></span>
                                             <div class="d-flex gap-2 mt-3 colores">
-
                                                 @foreach ($color as $colors)
                                                 @foreach( $productcolor as $procolor)
                                                 @if ($procolor->shirtcolor_id == $colors->id)
                                                     <label class="shirtColor" for="c-{{$colors->name}}"></label>
-                                                    <input value="{{ucfirst($colors->name)}}" hidden type="radio" name="color" id="c-{{$colors->name}}" required>
+                                                    <input value="{{ucfirst($colors->name)}}.{{$colors->id}}" hidden type="radio" name="color" id="c-{{$colors->name}}" required>
                                                 @endif
                                                 @endforeach
                                                 @endforeach
-
+                                                {{----input color----}}
+                                                <input type="hidden" value="" name="idColor" id="idColor" size="2">
+                                                <input type="hidden" value="" name="nameColor" id="nameColor" size="2">
+                                                {{----input color----}}
                                             </div>
                                         </div>
 
@@ -148,17 +154,25 @@
                                             <span>Talla: <span id="ptalla"></span></span>
                                             <div class="d-flex gap-2 mt-3">
                                                 <div>
-                                                    @foreach ($size as $sizes)
-                                                    @foreach ($productsize as $prosize )
-                                                    @if ($prosize->shirtsize_id == $sizes->id)
-                                                        <label class="btn btn-outline-danger shirtSize" for="t-{{$sizes->sizes}}">{{$sizes->sizes}}</label>
-                                                    @endif
-                                                    @endforeach
-                                                    @endforeach
+                                                    {{--Product Sizes label --}}
+                                                        @foreach ($size as $sizes)
+                                                        @foreach ($productsize as $prosize )
+                                                        @if ($prosize->shirtsize_id == $sizes->id)
+                                                            <label class="btn btn-outline-danger shirtSize" for="t-{{$sizes->size}}">{{$sizes->size}}</label>
+                                                            @php $stock[$prosize->shirtsize_id] = [$prosize->shirtsize_id, $prosize->stock] @endphp
+                                                        @endif
+                                                        @endforeach
+                                                        @endforeach
+                                                    {{--Product Sizes label --}}
+
+                                                    {{----input size----}}
+                                                    <input type="hidden" value="" id="idSize" name="idSize" size="2">
+                                                    <input type="hidden" value="" id="nameSize" name="nameSize" size="2">
+                                                    {{----input size----}}
                                                 </div>
                                                 <div id="radio-talla">
                                                     @foreach ($size as $sizes)
-                                                        <input hidden type="radio" name="talla" id="t-{{$sizes->sizes}}" value="{{$sizes->sizes}}" required>
+                                                        <input hidden type="radio" name="talla" id="t-{{$sizes->size}}" value="{{$sizes->size}}.{{$sizes->id}}" required>
                                                     @endforeach
                                                 </div>
                                             </div>
@@ -171,11 +185,13 @@
                                             <div class="quantity buttons_added col-6 d-grid">
                                                 <div class="mx-lg-auto mx-md-auto">
                                                     <input type="button" value="-" class="minus" onclick="minquant()" >
-                                                    <input type="number" step="1" min="1" max="{{$products->quantity}}" id="quantity" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode="">
+                                                    <input type="number" step="1" min="1" max="" id="quantity" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode="">
                                                     <input type="button" value="+" class="plus" onclick="maxquant()">
                                                 </div>
-                                                <div class="d-grid mt-2">
-                                                    <span class="fs-6 text-lg-center text-md-center">({{$products->quantity}}) Unidades disponibles</span>
+                                                <div class="d-grid mt-2 d-flex">
+                                                    <span class="fs-6 text-lg-center text-md-center me-1 quantityStock"></span>
+                                                    <span class="fs-6 text-lg-center text-md-center"> Unidades disponibles</span>
+                                                    <input type="hidden" value="" name="" class="quantityStock" size="2">
                                                 </div>
                                             </div>
                                         </div>
@@ -183,7 +199,7 @@
                                     <div class="total">
                                         {{-- <h4 class="mb-3" id="total">Total : ${{number_format($price, 0, ',', '.')}}</h4> --}}
                                         <div class="main-border-button text-center ">
-                                            <button class="btn text-center btn-outline-dark py-2 px-4"   type="submit" >Añadir al carrito</button>
+                                            <button class="btn text-center btn-outline-dark py-2 px-4" type="submit" >Añadir al carrito</button>
                                         </div>
                                     </div>
                                 </div>
@@ -201,6 +217,7 @@
     let color = document.querySelector('#color');
 
     const colores = @json($shirtcolor_image);
+    const stock = @json($stock);
 
     let pTalla = document.querySelector('#ptalla');
     let imageview = document.querySelector('#imageview');
@@ -213,6 +230,7 @@
     let quantityValue;
 
     var item;
+    var tItem;
 
     function maxquant(){
         quant = parseInt(quantity.value)+1;
@@ -220,27 +238,41 @@
     function minquant(){
         quant = parseInt(quantity.value)-1;
     }
+
+    function stockSearch(data){
+        data = stock[data[1]];
+        console.log(data[1]);
+        document.querySelector('.quantityStock').innerHTML = data[1];
+        document.querySelector('input.quantityStock').setAttribute('value', data[1]);
+    }
+
     if (document.querySelector('input[name="color"]')) {
         document.querySelectorAll('input[name="color"]').forEach((elem) => {
         elem.addEventListener("change", function(event) {
             item = event.target.value;
-            pColor.innerHTML = item;
-            imageview.src = `{{url('assets/images/productos')}}/${colores[item]}`;
+            item = item.split('.');
+            pColor.innerHTML = item[0];
+            imageview.src = `{{url('assets/images/productos')}}/${colores[item[0]]}`;
+            document.querySelector('#idColor').setAttribute('value', item[1]);
+            document.querySelector('#nameColor').setAttribute('value', item[0].toLowerCase());
+        });
+    });
+    }
+    if (document.querySelector('input[name="talla"]')) {
+        document.querySelectorAll('input[name="talla"]').forEach((elem) => {
+            elem.addEventListener("change", function(event) {
+                tItem = event.target.value;
+                tItem = tItem.split('.');
+                stockSearch(tItem);
+                pTalla.innerHTML = tItem[0];
+                document.querySelector(`label[for='t-${tItem[0]}']`);
+                document.querySelector('#idSize').setAttribute('value', tItem[1]);
+                document.querySelector('#nameSize').setAttribute('value', tItem[0]);
 
+            });
         });
-    });
-}
-if (document.querySelector('input[name="talla"]')) {
-    document.querySelectorAll('input[name="talla"]').forEach((elem) => {
-        elem.addEventListener("change", function(event) {
-            var tItem = event.target.value;
-            pTalla.innerHTML = tItem;
-            var talla = document.querySelector(`label[for='t-${tItem}']`);
-            // alert(talla.getAttribute("for"));
-        });
-    });
-}
-let shirtSize = document.querySelectorAll('label.shirtSize');
+    }
+    let shirtSize = document.querySelectorAll('label.shirtSize');
     // For each button, register an event listener
     shirtSize.forEach(function(elem){
         elem.addEventListener("click", function(e){
@@ -250,6 +282,7 @@ let shirtSize = document.querySelectorAll('label.shirtSize');
             });
             // Add the class on clicked one
             e.target.classList.add("active");
+
         })
     })
     let ShirtColor = document.querySelectorAll('label.shirtColor');
@@ -262,6 +295,7 @@ let shirtSize = document.querySelectorAll('label.shirtSize');
         });
         // Add the class on clicked one
         e.target.classList.add("colorActive");
+
 
         // imageview.src = "item";
     })
