@@ -102,10 +102,10 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(5, 'Mujeres', NULL, NULL),
-(6, 'Hombres', NULL, NULL),
-(7, 'Jovenes', NULL, NULL),
-(8, 'Niños', NULL, NULL);
+(1, 'Mujeres', NULL, NULL),
+(2, 'Hombres', NULL, NULL),
+(3, 'Jovenes', NULL, NULL),
+(4, 'Niños', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -361,7 +361,9 @@ CREATE TABLE `products_descountsettings` (
 CREATE TABLE `products_shirtcolors` (
   `product_id` int(11) NOT NULL,
   `shirtcolor_id` int(11) NOT NULL,
-  `image` varchar(500) DEFAULT NULL
+  `image` varchar(500) DEFAULT NULL,
+    `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -378,7 +380,9 @@ CREATE TABLE `products_shirtcolors` (
 CREATE TABLE `products_shirtsizes` (
   `product_id` int(11) NOT NULL,
   `shirtsize_id` int(11) NOT NULL,
-  `stock` int(11) NOT NULL
+  `stock` int(11) NOT NULL,
+    `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -392,7 +396,9 @@ CREATE TABLE `products_shirtsizes` (
 
 CREATE TABLE `products_typesprint` (
   `product_id` int(11) NOT NULL,
-  `typeprint_id` int(11) NOT NULL
+  `typeprint_id` int(11) NOT NULL,
+    `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -409,7 +415,9 @@ CREATE TABLE `products_typesprint` (
 
 CREATE TABLE `products_shirttypes` (
   `product_id` int(11) NOT NULL,
-  `shirttype_id` int(11) NOT NULL
+  `shirttype_id` int(11) NOT NULL,
+    `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -663,7 +671,7 @@ ALTER TABLE `migrations`
 --
 ALTER TABLE `ordersbase`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `bills_ordersBase` (`bill_id`),  
+  ADD KEY `bills_ordersBase` (`bill_id`),
   ADD KEY `products_ordersBase` (`product_id`);
 
 --
@@ -767,14 +775,14 @@ ALTER TABLE `shirttypes`
 --
 ALTER TABLE `typespqrs`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `typePqrs` (`typePqrs`);;
+  ADD UNIQUE KEY `typePqrs` (`typePqrs`);
 
 --
 -- Indices de la tabla `typesprint`
 --
 ALTER TABLE `typesprint`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `print` (`print`);;
+  ADD UNIQUE KEY `print` (`print`);
 
 --
 -- Indices de la tabla `users`
@@ -791,37 +799,37 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `bills`
 --
 ALTER TABLE `bills`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `billstates`
 --
 ALTER TABLE `billstates`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `deliveries`
 --
 ALTER TABLE `deliveries`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `descountsettings`
 --
 ALTER TABLE `descountsettings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `dimensionprint`
 --
 ALTER TABLE `dimensionprint`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `failed_jobs`
@@ -833,19 +841,19 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT de la tabla `managementpqrs`
 --
 ALTER TABLE `managementpqrs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `ordersbase`
 --
 ALTER TABLE `ordersbase`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `personal_access_tokens`
@@ -857,37 +865,37 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT de la tabla `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT
 
 --
 -- AUTO_INCREMENT de la tabla `shirtcolors`
 --
 ALTER TABLE `shirtcolors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `shirtsizes`
 --
 ALTER TABLE `shirtsizes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `shirttypes`
 --
 ALTER TABLE `shirttypes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `typesprint`
 --
 ALTER TABLE `typesprint`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
@@ -919,7 +927,6 @@ ALTER TABLE `managementpqrs`
 --
 ALTER TABLE `ordersbase`
   ADD CONSTRAINT `bills_ordersBase` FOREIGN KEY (`bill_id`) REFERENCES `bills` (`id`),
-  ADD CONSTRAINT `dimensionPrint_ordersBase` FOREIGN KEY (`dimensionPrint_id`) REFERENCES `dimensionprint` (`id`),
   ADD CONSTRAINT `products_ordersBase` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 
 --
@@ -975,3 +982,4 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+

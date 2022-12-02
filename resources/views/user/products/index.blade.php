@@ -19,7 +19,7 @@
             <section class="section carousel-products">
                 {{-- Inicio de enlaces--}}
                 <div class="mb-4  float-start fs-6">
-                    <a  href="/categoria" class="text-dark">Categorias</a>
+                    <a  href="/categorias" class="text-dark">Categorias</a>
                     /
                     <a class="text-dark">{{$name}}</a   >
                 </div>
