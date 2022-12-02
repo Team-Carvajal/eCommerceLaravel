@@ -114,17 +114,9 @@
                         <div class="right-content col-12 col-sm-12 mx-auto">
 
                             {{-- <form action="{{url('/carrito/agregar')}}" method="post" id="product"> --}}
-                            <form action="" method="get">
-
-                                @csrf
-
                                 <div class="mb-5">
                                     <h3 class="mb-2">{{$product}}</h3>
                                     <span class="price">${{number_format($price, 0, ',', '.')}}</span>
-                                    {{----input price && productID----}}
-                                    <input type="hidden" value="{{$price}}" name="product_price">
-                                    <input type="hidden" name="product_id" value="{{$procolor->product_id}}"> {{--Envia--}}
-                                    {{----input price && productID----}}
                                 </div>
 
                                 <span>{{$products->description}}</span>
@@ -142,10 +134,6 @@
                                                 @endif
                                                 @endforeach
                                                 @endforeach
-                                                {{----input color----}}
-                                                <input type="hidden" value="" name="idColor" id="idColor" size="2">
-                                                <input type="hidden" value="" name="nameColor" id="nameColor" size="2">
-                                                {{----input color----}}
                                             </div>
                                         </div>
 
@@ -164,11 +152,6 @@
                                                         @endforeach
                                                         @endforeach
                                                     {{--Product Sizes label --}}
-
-                                                    {{----input size----}}
-                                                    <input type="hidden" value="" id="idSize" name="idSize" size="2">
-                                                    <input type="hidden" value="" id="nameSize" name="nameSize" size="2">
-                                                    {{----input size----}}
                                                 </div>
                                                 <div id="radio-talla">
                                                     @foreach ($size as $sizes)
@@ -178,20 +161,20 @@
                                             </div>
 
                                         </div>
+                                <form action="" method="get" class="row">
                                         <div class="d-grid d-lg-flex mt-4">
                                             <div class="col-12 col-sm-12 col-lg-6 d-grid">
                                                 <span class="fs-6 my-auto">Cantidad:</span>
                                             </div>
                                             <div class="quantity buttons_added col-6 d-grid">
                                                 <div class="mx-lg-auto mx-md-auto">
-                                                    <input type="button" value="-" class="minus" onclick="minquant()" >
-                                                    <input type="number" step="1" min="1" max="" id="quantity" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode="">
-                                                    <input type="button" value="+" class="plus" onclick="maxquant()">
+                                                    <input type="button" value="-" class="minus" >
+                                                    <input type="number" step="1" min="1" max="1" id="quantity" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode="">
+                                                    <input type="button" value="+" class="plus" >
                                                 </div>
                                                 <div class="d-grid mt-2 d-flex">
                                                     <span class="fs-6 text-lg-center text-md-center me-1 quantityStock"></span>
                                                     <span class="fs-6 text-lg-center text-md-center"> Unidades disponibles</span>
-                                                    <input type="hidden" value="" name="" class="quantityStock" size="2">
                                                 </div>
                                             </div>
                                         </div>
@@ -199,17 +182,37 @@
                                     <div class="total">
                                         {{-- <h4 class="mb-3" id="total">Total : ${{number_format($price, 0, ',', '.')}}</h4> --}}
                                         <div class="main-border-button text-center ">
-                                            <button class="btn text-center btn-outline-dark py-2 px-4" type="submit" >Añadir al carrito</button>
+                                            <button class="btn text-center btn-outline-dark py-2 px-4" type="submit">Añadir al carrito</button>
                                         </div>
                                     </div>
                                 </div>
+
+
+                                    {{-- @csrf --}}
+                                {{-- --input price && productID-- --}}
+                                <input type="hidden" required name="product_id" value="{{$procolor->product_id}}">
+                                <input type="hidden" required value="{{$price}}" name="product_price">
+                                {{-- --input price && productID-- --}}
+                                {{-- --input color-- --}}
+                                <input type="hidden" required value="" name="idColor" id="idColor" size="2">
+                                <input type="hidden" required value="" name="nameColor" id="nameColor" size="2">
+                                {{-- --input color-- --}}
+                                {{-- --input size-- --}}
+                                <input type="hidden" required value="" id="idSize" name="idSize" size="2">
+                                <input type="hidden" required value="" id="nameSize" name="nameSize" size="2">
+                                {{-- --input size-- --}}
+                                {{-- --input quantity-- --}}
+                                <input type="hidden" required value="" name="" class="quantityStock" size="2">
+                                {{-- --input quantity-- --}}
+
+
+
                             </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    {{-- {!! print_r ($shirtcolor_image) !!} --}}
 
 <script>
 
@@ -224,26 +227,18 @@
     let radioTalla = document.querySelector('#radio-talla');
     let quantity = document.querySelector('#quantity');
     let total = document.querySelector('#total');
+    let quant, quantityValue, item, tItem;
 
-    let quant;
+    document.querySelector('#quantity').addEventListener('input', function(){
+        console.log(document.querySelector('#quantity').value)
+    })
 
-    let quantityValue;
-
-    var item;
-    var tItem;
-
-    function maxquant(){
-        quant = parseInt(quantity.value)+1;
-    }
-    function minquant(){
-        quant = parseInt(quantity.value)-1;
-    }
 
     function stockSearch(data){
         data = stock[data[1]];
-        console.log(data[1]);
         document.querySelector('.quantityStock').innerHTML = data[1];
         document.querySelector('input.quantityStock').setAttribute('value', data[1]);
+        document.querySelector('#quantity').setAttribute('max', data[1]);
     }
 
     if (document.querySelector('input[name="color"]')) {

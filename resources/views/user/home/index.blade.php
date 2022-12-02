@@ -116,7 +116,7 @@
                                                 <div class="thumb">
                                                     <div class="hover-content">
                                                         <ul>
-                                                            <li><a href="{{ url('../products/index.blade.php')}}"><i class="fa fa-eye"></i></a></li>
+                                                            <li><a href="{{'categoria/' . $category->name . '/' . str_replace(' ' , '-', (strtolower($product->name)))}}"><i class="fa fa-eye"></i></a></li>
                                                             {{-- <li><a href="/producto"><i class="fa fa-shopping-cart"></i></a></li> --}}
                                                         </ul>
                                                     </div>
