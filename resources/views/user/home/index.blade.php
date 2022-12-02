@@ -81,15 +81,14 @@
 <!-- ***** Carousel Area Starts ***** -->
 @php
     $pro = "";
-    $image = "";
 @endphp
 
 {{-- @endisset --}}
     @foreach($category as $categories => $category)
         @php
-            // $limitProduct = count($category->products) <= 8 && count($category->products) >= 4
+            $limitProduct = count($category->products) <= 8 && count($category->products) >= 4
         @endphp
-    {{-- @if ($limitProduct) --}}
+    @if ($limitProduct)
         <section class="section carousel-products">
             <div class="container">
                 <div class="row">
@@ -107,21 +106,31 @@
                         <div class="men-item-carousel">
                             <div class="owl-men-item owl-carousel">
 
-                                <div class="item">
-                                    <div class="thumb">
-                                        <div class="hover-content">
-                                            <ul>
-                                                <li><a href="/producto/{{str_replace(' ' , '-', (strtolower($pro)))}}"><i class="fa fa-eye"></i></a></li>
-                                                <li><a href="/producto"><i class="fa fa-shopping-cart"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <img src="{{ url('assets/images/productos/'.$image)}}"alt="" class="pd-carousel">
-                                    </div>
-                                    <div class="down-content bg-transparent">
-                                            <h4 class="pe-3">{{$pro}}</h4> {{--nombre--}}
-                                        {{-- <span>${{number_format($pro, 0, ',', '.')}}</span> precio --}}
-                                    </div>
-                                </div>
+                                @foreach($category->products as $product)
+                                @php
+                                    $rand = rand(0, count($product->colors)-1);
+                                @endphp
+                                    @foreach($product->colors as $key => $img)
+                                        @if($rand == $key)
+                                            <div class="item">
+                                                <div class="thumb">
+                                                    <div class="hover-content">
+                                                        <ul>
+                                                            <li><a href="{{ url('../products/index.blade.php')}}"><i class="fa fa-eye"></i></a></li>
+                                                            <li><a href="/producto"><i class="fa fa-shopping-cart"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                    {{$img->pivot->image}}
+                                                    <img src="{{ url('assets/images/')}}" alt="" class="pd-carousel">
+                                                </div>
+                                                <div class="down-content bg-transparent">
+                                                    <h4 class="pe-3">{{$product->name}}</h4>
+                                                    <span>$ {{ $product->price}}</span>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                    @endforeach
 
                             </div>
                         </div>
@@ -129,7 +138,7 @@
                 </div>
             </div>
         </section>
-        {{-- @endif --}}
+        @endif
     @endforeach
 
 
