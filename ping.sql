@@ -48,6 +48,8 @@ CREATE TABLE `aboutus` (
 
 LOCK TABLES `aboutus` WRITE;
 /*!40000 ALTER TABLE `aboutus` DISABLE KEYS */;
+INSERT INTO `aboutus` (`id`, `aboutus`, `mission`, `vision`, `logo`, `created_at`, `updated_at`) VALUES (1, 'Somos una tienda de camisas estampadas', ' Ofrecer un servicio eficaz de todo tipo de prendas de buena calidad y en buen estado para satisfacer las necesidades de nuestros clientes.', 'Convertir mi tienda en una de las más conocidas y poder llevar mis productos a todo el país y al extranjero.', '', NULL, NULL);
+
 /*!40000 ALTER TABLE `aboutus` ENABLE KEYS */;
 UNLOCK TABLES;
 
