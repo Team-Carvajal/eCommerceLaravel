@@ -169,10 +169,10 @@
                         </div>
                     </div>
                     <div class="modal-body">
-                        <div class="input-group flex-nowrap shadow-lg">
-                            <input type="text" class="form-control" placeholder="Buscar.." aria-label="Username" aria-describedby="addon-wrapping">
-                            <span class="input-group-text iconSearch" id="addon-wrapping" role="button"><img class="" src="{{ url('assets/images/icon/search.svg')}}" alt=""></span>
-                        </div>
+                            <div class="input-group flex-nowrap shadow-lg">
+                                <input type="text" class="form-control" id="text-search" placeholder="Buscar.." aria-label="Username" aria-describedby="addon-wrapping">
+                                <span class="input-group-text iconSearch" id="addon-wrapping" role="button"><img class="" src="{{ url('assets/images/icon/search.svg')}}" alt=""></span>
+                            </div>
                     </div>
                 </div>
                 </div>
@@ -291,19 +291,32 @@
 
 
             </script>
-                        <script>
+            <script>
 
-                            $('#helpwha').click(function(){
 
-                                let num = '+573158559229';
-                                let msg = 'Hola, necesito hacer una consulta';
 
-                                var win = window.open(`https://wa.me/${num}?text=${msg}`, '_blank');
+                $('#addon-wrapping').click(function(){
+                    let text = $('#text-search').val()
+                    location.href = "/productos/search/"+text;
 
-                            });
+                });
+                $('#text-search').keypress(function(event){
+                    if (event.key === "Enter")
+                    $('#addon-wrapping').click();
+                });
 
-                        </script>
-        <!-- Plugins -->
+
+                $('#helpwha').click(function(){
+
+                    let num = '+573158559229';
+                    let msg = 'Hola, necesito hacer una consulta';
+
+                    var win = window.open(`https://wa.me/${num}?text=${msg}`, '_blank');
+
+                });
+
+            </script>
+<!-- Plugins -->
 
     </body>
 </html>

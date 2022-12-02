@@ -40,5 +40,11 @@ class ProductController extends Controller
     }
 
 
+    public function search( $text ){
+        $data = product::where('name', 'LIKE', '%'.$text.'%')->get();
+        return view('user.products.result', compact('data', 'text'));
+    }
+
+
 
 }

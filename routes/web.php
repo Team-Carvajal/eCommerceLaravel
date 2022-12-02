@@ -56,3 +56,9 @@ Route::post('/carrito/Pago', [ShoppingcarController::class, 'order'])->middlewar
 Route::get('/carrito/remover/{id}', [ShoppingcarController::class, 'destroy'])->middleware('auth');
 Route::post('/carrito/actualizar/{id}', [ShoppingcarController::class, 'update'])->middleware('auth');
 Route::get('/carrito/actualizar/{id}/{cant}', [ShoppingcarController::class, 'updateSubtotal'])->middleware('auth');
+
+
+
+Route::get('/productos/search/{text}', [ProductController::class, 'search']);
+
+
