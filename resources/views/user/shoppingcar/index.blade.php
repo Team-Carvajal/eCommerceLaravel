@@ -36,6 +36,10 @@
 
                     @foreach($bill->orders as $order)
                     @foreach($order->products as $product)
+                        @php
+                            $details = json_decode($order->detail);
+                        @endphp
+                        
                         <div class="card mb-3 shadow-sm">
                             <div class="card-body">
                                 <div class=" justify-content-between">
@@ -44,24 +48,40 @@
                                             <img src="{{ url('assets/images/icon/isotipo1x.svg')}}" class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
                                         </div>
                                         <div class="ms-3">
-                                            <h5 class="">{{$product->name}}</h5>
+                                            <h5 class="mb-2">{{$product->name}}</h5>
                                             @if (strlen($product->description) < 60)
-                                                <p class="small mb-0">{{ $product->description }} </p>
+                                                <span class="mb-3">{{ $product->description }} </span>
                                             @else
-                                                <p class="small mb-0" title="{{$product->description}}">{{substr($product->description, 0 , 60) . "..." }} </p>
+                                                <p class=" mb-3" title="{{$product->description}}">{{substr($product->description, 0 , 60) . "..." }} </p>
                                             @endif
-                                                <h5 class="fw-normal mb-0 fs-6">${{$product->price}}</h5>
+                                                {{-- <h5 class="fw-normal mb-0 fs-6">${{$product->price}}</h5> --}}
+                                                <div class="d-grid">
+                                                    <div>
+                                                        <span class="pe-1 small">Precio:</span><span class="small">$ {{ number_format($details->product_price, 0, ',', '.')}}</span>
+                                                    </div>
+                                                    <div>
+                                                        <span class="pe-1 small fw-800">Color:</span><span class="small">{{$details->nameColor}}</span>
+                                                    </div>
+                                                    <div>
+                                                        <span class="pe-1 small fw-800">Talla:</span><span class="small">{{$details->nameSize}}</span>
+                                                    </div>
+                                                    <div>
+                                                        <span class="pe-1 small fw-800">Cantidad:</span><span class="small">{{$details->quantity}}</span>
+                                                    </div>
+                                                </div>
                                         </div>
+
                                     </div>
                                     <div class="align-items-center float-start mt-3">
                                         <div style="width: 140px;" class="d-flex align-items-center gap-2">
                                             <span>Total:</span>
                                             <span>$</span>
-                                            <h5 class="fw-normal fs-6  subTotal" >{{number_format($bill->subTotal , 0 , ',', '.'); }}</h5>
-                                            <input type="number" name="quantity" class="col-6 quantity" value="{{$order->quantity}}" maxlength="11" min="1" >
-                                            <input type="hidden" class="productId" value="{{$product->id}}">
+                                            <h5 class="fw-normal fs-6  subTotal" >{{number_format(($details->quantity * $details->product_price) , 0 , ',', '.'); }}</h5>
+                                            {{-- <input type="number" name="quantity" class="col-6 quantity" value="{{$details->quantity}}" maxlength="11" min="1" > --}}
+                                            {{-- <input type="hidden" class="productId" value="{{$product->id}}"> --}}
                                         </div>
                                     </div>
+
                                     <div class="float-end">
                                         <a href="{{ url('/carrito/remover/'.$product->id) }}" class="btn btn-outline-dark mt-2"><i class="bi bi-trash-fill"></i></a>
                                     </div>
