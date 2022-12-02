@@ -1,5 +1,5 @@
 @extends('user.layouts.index')
-@section('title', ucfirst($name))
+@section('title', ucfirst($text))
 @section('content')
 
 <style>
@@ -19,9 +19,7 @@
             <section class="section carousel-products">
                 {{-- Inicio de enlaces--}}
                 <div class="mb-4  float-start fs-6">
-                    <a  href="/categorias" class="text-dark">Categorias</a>
-                    /
-                    <a class="text-dark">{{$name}}</a   >
+                    <a  href="/categorias" class="text-dark">Productos</a>
                 </div>
                 {{-- Fin de enlaces--}}
             </section>
@@ -29,7 +27,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-heading">
-                        <h2>{{$name}}</h2>
+                        <h2>Resultado de productos con <u><i>{{$text}}</i></u></h2>
                         <span>Ropa a tu gusto</span>
                     </div>
                 </div>
@@ -39,7 +37,6 @@
             <div class="row">
                 @foreach($data as $products)
                 @foreach($products->colors as $detail)
-                @if ($loop->first)
 
                     <div class="col-lg-4">
                         <form action="{{url('/carrito/agregar')}}" method="post">
@@ -48,7 +45,7 @@
                                 <div class="thumb ">
                                     <div class="hover-content">
                                         <ul>
-                                            <li><a href="{{$name . '/' . str_replace(' ' , '-', (strtolower($products->name)))}}"><i class="fa fa-eye"></i></a></li>
+                                            <li><a href="{{$text . '/' . str_replace(' ' , '-', (strtolower($products->name)))}}"><i class="fa fa-eye"></i></a></li>
                                             <!-- AQUI CARRITO  -->
                                             {{-- <li><a><button type="submit" class="bg-transparent border-0" ><i class="fa fa-shopping-cart"></i></button></i></a></li> --}}
                                         </ul>
@@ -72,12 +69,10 @@
                             </div>
                         </form>
                     </div>
-                @endif
                 @endforeach
                 @endforeach
 
-                   
-                </div>
+
             </div>
         </div>
     </section>
