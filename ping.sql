@@ -55,6 +55,7 @@ CREATE TABLE `bills` (
   `billState_id` int(5) NOT NULL DEFAULT 1,
   `paymentMethod_id` int(11) NOT NULL DEFAULT 1,
   `subTotal` int(11) DEFAULT NULL,
+  `totalQuantity` int(11) DEFAULT NULL,
   `user_id` bigint(20) unsigned NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -100,7 +101,7 @@ CREATE TABLE `billstates` (
 
 LOCK TABLES `billstates` WRITE;
 /*!40000 ALTER TABLE `billstates` DISABLE KEYS */;
-INSERT INTO `billstates` VALUES (1,'Carrito',NULL,NULL),(3,'Entregado',NULL,NULL),(4,'En espera',NULL,NULL);
+INSERT INTO `billstates` VALUES (1,'Carrito',NULL,NULL),(2,'Pago',NULL,NULL),(3,'Entregado',NULL,NULL);
 /*!40000 ALTER TABLE `billstates` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -185,7 +186,7 @@ CREATE TABLE `descountsettings` (
 
 LOCK TABLES `descountsettings` WRITE;
 /*!40000 ALTER TABLE `descountsettings` DISABLE KEYS */;
-INSERT INTO `descountsettings` VALUES (5,'Sin descuento',0,'0000-00-00',NULL,NULL),(6,'Por Navidad',10,'2022-11-20',NULL,NULL);
+INSERT INTO `descountsettings` VALUES (1,'Por Navidad',10,'2022-11-20',NULL,NULL);
 /*!40000 ALTER TABLE `descountsettings` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -306,9 +307,8 @@ DROP TABLE IF EXISTS `ordersbase`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ordersbase` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `quantity` int(11) NOT NULL,
+  `detail` Varchar(800) NOT NULL,
   `bill_id` int(11) NOT NULL,
-  `dimensionPrint_id` int(11) DEFAULT NULL,
   `product_id` int(11) NOT NULL,
   `product_price` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -318,7 +318,6 @@ CREATE TABLE `ordersbase` (
   KEY `dimensionPrint_ordersBase` (`dimensionPrint_id`),
   KEY `products_ordersBase` (`product_id`),
   CONSTRAINT `bills_ordersBase` FOREIGN KEY (`bill_id`) REFERENCES `bills` (`id`),
-  CONSTRAINT `dimensionPrint_ordersBase` FOREIGN KEY (`dimensionPrint_id`) REFERENCES `dimensionprint` (`id`),
   CONSTRAINT `products_ordersBase` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -378,7 +377,7 @@ CREATE TABLE `paymentmethods` (
 
 LOCK TABLES `paymentmethods` WRITE;
 /*!40000 ALTER TABLE `paymentmethods` DISABLE KEYS */;
-INSERT INTO `paymentmethods` VALUES (1,'payPal',NULL,NULL),(2,'PSE',NULL,NULL);
+INSERT INTO `paymentmethods` VALUES (1,'payPal',NULL,NULL);
 /*!40000 ALTER TABLE `paymentmethods` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -457,7 +456,7 @@ CREATE TABLE `products` (
   `price` int(11) NOT NULL,
   `description` varchar(200) DEFAULT NULL,
   `garanty` int(11) DEFAULT NULL,
-  `total_stock` int(11) DEFAULT NULL,
+  `state` int(1) DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -470,7 +469,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'Koro Sensei Assassination Classroom',55000,'Te extrañamos profesor <3',NULL,12,'2022-11-16 06:49:01','2022-11-16 06:49:01'),(2,'Goku Dragon ball',55000,'',NULL,10,'2022-11-16 07:21:52','2022-11-16 07:21:52'),(3,'Luffy Nika Five Gear One Piece',55000,'',NULL,10,'2022-11-16 19:10:19','2022-11-16 19:10:19'),(4,'Saitama One Punch Man',55000,'',NULL,10,'2022-11-16 19:11:21','2022-11-16 19:11:21'),(5,'Camisa texto Beach',55000,NULL,NULL,5,'2022-11-17 08:28:12','2022-11-17 08:28:13');
+INSERT INTO `products` VALUES (1,'Koro Sensei Assassination Classroom',55000,'Te extrañamos profesor <3',NULL,0,'2022-11-16 06:49:01','2022-11-16 06:49:01'),(2,'Goku Dragon ball',55000,'',NULL,1,'2022-11-16 07:21:52','2022-11-16 07:21:52'),(3,'Luffy Nika Five Gear One Piece',55000,'',NULL,0,'2022-11-16 19:10:19','2022-11-16 19:10:19'),(4,'Saitama One Punch Man',55000,'',NULL,1,'2022-11-16 19:11:21','2022-11-16 19:11:21'),(5,'Camisa texto Beach',55000,NULL,NULL,5,'2022-11-17 08:28:12','2022-11-17 08:28:13');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -540,7 +539,6 @@ CREATE TABLE `products_shirtcolors` (
   `product_id` int(11) NOT NULL,
   `shirtcolor_id` int(11) NOT NULL DEFAULT 1,
   `image` varchar(500) DEFAULT NULL,
-  `stock` int(11) NULL,
   PRIMARY KEY (`product_id`,`shirtcolor_id`),
   KEY `fk_products_has_shirtcolors_shirtcolors1` (`shirtcolor_id`),
   CONSTRAINT `products_shirtcolors_products` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
@@ -554,7 +552,7 @@ CREATE TABLE `products_shirtcolors` (
 
 LOCK TABLES `products_shirtcolors` WRITE;
 /*!40000 ALTER TABLE `products_shirtcolors` DISABLE KEYS */;
-INSERT INTO `products_shirtcolors` VALUES (1,3,'1153467002.jpg', null),(2,1,'3057875722.jpg', null),(2,2,'4062048018.jpg', null),(2,6,'3381335575.jpg', null),(3,1,'2003813554.jpg', null),(3,2,'2253497583.jpg', null),(4,2,'2505438710.jpg', null),(5,1,'8407492372.jpg', null);
+INSERT INTO `products_shirtcolors` VALUES (1,3,'1153467002.jpg',(2,1,'3057875722.jpg', null),(2,2,'4062048018.jpg'),(2,6,'3381335575.jpg'),(3,1,'2003813554.jpg'),(3,2,'2253497583.jpg'),(4,2,'2505438710.jpg'),(5,1,'8407492372.jpg');
 /*!40000 ALTER TABLE `products_shirtcolors` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -596,7 +594,6 @@ DROP TABLE IF EXISTS `products_shirttypes`;
 CREATE TABLE `products_shirttypes` (
   `product_id` int(11) NOT NULL,
   `shirttype_id` int(11) NOT NULL,
-  `stock` int(11) NULL,
   PRIMARY KEY (`product_id`,`shirttype_id`),
   KEY `fk_products_has_shirttypes_shirttypes1` (`shirttype_id`),
   CONSTRAINT `products_shirttypes_products` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
@@ -610,7 +607,7 @@ CREATE TABLE `products_shirttypes` (
 
 LOCK TABLES `products_shirttypes` WRITE;
 /*!40000 ALTER TABLE `products_shirttypes` DISABLE KEYS */;
-INSERT INTO `products_shirttypes` VALUES (2,1, null);
+INSERT INTO `products_shirttypes` VALUES (2,1);
 /*!40000 ALTER TABLE `products_shirttypes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -624,7 +621,6 @@ DROP TABLE IF EXISTS `products_typesprint`;
 CREATE TABLE `products_typesprint` (
   `product_id` int(11) NOT NULL,
   `typeprint_id` int(11) NOT NULL,
-  `stock` int(11) DEFAULT NULL,
   PRIMARY KEY (`product_id`,`typeprint_id`),
   KEY `fk_products_has_typesprint_typesprint1` (`typeprint_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
