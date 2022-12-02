@@ -583,7 +583,7 @@ CREATE TABLE `products_shirtsizes` (
 
 LOCK TABLES `products_shirtsizes` WRITE;
 /*!40000 ALTER TABLE `products_shirtsizes` DISABLE KEYS */;
-INSERT INTO `products_shirtsizes` VALUES (1,2),(2,2),(3,1),(3,2),(5,2);
+INSERT INTO `products_shirtsizes` VALUES (1, 1),(1, 2),(1, 3),(1, 4),(2, 1),(2, 2),(2, 3),(2, 4),(3, 1),(3, 2),(3, 3),(3, 4),(4, 4),(5, 1),(5, 2),(5, 3),(5, 4);
 /*!40000 ALTER TABLE `products_shirtsizes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -828,7 +828,6 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Johan Andres','Londoño Villegas','2003-06-27','lineckack03@gmail.com',NULL,'3178371709',2,'$2y$10$yv3BYddoQUXp4s05JU8T/.Ap45JGzDy2gMW7rViHkA/boiAj38gye',NULL,'2022-11-23 03:46:23','2022-11-23 03:46:23');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
