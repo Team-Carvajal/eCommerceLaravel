@@ -18,6 +18,9 @@
 --
 -- Table structure for table `aboutus`
 --
+DROP DATABASE IF EXISTS `ping`;
+CREATE DATABASE `ping`;
+USE `ping`;
 
 DROP TABLE IF EXISTS `aboutus`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
