@@ -17,7 +17,7 @@
                                     <a href="/contactanos">Escribenos</a>
                                 </div>
                             </div>
-                                    <img src="{{ url('assets/images/productosparatesteo/00.jpg')}}" alt="" class="banner-1">
+                                    <img src="{{ url('assets/images/categorias/002.jpg')}}" alt="" class="banner-1">
                         </div>
                     </div>
                 </div>
@@ -38,11 +38,11 @@
                                                         <h4>{{ ucfirst($categories->name) }}</h4>
                                                         <p>{{ $categories->description }}</p>
                                                         <div class="main-border-button">
-                                                            <a href="/{{ $categories->name }}">Ver más</a>
+                                                            <a href="/categoria/{{ $categories->name }}">Ver más</a>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <img src="{{ url('assets/images/' . $categories->image) }}" class="banner-2">
+                                                <img src="{{ url('assets/images/categorias/' . $categories->image) }}" class="banner-2">
                                             </div>
                                         </div>
                                     </div>
@@ -61,7 +61,7 @@
                                                 <h4>Otros</h4>
                                                 <p>Soprendete con nuestros productos!</p>
                                                 <div class="main-border-button">
-                                                    <a href="#">Ver más</a>
+                                                    <a href="{{url('categorias/')}}">Ver más</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -111,7 +111,7 @@
                                     $rand = rand(0, count($product->colors)-1);
                                 @endphp
                                     @foreach($product->colors as $key => $img)
-                                        @if($rand == $key)
+                                    @if($rand == $key)
                                             <div class="item">
                                                 <div class="thumb">
                                                     <div class="hover-content">
@@ -120,8 +120,7 @@
                                                             <li><a href="/producto"><i class="fa fa-shopping-cart"></i></a></li>
                                                         </ul>
                                                     </div>
-                                                    {{$img->pivot->image}}
-                                                    <img src="{{ url('assets/images/')}}" alt="" class="pd-carousel">
+                                                    <img src="{{ url('assets/images/productos/'. $img->product_color->image )}}" alt="" class="pd-carousel">
                                                 </div>
                                                 <div class="down-content bg-transparent">
                                                     <h4 class="pe-3">{{$product->name}}</h4>

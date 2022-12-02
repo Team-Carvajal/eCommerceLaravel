@@ -46,7 +46,7 @@
                                             </div>
                                         </div>
                                         @if($category->image)
-                                        <img src="{{ url('assets/images/'.$category->image)}}">
+                                        <img src="{{ url('assets/images/categorias/'.$category->image)}}">
                                         @else
                                         <img src="{{ url('assets/images/categorydefault.jpg')}}">
                                         @endif
