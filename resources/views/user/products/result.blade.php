@@ -19,7 +19,7 @@
             <section class="section carousel-products">
                 {{-- Inicio de enlaces--}}
                 <div class="mb-4  float-start fs-6">
-                    <a  href="/categorias" class="text-dark">Productos</a>
+                    <a  href="/categorias" class="text-dark">Categorias/</a>
                 </div>
                 {{-- Fin de enlaces--}}
             </section>
@@ -28,7 +28,6 @@
                 <div class="col-lg-12">
                     <div class="section-heading">
                         <h2>Resultado de productos con <u><i>{{$text}}</i></u></h2>
-                        <span>Ropa a tu gusto</span>
                     </div>
                 </div>
             </div>
