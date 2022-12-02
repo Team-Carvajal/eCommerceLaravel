@@ -103,7 +103,7 @@
                                             <li><a href="/contactanos"><i><img src="{{ url('assets/images/icon/person-lines-fill.svg')}}" width="14px" class="mx-2" alt=""></i>Contactanos</a></li>
 
                                             @auth
-                                                <li><a href="/logout"><i><img src="{{ url('assets/images/icon/person-lines-fill.svg')}}" width="14px" class="mx-2" alt=""></i>Salir</a></li>
+                                                <li><a href="/logout"><i class="bi bi-box-arrow-left mx-2 "></i>Salir</a></li>
                                             @endauth
 
                                         </ul>

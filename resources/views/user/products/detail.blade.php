@@ -101,7 +101,7 @@
                 <div class=" col-lg-6 col-md-10 col-sm-12 col-12 mx-auto d-grid mb-md-5 mb-5">
                     <div class="d-flex">
                         <div class="col-10 img-product mx-auto left-images">
-                            <img src="{{ url('assets/images/productosparatesteo/'. $procolor->image )}}" alt="" id="imageview">
+                            <img src="{{ url('assets/images/productos/'. $procolor->image )}}" alt="" id="imageview">
                         </div>
                     </div>
                 </div>
@@ -225,7 +225,7 @@
         elem.addEventListener("change", function(event) {
             item = event.target.value;
             pColor.innerHTML = item;
-            imageview.src = `{{url('assets/images/productosparatesteo')}}/${colores[item]}`;
+            imageview.src = `{{url('assets/images/productos')}}/${colores[item]}`;
 
         });
     });
@@ -271,4 +271,3 @@ let shirtSize = document.querySelectorAll('label.shirtSize');
 
 @endsection
 
-{{-- imageview.src = `{{ url('assets/images/productosparatesteo/'. $shirtcolor_image[${item}] )}}`; --}}

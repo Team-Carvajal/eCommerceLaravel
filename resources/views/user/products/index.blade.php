@@ -54,7 +54,7 @@
                                         </ul>
                                     </div>
                                     @if(isset($detail->product_color->image))
-                                        <img src="{{ url('assets/images/productosparatesteo/'.$detail->product_color->image) }}" alt="{{ $products->name }} - {{ $detail->name }} ">
+                                        <img src="{{ url('assets/images/productos/'.$detail->product_color->image) }}" alt="{{ $products->name }} - {{ $detail->name }} ">
                                     @else
                                     {{-- Poner una imagen por defecto aqui, en caso de que no haya imagen --}}
                                         <img src="{{ url('assets/images/') }}" alt="">
