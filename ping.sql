@@ -136,7 +136,7 @@ CREATE TABLE `categories` (
 
 LOCK TABLES `categories` WRITE;
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
-INSERT INTO `categories` VALUES (1,'Mujeres', null ,'2022-11-16 07:29:57','2022-11-16 07:29:57'),(2,'Hombres', null, '2022-11-16 07:30:20','2022-11-16 07:30:20'),(3,'niños', null, '2022-11-16 18:10:18','2022-11-16 05:00:00');
+INSERT INTO `categories` VALUES (1,'Mujeres', '008.jpg' ,'2022-11-16 07:29:57','2022-11-16 07:29:57'),(2,'Hombres', '007.jpg', '2022-11-16 07:30:20','2022-11-16 07:30:20'),(3,'niños', '009.jpg', '2022-11-16 18:10:18','2022-11-16 05:00:00');
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
