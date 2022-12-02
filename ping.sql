@@ -19,10 +19,6 @@
 -- Table structure for table `aboutus`
 --
 
-DROP DATABASE IF EXISTS `ping`;
-CREATE DATABASE `ping`;
-USE `ping`;
-
 DROP TABLE IF EXISTS `aboutus`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -32,10 +28,6 @@ CREATE TABLE `aboutus` (
   `mission` varchar(500) NOT NULL,
   `vision` varchar(500) NOT NULL,
   `logo` varchar(500) NOT NULL,
-  `info1` varchar(500),
-  `info2` varchar(200),
-  `info3` varchar(500),
-  `info4` varchar(200),
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -48,8 +40,6 @@ CREATE TABLE `aboutus` (
 
 LOCK TABLES `aboutus` WRITE;
 /*!40000 ALTER TABLE `aboutus` DISABLE KEYS */;
-INSERT INTO `aboutus` (`id`, `aboutus`, `mission`, `vision`, `logo`, `created_at`, `updated_at`) VALUES (1, 'Somos una tienda de camisas estampadas', ' Ofrecer un servicio eficaz de todo tipo de prendas de buena calidad y en buen estado para satisfacer las necesidades de nuestros clientes.', 'Convertir mi tienda en una de las más conocidas y poder llevar mis productos a todo el país y al extranjero.', '', NULL, NULL);
-
 /*!40000 ALTER TABLE `aboutus` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -75,7 +65,7 @@ CREATE TABLE `bills` (
   CONSTRAINT `billStates_bills` FOREIGN KEY (`billState_id`) REFERENCES `billstates` (`id`),
   CONSTRAINT `paymentMethods_bills` FOREIGN KEY (`paymentMethod_id`) REFERENCES `paymentmethods` (`id`),
   CONSTRAINT `users_bills` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -84,6 +74,7 @@ CREATE TABLE `bills` (
 
 LOCK TABLES `bills` WRITE;
 /*!40000 ALTER TABLE `bills` DISABLE KEYS */;
+INSERT INTO `bills` VALUES (2,1,1,NULL,5,NULL,NULL),(3,1,1,NULL,4,NULL,NULL),(4,4,1,NULL,3,NULL,NULL),(5,3,1,100000,4,NULL,NULL),(6,1,1,27000,3,NULL,NULL),(7,3,1,25000,5,NULL,NULL);
 /*!40000 ALTER TABLE `bills` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -100,7 +91,7 @@ CREATE TABLE `billstates` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -109,7 +100,7 @@ CREATE TABLE `billstates` (
 
 LOCK TABLES `billstates` WRITE;
 /*!40000 ALTER TABLE `billstates` DISABLE KEYS */;
-INSERT INTO `billstates`(`id`, `state`, `created_at`, `updated_at`) VALUES ('1','Carrito',null,null),('2','Pagado',null,null),('3','En espera',null,null);
+INSERT INTO `billstates` VALUES (1,'Carrito',NULL,NULL),(3,'Entregado',NULL,NULL),(4,'En espera',NULL,NULL);
 /*!40000 ALTER TABLE `billstates` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -126,8 +117,9 @@ CREATE TABLE `categories` (
   `image` varchar(500) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -136,7 +128,7 @@ CREATE TABLE `categories` (
 
 LOCK TABLES `categories` WRITE;
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
-INSERT INTO `categories` VALUES (1,'Mujeres', '008.jpg' ,'2022-11-16 07:29:57','2022-11-16 07:29:57'),(2,'Hombres', '007.jpg', '2022-11-16 07:30:20','2022-11-16 07:30:20'),(3,'niños', '009.jpg', '2022-11-16 18:10:18','2022-11-16 05:00:00');
+INSERT INTO `categories` VALUES (5,'Mujeres',NULL,NULL,NULL),(6,'Hombres',NULL,NULL,NULL),(7,'Jovenes',NULL,NULL,NULL),(8,'Niños',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -156,7 +148,7 @@ CREATE TABLE `deliveries` (
   PRIMARY KEY (`id`),
   KEY `bills_deliveries` (`bill_id`),
   CONSTRAINT `bills_deliveries` FOREIGN KEY (`bill_id`) REFERENCES `bills` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -165,6 +157,7 @@ CREATE TABLE `deliveries` (
 
 LOCK TABLES `deliveries` WRITE;
 /*!40000 ALTER TABLE `deliveries` DISABLE KEYS */;
+INSERT INTO `deliveries` VALUES (1,'calle 40 $ 32 - 15 norte',7,NULL,NULL),(2,'Carrera 16 # 23-89 sur',6,NULL,NULL);
 /*!40000 ALTER TABLE `deliveries` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -183,7 +176,7 @@ CREATE TABLE `descountsettings` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -192,7 +185,7 @@ CREATE TABLE `descountsettings` (
 
 LOCK TABLES `descountsettings` WRITE;
 /*!40000 ALTER TABLE `descountsettings` DISABLE KEYS */;
-INSERT INTO `descountsettings` (`id`, `description`, `descount`, `applyDate`, `created_at`, `updated_at`) VALUES (5, 'Sin descuento', 0, '0000-00-00', NULL, NULL),(6, 'Por Navidad', 10, '2022-11-20', NULL, NULL);
+INSERT INTO `descountsettings` VALUES (5,'Sin descuento',0,'0000-00-00',NULL,NULL),(6,'Por Navidad',10,'2022-11-20',NULL,NULL);
 /*!40000 ALTER TABLE `descountsettings` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -207,7 +200,7 @@ CREATE TABLE `dimensionprint` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `dimension` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -257,7 +250,6 @@ DROP TABLE IF EXISTS `managementpqrs`;
 CREATE TABLE `managementpqrs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(200) NOT NULL,
-  `fechaPqrs` date NOT NULL,
   `state` varchar(1) NOT NULL,
   `typePqrs_id` int(11) NOT NULL,
   `user_id` bigint(11) unsigned NOT NULL,
@@ -268,7 +260,7 @@ CREATE TABLE `managementpqrs` (
   KEY `users_managementPqrs` (`user_id`),
   CONSTRAINT `typesPqrs_magagementPqrs` FOREIGN KEY (`typePqrs_id`) REFERENCES `typespqrs` (`id`),
   CONSTRAINT `users_managementPqrs` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -277,7 +269,7 @@ CREATE TABLE `managementpqrs` (
 
 LOCK TABLES `managementpqrs` WRITE;
 /*!40000 ALTER TABLE `managementpqrs` DISABLE KEYS */;
-INSERT INTO `managementpqrs` (`id`, `description`, `state`, `typePqrs_id`, `user_id`, `created_at`, `updated_at`) VALUES (2, 'la página funciona re bien :]', '0', 6, 4, NULL, NULL);
+INSERT INTO `managementpqrs` VALUES (2,'la página funciona re bien :]','0',6,4,NULL,NULL);
 /*!40000 ALTER TABLE `managementpqrs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -293,7 +285,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -313,7 +305,7 @@ DROP TABLE IF EXISTS `ordersbase`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ordersbase` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `quantity` int(11) NOT NULL,
   `bill_id` int(11) NOT NULL,
   `dimensionPrint_id` int(11) DEFAULT NULL,
@@ -328,7 +320,7 @@ CREATE TABLE `ordersbase` (
   CONSTRAINT `bills_ordersBase` FOREIGN KEY (`bill_id`) REFERENCES `bills` (`id`),
   CONSTRAINT `dimensionPrint_ordersBase` FOREIGN KEY (`dimensionPrint_id`) REFERENCES `dimensionprint` (`id`),
   CONSTRAINT `products_ordersBase` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -337,6 +329,7 @@ CREATE TABLE `ordersbase` (
 
 LOCK TABLES `ordersbase` WRITE;
 /*!40000 ALTER TABLE `ordersbase` DISABLE KEYS */;
+INSERT INTO `ordersbase` VALUES (9,9,4,NULL,4,0,NULL,NULL),(10,10,2,NULL,4,0,NULL,NULL),(11,3,6,NULL,3,0,NULL,NULL),(12,2,3,NULL,4,0,NULL,NULL),(13,2,3,NULL,3,0,NULL,NULL);
 /*!40000 ALTER TABLE `ordersbase` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -385,7 +378,7 @@ CREATE TABLE `paymentmethods` (
 
 LOCK TABLES `paymentmethods` WRITE;
 /*!40000 ALTER TABLE `paymentmethods` DISABLE KEYS */;
-INSERT INTO `paymentmethods`(`id`, `method`, `created_at`, `updated_at`) VALUES (1,'Paypal',null,null);
+INSERT INTO `paymentmethods` VALUES (1,'payPal',NULL,NULL),(2,'PSE',NULL,NULL);
 /*!40000 ALTER TABLE `paymentmethods` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -464,11 +457,11 @@ CREATE TABLE `products` (
   `price` int(11) NOT NULL,
   `description` varchar(200) DEFAULT NULL,
   `garanty` int(11) DEFAULT NULL,
-  `quantity` int(11) DEFAULT NULL,
+  `total_stock` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -518,6 +511,7 @@ DROP TABLE IF EXISTS `products_descountsettings`;
 CREATE TABLE `products_descountsettings` (
   `product_id` int(11) NOT NULL,
   `descountsetting_id` int(11) NOT NULL,
+  `price` int(11) DEFAULT NULL,
   PRIMARY KEY (`product_id`,`descountsetting_id`) USING BTREE,
   KEY `fk_products_has_descountsettings_descountsettings1` (`descountsetting_id`) USING BTREE,
   CONSTRAINT `products_descountsettings_descountsettings` FOREIGN KEY (`descountsetting_id`) REFERENCES `descountsettings` (`id`),
@@ -531,6 +525,7 @@ CREATE TABLE `products_descountsettings` (
 
 LOCK TABLES `products_descountsettings` WRITE;
 /*!40000 ALTER TABLE `products_descountsettings` DISABLE KEYS */;
+INSERT INTO `products_descountsettings` VALUES (3,5,NULL),(4,5,NULL);
 /*!40000 ALTER TABLE `products_descountsettings` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -543,8 +538,9 @@ DROP TABLE IF EXISTS `products_shirtcolors`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `products_shirtcolors` (
   `product_id` int(11) NOT NULL,
-  `shirtcolor_id` int(11) NOT NULL,
-  `image` varchar(200) DEFAULT NULL,
+  `shirtcolor_id` int(11) NOT NULL DEFAULT 1,
+  `image` varchar(500) DEFAULT NULL,
+  `stock` int(11) NULL,
   PRIMARY KEY (`product_id`,`shirtcolor_id`),
   KEY `fk_products_has_shirtcolors_shirtcolors1` (`shirtcolor_id`),
   CONSTRAINT `products_shirtcolors_products` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
@@ -558,7 +554,7 @@ CREATE TABLE `products_shirtcolors` (
 
 LOCK TABLES `products_shirtcolors` WRITE;
 /*!40000 ALTER TABLE `products_shirtcolors` DISABLE KEYS */;
-INSERT INTO `products_shirtcolors` VALUES (1,3,'1153467002.jpg'),(2,1,'3057875722.jpg'),(2,2,'4062048018.jpg'),(2,6,'3381335575.jpg'),(3,1,'2003813554.jpg'),(3,2,'2253497583.jpg'),(4,2,'2505438710.jpg'),(5,1,'8407492372.jpg');
+INSERT INTO `products_shirtcolors` VALUES (1,3,'1153467002.jpg', null),(2,1,'3057875722.jpg', null),(2,2,'4062048018.jpg', null),(2,6,'3381335575.jpg', null),(3,1,'2003813554.jpg', null),(3,2,'2253497583.jpg', null),(4,2,'2505438710.jpg', null),(5,1,'8407492372.jpg', null);
 /*!40000 ALTER TABLE `products_shirtcolors` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -570,8 +566,9 @@ DROP TABLE IF EXISTS `products_shirtsizes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `products_shirtsizes` (
-  `shirtsize_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
+  `shirtsize_id` int(11) NOT NULL,
+  `stock` int(11) NOT NULL,
   PRIMARY KEY (`shirtsize_id`,`product_id`),
   KEY `fk_shirtsizes_products_products1` (`product_id`),
   CONSTRAINT `products_shirtsizes_products` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
@@ -585,7 +582,7 @@ CREATE TABLE `products_shirtsizes` (
 
 LOCK TABLES `products_shirtsizes` WRITE;
 /*!40000 ALTER TABLE `products_shirtsizes` DISABLE KEYS */;
-INSERT INTO `products_shirtsizes` VALUES (1, 1),(1, 2),(1, 3),(1, 4),(2, 1),(2, 2),(2, 3),(2, 4),(3, 1),(3, 2),(3, 3),(3, 4),(4, 4),(5, 1),(5, 2),(5, 3),(5, 4);
+INSERT INTO `products_shirtsizes` VALUES (1, 1, 15),(1, 2, 15),(1, 3, 15),(1, 4, 15),(2, 1, 15),(2, 2, 15),(2, 3, 15),(2, 4, 15),(3, 1, 15),(3, 2, 15),(3, 3, 15),(3, 4, 15),(4, 4, 15),(5, 1, 15),(5, 2, 15),(5, 3, 15),(5, 4, 15);
 /*!40000 ALTER TABLE `products_shirtsizes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -599,6 +596,7 @@ DROP TABLE IF EXISTS `products_shirttypes`;
 CREATE TABLE `products_shirttypes` (
   `product_id` int(11) NOT NULL,
   `shirttype_id` int(11) NOT NULL,
+  `stock` int(11) NULL,
   PRIMARY KEY (`product_id`,`shirttype_id`),
   KEY `fk_products_has_shirttypes_shirttypes1` (`shirttype_id`),
   CONSTRAINT `products_shirttypes_products` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
@@ -612,8 +610,34 @@ CREATE TABLE `products_shirttypes` (
 
 LOCK TABLES `products_shirttypes` WRITE;
 /*!40000 ALTER TABLE `products_shirttypes` DISABLE KEYS */;
-INSERT INTO `products_shirttypes` VALUES (2,1);
+INSERT INTO `products_shirttypes` VALUES (2,1, null);
 /*!40000 ALTER TABLE `products_shirttypes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `products_typesprint`
+--
+
+DROP TABLE IF EXISTS `products_typesprint`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `products_typesprint` (
+  `product_id` int(11) NOT NULL,
+  `typeprint_id` int(11) NOT NULL,
+  `stock` int(11) DEFAULT NULL,
+  PRIMARY KEY (`product_id`,`typeprint_id`),
+  KEY `fk_products_has_typesprint_typesprint1` (`typeprint_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `products_typesprint`
+--
+
+LOCK TABLES `products_typesprint` WRITE;
+/*!40000 ALTER TABLE `products_typesprint` DISABLE KEYS */;
+INSERT INTO `products_typesprint` VALUES (5,4,10),(7,3,10),(8,3,10),(8,4,10);
+/*!40000 ALTER TABLE `products_typesprint` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -638,7 +662,7 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` (`id`, `name`, `created_at`, `updated_at`) VALUES (0, 'Restringido', NULL, NULL),(1, 'Administrador', NULL, NULL),(2, 'Cliente', NULL, NULL);
+INSERT INTO `roles` VALUES (0,'Restringido',NULL,NULL),(1,'Administrador',NULL,NULL),(2,'Cliente',NULL,NULL);
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -655,7 +679,9 @@ CREATE TABLE `shirtcolors` (
   `color` varchar(45) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `color` (`color`),
+  UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -678,11 +704,12 @@ DROP TABLE IF EXISTS `shirtsizes`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `shirtsizes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `sizes` varchar(45) NOT NULL,
+  `size` varchar(45) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `size` (`size`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -704,11 +731,12 @@ DROP TABLE IF EXISTS `shirttypes`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `shirttypes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `types` varchar(45) NOT NULL,
+  `type` varchar(45) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `type` (`type`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -717,7 +745,7 @@ CREATE TABLE `shirttypes` (
 
 LOCK TABLES `shirttypes` WRITE;
 /*!40000 ALTER TABLE `shirttypes` DISABLE KEYS */;
-INSERT INTO `shirttypes` VALUES (1,'camiseta cuello redondo','2022-11-21 21:47:03','2022-11-21 21:47:03');
+INSERT INTO `shirttypes` VALUES (5,'Algodon',NULL,NULL),(6,'Licra',NULL,NULL),(7,'Seda',NULL,NULL);
 /*!40000 ALTER TABLE `shirttypes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -730,10 +758,11 @@ DROP TABLE IF EXISTS `typespqrs`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `typespqrs` (
   `id` int(11) NOT NULL,
-  `typesPqrs` varchar(50) DEFAULT NULL,
+  `typePqrs` varchar(50) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `typePqrs` (`typePqrs`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -743,6 +772,7 @@ CREATE TABLE `typespqrs` (
 
 LOCK TABLES `typespqrs` WRITE;
 /*!40000 ALTER TABLE `typespqrs` DISABLE KEYS */;
+INSERT INTO `typespqrs` VALUES (1,'Peticion',NULL,NULL),(2,'Queja',NULL,NULL),(3,'Reclamo',NULL,NULL),(4,'Sugerencia',NULL,NULL),(5,'Pregunta',NULL,NULL),(6,'Felicitación',NULL,NULL);
 /*!40000 ALTER TABLE `typespqrs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -755,11 +785,12 @@ DROP TABLE IF EXISTS `typesprint`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `typesprint` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `typesPrint` varchar(45) NOT NULL,
+  `print` varchar(45) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `print` (`print`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -768,35 +799,8 @@ CREATE TABLE `typesprint` (
 
 LOCK TABLES `typesprint` WRITE;
 /*!40000 ALTER TABLE `typesprint` DISABLE KEYS */;
-INSERT INTO `typesprint` VALUES (1,'estampado','2022-11-21 21:42:29','2022-11-21 21:42:29'),(2,'sublimado','2022-11-21 21:42:46','2022-11-21 21:42:46');
+INSERT INTO `typesprint` VALUES (1,'Sublimación',NULL,NULL),(2,'Vinilo Impreso',NULL,NULL),(3,'Serigrafia',NULL,NULL),(4,'Transfer',NULL,NULL),(5,'Laser (DTF)',NULL,NULL);
 /*!40000 ALTER TABLE `typesprint` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `uicode`
---
-
-DROP TABLE IF EXISTS `uicode`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `uicode` (
-  `id` int(11) NOT NULL,
-  `file` varchar(200) NOT NULL,
-  `rol_id` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `rol_UICode` (`rol_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `uicode`
---
-
-LOCK TABLES `uicode` WRITE;
-/*!40000 ALTER TABLE `uicode` DISABLE KEYS */;
-/*!40000 ALTER TABLE `uicode` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -821,7 +825,7 @@ CREATE TABLE `users` (
   `updated_at` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
   KEY `roles_users` (`rol_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -830,6 +834,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (3,'Daniel Mauricio',NULL,NULL,'damn-man@yahoo.es',NULL,NULL,2,'$2y$10$vnPqYVtdqZTV3E1Wflr7luqjxv4UFmBZySVtU1w7H91jTKof.eSoq',NULL,'2022-11-13 04:23:51','2022-11-13 04:23:51'),(4,'Gerardo','Gonzales','2011-09-16','gerardo15@gmail.com',NULL,'3189234589',2,'$2a$12$UVUbt0NThImIF4gXD7RLJehGW1wS8fEs.4O7xeepeJmanTM3RvI/e',NULL,'2022-11-13 01:09:43','2022-11-13 01:09:43'),(5,'María Alejandra','Castillo Sierra','2000-05-28','mariale@hotmail.com',NULL,'3224838312',1,'$2a$12$V8wa9NoPLiRyrplGM.gRmOsZaE6givcQRZ.zw8I0ITg1FefV/1UKK',NULL,'2022-11-13 01:09:43','2022-11-13 01:09:43');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -842,4 +847,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-25 11:51:15
+-- Dump completed on 2022-12-02  0:51:51

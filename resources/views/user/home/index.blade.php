@@ -117,7 +117,7 @@
                                                     <div class="hover-content">
                                                         <ul>
                                                             <li><a href="{{ url('../products/index.blade.php')}}"><i class="fa fa-eye"></i></a></li>
-                                                            <li><a href="/producto"><i class="fa fa-shopping-cart"></i></a></li>
+                                                            {{-- <li><a href="/producto"><i class="fa fa-shopping-cart"></i></a></li> --}}
                                                         </ul>
                                                     </div>
                                                     <img src="{{ url('assets/images/productos/'. $img->product_color->image )}}" alt="" class="pd-carousel">
