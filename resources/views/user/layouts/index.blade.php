@@ -170,7 +170,7 @@
                     </div>
                     <div class="modal-body">
                             <div class="input-group flex-nowrap shadow-lg">
-                                <input type="text" class="form-control" id="text-search" placeholder="Buscar.." aria-label="Username" aria-describedby="addon-wrapping">
+                                <input type="text" class="form-control" id="text-search" placeholder="Buscar.." aria-label="Username" aria-describedby="addon-wrapping" autofocus>
                                 <span class="input-group-text iconSearch" id="addon-wrapping" role="button"><img class="" src="{{ url('assets/images/icon/search.svg')}}" alt=""></span>
                             </div>
                     </div>
@@ -286,8 +286,8 @@
                 });
 
                 function modalBuscar(){
-                    // alert('Hola');
-                    }
+                    // mo
+                }
 
 
             </script>

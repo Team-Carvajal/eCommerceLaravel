@@ -124,7 +124,7 @@
                                                 </div>
                                                 <div class="down-content bg-transparent">
                                                     <h4 class="pe-3">{{$product->name}}</h4>
-                                                    <span class="fs-6">$ {{ $product->price}}</span>
+                                                    <span class="fs-6">$ {{ number_format($product->price, 0, ',', '.')}}</span>
                                                 </div>
                                             </div>
                                         @endif

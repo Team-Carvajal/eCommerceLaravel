@@ -41,7 +41,16 @@ class ProductController extends Controller
 
 
     public function search( $text ){
-        $data = product::where('name', 'LIKE', '%'.$text.'%')->get();
+        $data = product::where('name', 'LIKE', '%'.$text.'%')
+            ->join('products_categories', 'product_id', 'id')
+            ->get();
+        $data = $data[0];
+
+        $category = Category::all()->where('id', $data->category_id);
+        $category = $category[($data->category_id)-1];
+        
+        $data['category'] = $category->name;
+
         return view('user.products.result', compact('data', 'text'));
     }
 

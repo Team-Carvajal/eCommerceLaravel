@@ -64,7 +64,7 @@
                                     <input type="hidden" value="{{$products->id}}" name="product_id">
                                     <h4 class="">{{$products->name}}</h4>
                                     <input type="hidden" value="{{$products->price}}" name="product_price">
-                                    <span> {{$products->price}}</span>
+                                    <span>$ {{ number_format($products->price, 0, ',', '.')}}</span>
                                     <div class="col-5">
                                         <input type="hidden" name="quantity" class="col-12" value=1 maxlength="11">
                                     </div>
@@ -76,7 +76,7 @@
                 @endforeach
                 @endforeach
 
-                   
+
                 </div>
             </div>
         </div>
