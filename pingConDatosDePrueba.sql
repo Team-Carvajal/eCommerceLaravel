@@ -817,6 +817,7 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `avatar` varchar(15) NULL,
   `lastName` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `birthDate` date DEFAULT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -838,7 +839,6 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (3,'Daniel Mauricio',NULL,NULL,'damn-man@yahoo.es',NULL,NULL,2,'$2y$10$vnPqYVtdqZTV3E1Wflr7luqjxv4UFmBZySVtU1w7H91jTKof.eSoq',NULL,'2022-11-13 04:23:51','2022-11-13 04:23:51'),(4,'Gerardo','Gonzales','2011-09-16','gerardo15@gmail.com',NULL,'3189234589',2,'$2a$12$UVUbt0NThImIF4gXD7RLJehGW1wS8fEs.4O7xeepeJmanTM3RvI/e',NULL,'2022-11-13 01:09:43','2022-11-13 01:09:43'),(5,'María Alejandra','Castillo Sierra','2000-05-28','mariale@hotmail.com',NULL,'3224838312',1,'$2a$12$V8wa9NoPLiRyrplGM.gRmOsZaE6givcQRZ.zw8I0ITg1FefV/1UKK',NULL,'2022-11-13 01:09:43','2022-11-13 01:09:43'),(6,'Johan Andres','Londoño Villegas','2003-06-27','lineckack03@gmail.com',NULL,'3178371709',2,'$2y$10$XvM7L5QTO0ppPWh2vzgDgOc/EER1DcdOdv5XMgrfcn/jH.PtBNy26',NULL,'2022-12-02 19:27:13','2022-12-02 21:44:18');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

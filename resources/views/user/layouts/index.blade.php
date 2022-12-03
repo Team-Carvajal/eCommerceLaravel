@@ -252,6 +252,8 @@
             <script src="{{ url('assets/js/lightbox.js')}}"></script>
             <script src="{{ url('assets/js/isotope.js')}}"></script>
             <script src="{{ url('assets/js/quantity.js')}} "></script>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
             {{-- <script>
             document.querySelector("").addEventListener("keypress", function (evt) {
