@@ -24,6 +24,9 @@ class ShoppingcarController extends Controller
             ->where("billstate_id", "=", 1)
             ->get();
 
+        $data[0]['subTotal'] = $data[0]->toArray()['subTotal'] / 4.773;  
+      
+
             foreach($data as $order){
                 if(count($order->first()->orders))
                     return view('user.shoppingcar.index', compact("data"));

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Bill;
 
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 

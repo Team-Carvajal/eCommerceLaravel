@@ -104,7 +104,7 @@
                         <hr class="my-4">
                         <div class="d-flex justify-content-between ">
                           <p class="mb-2">Subtotal</p>
-                          <p class="mb-2" id="subTotal">{{ number_format($bill->subTotal , 0 , ',', '.'); }} $</p>
+                          <p class="mb-2" id="subTotal">{{ number_format($bill->subTotal , 2  , '.', ''); }} $</p>
                           {{-- <p class="mb-2" id="subTotal"> $ {{ number_format($bill->subTotal , 0 , ',', '.'); }}</p> --}}
                         </div>
                        
@@ -188,7 +188,7 @@ paypal.Buttons({
           return actions.order.create({
             purchase_units: [{
               amount: {
-                value: '77.44' // Can also reference a variable or function
+                value: '{{ number_format($bill->subTotal , 2  , '.', ''); }}' // Can also reference a variable or function
               }
             }]
 
