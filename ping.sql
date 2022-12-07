@@ -310,6 +310,7 @@ DROP TABLE IF EXISTS `ordersbase`;
 CREATE TABLE `ordersbase` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `detail` varchar(800) NOT NULL,
+  `quantity` int(11) NULL,
   `bill_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `product_price` int(11) NOT NULL,
@@ -363,7 +364,7 @@ DROP TABLE IF EXISTS `paymentmethods`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `paymentmethods` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `method` varchar(60) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -420,8 +421,8 @@ DROP TABLE IF EXISTS `productcalification`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `productcalification` (
-  `id` int(11) NOT NULL,
-  `calification` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `calification` int(11) DEFAULT NULL AUTO_INCREMENT,
   `user_id` bigint(20) unsigned DEFAULT NULL,
   `product_id` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -451,7 +452,7 @@ DROP TABLE IF EXISTS `products`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `products` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `price` int(11) NOT NULL,
   `description` varchar(200) DEFAULT NULL,
@@ -677,7 +678,7 @@ DROP TABLE IF EXISTS `shirtcolors`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `shirtcolors` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   `color` varchar(45) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -760,7 +761,7 @@ DROP TABLE IF EXISTS `typespqrs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `typespqrs` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `typePqrs` varchar(50) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,

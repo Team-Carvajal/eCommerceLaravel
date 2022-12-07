@@ -74,7 +74,7 @@ class ProfileController extends Controller
         // $profile = Profile::find(session('id'));
         $profile->name = $request->name;
         $profile->lastName = $request->lastName;
-        $profile->birthDate = $request->birthDate;
+        // $profile->birthDate = $request->birthDate;
         $profile->phone = $request->phone;
         $profile->save();
         return redirect('/perfil'. "/" . session('id'));

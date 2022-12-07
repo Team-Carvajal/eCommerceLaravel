@@ -37,8 +37,8 @@ class SignupController extends Controller
 
         $user = new signup;
 
-            $user->name = $data['name'];
-            $user->lastName = $data['lastName'];
+            $user->name = ucwords($data['name']);
+            $user->lastName = ucwords($data['lastName']);
             $user->email = $data['email'];
             $user->rol_id = 2;
             $user->password = Hash::make($data['password']);
