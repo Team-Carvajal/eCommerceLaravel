@@ -117,14 +117,15 @@
                                                     <div class="thumb">
                                                         <div class="hover-content">
                                                             <ul>
-                                                                <li><a
-                                                                        href="{{ '/' . 'categoria/' . $category->name . '/' . str_replace(' ', '-', strtolower($product->name)) }}"><i
-                                                                            class="fa fa-eye"></i></a></li>
+                                                                <li>
+                                                                    <a href="{{ '/' . 'categoria/' . $category->name . '/' . str_replace(' ', '-', strtolower($product->name)) }}">
+                                                                        <i class="fa fa-eye mt-3"></i>
+                                                                    </a>
+                                                                </li>
                                                                 {{-- <li><a href="/producto"><i class="fa fa-shopping-cart"></i></a></li> --}}
                                                             </ul>
                                                         </div>
-                                                        <img src="{{ url('assets/images/productos/' . $img->product_color->image) }}"
-                                                            alt="" class="pd-carousel">
+                                                        <img src="{{ url('assets/images/productos/' . $img->product_color->image) }}" alt="" class="pd-carousel">
                                                     </div>
                                                     <div class="down-content bg-transparent">
                                                         <h4 class="pe-3">{{ $product->name }}</h4>
