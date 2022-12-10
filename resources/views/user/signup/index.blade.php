@@ -12,6 +12,8 @@ input[type=number]::-webkit-outer-spin-button {
 </style>
 
 
+
+
 <div class="d-grid mt-5">
         <div class="blur col-10 col-md-8  col-lg-5 col-sm-8 shadow rounded-2em m-auto">
                 <form method="POST" action="{{ route('save') }}">
@@ -53,7 +55,7 @@ input[type=number]::-webkit-outer-spin-button {
 
                                     <div class="mb-4 d-flex">
                                         <span class="bg-transparent input-group-text border-0 position-absolute" id="basic-addon1"><i class= "bi bi-calendar-event text-muted"></i></span>
-                                        <input type="date" name="birthDay" max='2004-01-01' class="form-control ps-5" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="text" onclick="fecha()" id="date" name="birthDay" class="form-control ps-5" placeholder="Fecha de cumpleaños" aria-label="Username" aria-describedby="basic-addon1">
                                     </div>
 
                                     <div class=" row col-md-6 col-sm-6 mx-auto mb-5 container ">
@@ -76,5 +78,17 @@ input[type=number]::-webkit-outer-spin-button {
 <div class="background-login">
     <img src="{{ url('assets\images\background-login-01.svg')}}" alt="">
 </div>
+
+
+<script>
+
+function fecha(){
+    let date = document.getElementById('date');
+    date.setAttribute('type', 'date');
+    date.setAttribute('max', '2004-12-31');
+}
+
+
+</script>
 
 @endsection

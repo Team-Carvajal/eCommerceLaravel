@@ -40,7 +40,7 @@ document.getElementById('cancelar').style.display = "none";
 
 </script>
 
-
+dd(session('id'));
 
 <div class="container pt-5 mt-5">
     <div class="main-body pt-4 ">
