@@ -22,12 +22,10 @@ DROP DATABASE IF EXISTS `ping`;
 CREATE DATABASE `ping`;
 USE `ping`;
 
-
-DROP TABLE IF EXISTS `aboutus`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `aboutus` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL ,
   `aboutus` varchar(500) NOT NULL,
   `mission` varchar(500) NOT NULL,
   `vision` varchar(500) NOT NULL,
@@ -71,7 +69,7 @@ CREATE TABLE `bills` (
   CONSTRAINT `billStates_bills` FOREIGN KEY (`billState_id`) REFERENCES `billstates` (`id`),
   CONSTRAINT `paymentMethods_bills` FOREIGN KEY (`paymentMethod_id`) REFERENCES `paymentmethods` (`id`),
   CONSTRAINT `users_bills` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -80,6 +78,7 @@ CREATE TABLE `bills` (
 
 LOCK TABLES `bills` WRITE;
 /*!40000 ALTER TABLE `bills` DISABLE KEYS */;
+INSERT INTO `bills` VALUES (1,1,1,605000,NULL,6,'2022-12-02 22:35:15','2022-12-03 00:01:36');
 /*!40000 ALTER TABLE `bills` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -309,11 +308,11 @@ DROP TABLE IF EXISTS `ordersbase`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ordersbase` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `quantity` int(11) NOT NULL,
   `detail` varchar(800) NOT NULL,
-  `quantity` int(11) NULL,
   `bill_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `product_price` int(11) NOT NULL,
+  `product_price` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -321,7 +320,7 @@ CREATE TABLE `ordersbase` (
   KEY `products_ordersBase` (`product_id`),
   CONSTRAINT `bills_ordersBase` FOREIGN KEY (`bill_id`) REFERENCES `bills` (`id`),
   CONSTRAINT `products_ordersBase` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -330,6 +329,7 @@ CREATE TABLE `ordersbase` (
 
 LOCK TABLES `ordersbase` WRITE;
 /*!40000 ALTER TABLE `ordersbase` DISABLE KEYS */;
+INSERT INTO `ordersbase` VALUES (8,2,'{\"product_id\":\"2\",\"nameproduct\":\"Goku dragon ball\",\"idColor\":\"6\",\"nameColor\":\"naranja\",\"idSize\":\"1\",\"nameSize\":\"S\",\"product_price\":\"55000\",\"quantity\":\"4\"}',1,2,220000,'2022-12-02 23:50:27','2022-12-02 23:50:27'),(9,10,'{\"product_id\":\"3\",\"nameproduct\":\"Luffy nika five gear one piece\",\"idColor\":\"2\",\"nameColor\":\"negro\",\"idSize\":\"2\",\"nameSize\":\"M\",\"product_price\":\"55000\",\"quantity\":\"7\"}',1,3,385000,'2022-12-03 00:01:36','2022-12-03 00:01:36');
 /*!40000 ALTER TABLE `ordersbase` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -422,7 +422,7 @@ DROP TABLE IF EXISTS `productcalification`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `productcalification` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `calification` int(11) DEFAULT NULL AUTO_INCREMENT,
+  `calification` int(11) DEFAULT NULL,
   `user_id` bigint(20) unsigned DEFAULT NULL,
   `product_id` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -455,12 +455,13 @@ CREATE TABLE `products` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `price` int(11) NOT NULL,
-  `description` varchar(200) DEFAULT NULL,
+  `description` varchar(500) DEFAULT NULL,
   `garanty` int(11) DEFAULT NULL,
   `state` int(1) DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -470,7 +471,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'Koro Sensei Assassination Classroom',55000,'Te extrañamos profesor <3',NULL,12,'2022-11-16 11:49:01','2022-11-16 11:49:01'),(2,'Goku Dragon ball',55000,'',NULL,10,'2022-11-16 12:21:52','2022-11-16 12:21:52'),(3,'Luffy Nika Five Gear One Piece',55000,'',NULL,10,'2022-11-17 00:10:19','2022-11-17 00:10:19'),(4,'Saitama One Punch Man',55000,'',NULL,10,'2022-11-17 00:11:21','2022-11-17 00:11:21'),(5,'Camisa texto Beach',55000,NULL,NULL,5,'2022-11-17 13:28:12','2022-11-17 13:28:13');
+INSERT INTO `products` VALUES (1,'Koro Sensei Assassination Classroom',55000,'Te extrañamos profesor <3',NULL,12,'2022-11-16 11:49:01','2022-11-16 11:49:01'),(2,'Goku Dragon ball',55000,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',NULL,10,'2022-11-16 12:21:52','2022-11-16 12:21:52'),(3,'Luffy Nika Five Gear One Piece',55000,'',NULL,10,'2022-11-17 00:10:19','2022-11-17 00:10:19'),(4,'Saitama One Punch Man',55000,'',NULL,10,'2022-11-17 00:11:21','2022-11-17 00:11:21'),(5,'Camisa texto Beach',55000,NULL,NULL,5,'2022-11-17 13:28:12','2022-11-17 13:28:13');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -584,7 +585,7 @@ CREATE TABLE `products_shirtsizes` (
 
 LOCK TABLES `products_shirtsizes` WRITE;
 /*!40000 ALTER TABLE `products_shirtsizes` DISABLE KEYS */;
-INSERT INTO `products_shirtsizes` VALUES (1,1,15,NULL,NULL),(2,1,15,NULL,NULL),(3,1,15,NULL,NULL),(5,1,15,NULL,NULL),(1,2,15,NULL,NULL),(2,2,15,NULL,NULL),(3,2,15,NULL,NULL),(5,2,15,NULL,NULL),(1,3,15,NULL,NULL),(2,3,15,NULL,NULL),(3,3,15,NULL,NULL),(5,3,15,NULL,NULL),(1,4,15,NULL,NULL),(2,4,15,NULL,NULL),(3,4,15,NULL,NULL),(4,4,15,NULL,NULL),(5,4,15,NULL,NULL);
+INSERT INTO `products_shirtsizes` VALUES (1,1,12,NULL,NULL),(2,1,5,NULL,NULL),(3,1,15,NULL,NULL),(5,1,15,NULL,NULL),(1,2,15,NULL,NULL),(2,2,0,NULL,NULL),(3,2,15,NULL,NULL),(5,2,15,NULL,NULL),(1,3,15,NULL,NULL),(2,3,6,NULL,NULL),(3,3,8,NULL,NULL),(5,3,15,NULL,NULL),(1,4,15,NULL,NULL),(2,4,10,NULL,NULL),(3,4,15,NULL,NULL),(4,4,15,NULL,NULL),(5,4,15,NULL,NULL);
 /*!40000 ALTER TABLE `products_shirtsizes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -652,7 +653,7 @@ DROP TABLE IF EXISTS `roles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `roles` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -817,9 +818,10 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `avatar` varchar(15) NULL,
   `lastName` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `birthDate` date DEFAULT NULL,
+  `avatar` varchar(15) NULL,
+  `dni` varchar(20) NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `phone` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -829,7 +831,8 @@ CREATE TABLE `users` (
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
-  KEY `roles_users` (`rol_id`)
+  KEY `roles_users` (`rol_id`),
+  UNIQUE KEY `dni` (`dni`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -839,6 +842,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'Admin','Admin',NULL,NULL,'1231221312' ,'admin@ping.com', NULL,NULL, 1, '$2a$12$LUfpDN5.QXJcWb6SLJjWXuYIjwO9dH193gT0sctazZgOcX9Tsk8oa',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -851,4 +855,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-02  9:43:48
+-- Dump completed on 2022-12-02 14:06:20
