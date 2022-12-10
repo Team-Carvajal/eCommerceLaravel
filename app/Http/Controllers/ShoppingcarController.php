@@ -8,6 +8,9 @@ use App\Models\Bill;
 use Illuminate\Http\Request;
 use Auth;
 
+
+
+
 class ShoppingcarController extends Controller
 {
     /**

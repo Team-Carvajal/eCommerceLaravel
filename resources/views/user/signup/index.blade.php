@@ -3,6 +3,15 @@
 @section('content')
 <link rel="stylesheet" href="{{ url('assets/css/login-registro.css')}}">
 
+<style>
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+</style>
+
+
 <div class="d-grid mt-5">
         <div class="blur col-10 col-md-8  col-lg-5 col-sm-8 shadow rounded-2em m-auto">
                 <form method="POST" action="{{ route('save') }}">
@@ -27,7 +36,15 @@
                                     </div>
                                     <div class="mb-3 d-flex">
                                         <span class="bg-transparent input-group-text border-0 position-absolute" id="basic-addon1"><i class="bi bi-telephone-fill text-muted"></i></span>
-                                        <input required type="number" class="form-control ps-5" name="phone" placeholder="Teléfono" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input required type="tel" class="form-control ps-5" name="phone" placeholder="Teléfono" maxlength="10" aria-label="Username" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="mb-3 d-flex">
+                                        <span class="bg-transparent input-group-text border-0 position-absolute" id="basic-addon1"><i class="bi bi-person-fill text-muted"></i></span>
+                                        <input required type="text" class="form-control ps-5" name="name" placeholder="Tipo de documento" aria-label="Username" value="Cedula de ciudadania" aria-describedby="basic-addon1" autofocus disabled>
+                                    </div>
+                                    <div class="mb-3 d-flex">
+                                        <span class="bg-transparent input-group-text border-0 position-absolute" id="basic-addon1"><i class="bi bi-person-fill text-muted"></i></span>
+                                        <input required type="number" class="form-control ps-5" name="phone" placeholder="Numero de documento" maxlength="10"  aria-label="Username" aria-describedby="basic-addon1">
                                     </div>
                                     <div class="mb-3 d-flex">
                                         <span class="bg-transparent input-group-text border-0 position-absolute" id="basic-addon1"><i class="bi bi-lock-fill text-muted"></i></span>
