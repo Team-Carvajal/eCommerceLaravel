@@ -4,10 +4,10 @@
 <link rel="stylesheet" href="{{ url('assets/css/login-registro.css')}}">
 
 <style>
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 </style>
 
@@ -26,15 +26,15 @@ input[type=number]::-webkit-outer-spin-button {
                         <div class="col-12 mx-auto">
                                     <div class="mb-3 d-flex">
                                         <span class="bg-transparent input-group-text border-0 position-absolute" id="basic-addon1"><i class="bi bi-person-fill text-muted"></i></span>
-                                        <input required type="text" class="form-control ps-5" name="name" placeholder="Nombres" aria-label="Username" aria-describedby="basic-addon1" autofocus>
+                                        <input required type="text" class="form-control ps-5" name="name" placeholder="Nombres" aria-label="Username" aria-describedby="basic-addon1" autofocus pattern="[A-Za-z- ]*" maxlength="50">
                                     </div>
                                     <div class="mb-3 d-flex">
                                         <span class="bg-transparent input-group-text border-0 position-absolute" id="basic-addon1"><i class="bi bi-person-fill text-muted"></i></span>
-                                        <input required type="text" class="form-control ps-5" name="lastName" placeholder="Apellidos" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input required type="text" class="form-control ps-5" name="lastName" placeholder="Apellidos" aria-label="Username" aria-describedby="basic-addon1" pattern="[A-Za-z- ]*" maxlength="50">
                                     </div>
                                     <div class="mb-3 d-flex">
                                         <span class="bg-transparent input-group-text border-0 position-absolute" id="basic-addon1"><i class="bi bi-envelope text-muted"></i></span>
-                                        <input required type="mail" class="form-control ps-5" name="email" placeholder="Correo" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input required type="mail" class="form-control ps-5" name="email" placeholder="Correo" aria-label="Username" aria-describedby="basic-addon1" maxlength="255">
                                     </div>
                                     <div class="mb-3 d-flex">
                                         <span class="bg-transparent input-group-text border-0 position-absolute" id="basic-addon1"><i class="bi bi-telephone-fill text-muted"></i></span>

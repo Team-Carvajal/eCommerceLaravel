@@ -6,7 +6,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
-        <title>Ping - @yield('title')</title>
+        <title> Ping - @yield('title')</title>
         <!-- CSS & JS Files Start-->
             <link rel="icon" href="{{ url('assets/images/icon/isotipo1x.svg') }}" type="image/x-icon">
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -100,7 +100,7 @@
                                             <li><a href="/registro"><i><img src="{{ url('assets/images/icon/iconUser.svg')}}" width="14px" class="mx-2" alt=""></i>Registrate</a></li>
 @endunless
                                             <!-- <li><a href="/sobre-nosotros"><i><img src="{{ url('assets/images/icon/people-fill.svg')}}" width="14px" class="mx-2" alt=""></i>Sobre nosotros</a></li> -->
-                                            <li><a href="/contactanos"><i><img src="{{ url('assets/images/icon/person-lines-fill.svg')}}" width="14px" class="mx-2" alt=""></i>Contactanos</a></li>
+                                            <li><a href="/contactanos#contactUs"><i><img src="{{ url('assets/images/icon/person-lines-fill.svg')}}" width="14px" class="mx-2" alt=""></i>Contactanos</a></li>
 
                                             @auth
                                                 <li><a href="/logout"><i class="bi bi-box-arrow-left mx-2 "></i>Salir</a></li>
@@ -214,7 +214,7 @@
 
                             <li><a href="/categorias">Categorías</a></li>
                             <li><a href="/registro">Registrate</a></li>
-                            <li><a href="/">Inicia sesión</a></li>
+                            <li><a href="/login">Inicia sesión</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-3 ayuda-informacion">

@@ -3,6 +3,7 @@
 @section('content')
 <br>
 <section class="h-100 h-custom mt-5 pt-5" >
+
     @foreach($data as $bill)
       <div class="container py-5 h-100 shadow rounded-lg" style="background-color: #ffff;">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -18,7 +19,7 @@
                       <div>
                         <p class="mb-0">Tienes {{$bill->orders_count}} Productos en el carrito </p>
                       </div>
-                      <div>
+                      {{-- <div>
                         <p class="mb-0">
                             <span class="text-muted">
                                 Organizar por:
@@ -29,7 +30,7 @@
                                 </select>
                             </span>
                         </p>
-                      </div>
+                      </div> --}}
                     </div>
 
                     {{-- Inicio de card --}}
@@ -39,7 +40,7 @@
                         @php
                             $details = json_decode($order->detail);
                         @endphp
-                        
+
                         <div class="card mb-3 shadow-sm">
                             <div class="card-body">
                                 <div class=" justify-content-between">
@@ -104,13 +105,13 @@
                         <hr class="my-4">
                         <div class="d-flex justify-content-between ">
                           <p class="mb-2">Subtotal</p>
-                          <p class="mb-2" id="subTotal">{{ number_format($bill->subTotal , 2  , '.', ''); }} $</p>
+                          <p class="mb-2" id="subTotal">$ {{ number_format($bill->subTotalCop , 0  , ',', '.'); }}</p>
                           {{-- <p class="mb-2" id="subTotal"> $ {{ number_format($bill->subTotal , 0 , ',', '.'); }}</p> --}}
                         </div>
-                       
+
                         <div class="d-flex justify-content-between mb-4">
-                          <p class="mb-2">Total(Incl. taxes)</p>
-                          <p class="mb-2">$</p>
+                          <p class="mb-2">Total(USD)</p>
+                          <p class="mb-2">$ {{ number_format($bill->subTotal , 2  , '.', ','); }}</p>
                         </div>
 
 
@@ -192,7 +193,7 @@ paypal.Buttons({
               }
             }]
 
-            
+
           });
         },
         // Finalize the transaction after payer approval
