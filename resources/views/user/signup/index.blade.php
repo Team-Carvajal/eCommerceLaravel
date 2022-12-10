@@ -44,7 +44,7 @@ input[type=number]::-webkit-outer-spin-button {
                                     </div>
                                     <div class="mb-3 d-flex">
                                         <span class="bg-transparent input-group-text border-0 position-absolute" id="basic-addon1"><i class="bi bi-person-fill text-muted"></i></span>
-                                        <input required type="number" class="form-control ps-5" name="phone" placeholder="Numero de documento" maxlength="10"  aria-label="Username" aria-describedby="basic-addon1">
+                                        <input required type="number" class="form-control ps-5" name="dni" placeholder="Numero de documento" maxlength="10"  aria-label="Username" aria-describedby="basic-addon1">
                                     </div>
                                     <div class="mb-3 d-flex">
                                         <span class="bg-transparent input-group-text border-0 position-absolute" id="basic-addon1"><i class="bi bi-lock-fill text-muted"></i></span>

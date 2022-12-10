@@ -44,6 +44,7 @@ class SignupController extends Controller
             $user->password = Hash::make($data['password']);
             $user->phone = $data['phone'];
             $user->birthdate = $data['birthDay'];
+            $user->dni = $data['dni'];
             $user->save();
 
             $credentials = $request->validate([
