@@ -37,8 +37,23 @@ document.getElementById('editar').style.display = "inline-block";
 document.getElementById('cancelar').style.display = "none";
 }
 
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+
+
+function modal(){
+    Swal.fire(
+      'Revisa tu correo',
+        'Enviamos un correo para cambiar tu contraseña',
+      'success'
+    )
+}
+
 
 </script>
+
 
 dd(session('id'));
 
@@ -92,6 +107,14 @@ dd(session('id'));
                                     <button onclick ="editar()" id ="editar" class="btn btn-outline-ping"><i class="bi bi-pen-fill" ></i> Editar</button>
                                     <button onclick ="cancelar()" id ="cancelar" style="display: none" class="btn btn-outline-ping"><i class="bi bi-x-lg"> Cancelar</i></button>
                                     <button type="submit" onclick="enviar()" id ="enviar" style="display: none" class="btn btn-outline-success" form="profile"><i class="bi bi-check2-all" width="1 em" height="1 em"> Enviar</i></button>
+                                    
+                                    <!--Aqui envio el correo para que se le pueda enviar una notificacion al mismo--->
+                                    <form method="post" action="{{route('password.email')}}">
+                                        @csrf
+                                        <button type="submit" onclick="modal()" class="btn btn-outline-ping"><i class="bi bi-check2-all" width="1 em" height="1 em">Cambiar contraseña</i></a>                                    
+                                        <input type="text" name="email" value="{{$profile->email}}" hidden>
+                                    </form>
+                                    
                                 </div>
                         </div>
                       </div>

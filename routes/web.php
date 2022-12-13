@@ -22,8 +22,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'show']);
-Route::get('/home', [HomeController::class, 'show']);
+Route::get('/', [HomeController::class, 'show'])->name('home');
+
 
 // Route::get('/home', [HomeController::class, 'joinproduct']);
 // Route::resource('/perfil',ProfileController::class);
@@ -31,7 +31,7 @@ Route::get('/perfil/{profile}', [ProfileController::class, 'edit'])->middleware(
 Route::post('perfil/update/{profile}', [ProfileController::class, 'update'])->name('profile/update/{profile}');
 
 //Login
-Route::get('/login', [LoginController::class, 'index'])->name('/login');
+Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('login', [LoginController::class, 'login'])->name('authentication');
 
 Route::get('/registro', [SignupController::class, 'index']);
@@ -62,3 +62,13 @@ Route::get('/carrito/actualizar/{id}/{cant}', [ShoppingcarController::class, 'up
 Route::get('/productos/search/{text}', [ProductController::class, 'search']);
 
 
+
+Route::post('/cambiar-contraseña', [ProfileController::class, 'forgotPassword'])->name('password.email');
+
+
+
+Route::get('/reset-contraseña/{token}', function ($token) {
+    return view('user.password.index', ['token' => $token]);
+})->name('password.reset');
+
+Route::post('/reset-password', [ProfileController::class, 'resetPassword'])->name('password.update');
