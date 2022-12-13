@@ -27,6 +27,9 @@ function cancelar(){
   document.getElementById('editar').style.display = "inline-block";
   document.getElementById('cancelar').style.display = "none";
   document.getElementById('enviar').style.display = "none";
+
+  let texto = "Cancelado";
+  dataAlertMessage(texto, 'info', 'top-end', 3000);
 }
 
 function enviar(){
@@ -38,7 +41,9 @@ function enviar(){
   document.getElementById('editar').style.display = "inline-block";
   document.getElementById('cancelar').style.display = "none";
   document.getElementById('enviar').style.display = "none";
-  updateprofile();
+
+  let texto = "Actualizado correctamente";
+  dataAlertMessage(texto, 'success', 'top-end', 3000);
 }
 
 </script>

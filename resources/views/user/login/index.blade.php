@@ -43,19 +43,5 @@
         <img src="{{ url('assets\images\background-login-01.svg')}}" alt="">
     </div>
 
-    <script>
-        {{--
-            window.addEventListener("load",function(){
-                @if (Auth::id())
-                    let userexists = 1;
-                @else
-                    let userexists = 0;
-                @endif
 
-                if(!userexists){
-                    nouserexists();
-                }
-            })
-        --}}
-    </script>
 @endsection

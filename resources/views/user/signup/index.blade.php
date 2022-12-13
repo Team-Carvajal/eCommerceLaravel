@@ -94,19 +94,25 @@ function fecha(){
 
     $('#email').focusout(function (e) {
         let text = $('#email').val();
+        querydata('email' , text);
 
-            // var querymail = $.get("/check" , function(request)){
-            //     alert('paso1');
-            // }
-
-            emailduplicate();
+        let texto = "Este correo ya está registrado";
+        dataAlertMessage(texto, 'info', 'bottom-end', 2000);
     });
 
     $('#dni').focusout(function (e) {
         let text = $('#dni').val();
-            dniduplicate();
+        querydata('dni' , text);
+
+        let texto = "Esta identificación ya está registrada";
+        dataAlertMessage(texto, 'info', 'bottom-end', 2000);
     });
 
+    function querydata(type, data){
+        // alert(type);
+        // alert(data);
+
+    }
 
 </script>
 
