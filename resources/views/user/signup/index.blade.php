@@ -94,6 +94,11 @@ function fecha(){
 
     $('#email').focusout(function (e) {
         let text = $('#email').val();
+
+            // var querymail = $.get("/check" , function(request)){
+            //     alert('paso1');
+            // }
+
             emailduplicate();
     });
 

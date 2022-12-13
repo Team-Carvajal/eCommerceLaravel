@@ -16,8 +16,6 @@ function editar(){
   document.getElementById('editar').style.display = "none";
   document.getElementById('cancelar').style.display = "inline-block";
   document.getElementById('enviar').style.display = "inline-block";
-
-
 }
 
 function cancelar(){
@@ -65,6 +63,7 @@ function enviar(){
     background: {{$profile->avatar}}80;
   }
 </style>
+
 {{-- dd(session('id')); --}}
 
 <div class="container pt-5 mt-5">
