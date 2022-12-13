@@ -1,14 +1,7 @@
 @extends('user.layouts.index')
 @section('title', 'Home')
 @section('content')
-<<<<<<< Updated upstream
 
-
-dd(session('id'));
-
-
-=======
->>>>>>> Stashed changes
     <!-- ***** Main Banner Area Start ***** -->
     <div class="main-banner carousel-products espacio" id="top">
         <div class="container-fluid">

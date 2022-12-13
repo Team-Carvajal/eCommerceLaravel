@@ -3,7 +3,6 @@
 @section('content')
 
 <!-- ***** Subscribe Area Starts ***** -->
-<br>
 <section class="our-services" id="about-us">
     <div class="container" >
         <div class="row mt-5">
@@ -58,21 +57,28 @@
                 <div class="col-lg-4">
                     <div class="col-12">
                         <ul>
-                            <li>Disponiblidad:
-                                <br>
-                                <span>07:30 AM - 9:30 PM Lunes a viernes</span>
+                            <li class="d-grid">
+                                Disponiblidad:
+                                <span>07:30 AM - 9:30 PM</span>
+                                <span>Lunes a viernes</span>
                             </li>
-                        </li>
-                            <span>Email:<br></span>
-                                <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox?compose=CllgCJfsctWTqvBXsNCdPVMtFXfLglsMlCQHxcrTHNQQxKsfWNZrSWBpbBKPNLDfKtFRCQQRDpg"target="_blank"><i class="bi bi-envelope"></i> pingep@gmail.com</a>
-                            </span>
-                            <br>
-                            <br>
-                            <li>Redes Sociales:<br>
+
+                            <li class="d-grid">
+                                Email:
+                                <span>
+                                    <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox?compose=CllgCJfsctWTqvBXsNCdPVMtFXfLglsMlCQHxcrTHNQQxKsfWNZrSWBpbBKPNLDfKtFRCQQRDpg"target="_blank"><i class="bi bi-envelope"></i>
+                                        pingestampados@gmail.com
+                                    </a>
+                                </span>
+                            </li>
+
+                            <li class="d-grid">
+                                Redes Sociales:
                                 <span>
                                     <a href="https://www.instagram.com/estampados_personalizado_1025/" target="_blank"><i class="bi bi-instagram"></i> Instagram</a>
                                 </span>
                             </li>
+
                         </ul>
                     </div>
                 </div>

@@ -1,26 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
-        <title> Ping - @yield('title')</title>
-        <link rel="icon" href="{{ url('assets/images/icon/isotipo1x.svg') }}" type="image/x-icon">
-
+        @extends('user.layouts.head')
+        
         <!-- CSS & JS Files Start-->
             {{-- imported from the web --}}
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
                 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
                 <script src="https://unpkg.com/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css" >
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/js/all.min.js"></script>
             {{-- imported from the web --}}
 
-            {{-- <link href="{{ url('assets/css/bootstrap.min.css')}}" rel="stylesheet"> --}}
             <link rel="stylesheet" type="text/css" href="{{ url('assets/css/font-awesome.css')}}">
             <link rel="stylesheet" href="{{ url('assets/css/templatemo-hexashop.css')}}">
             <link rel="stylesheet" href="{{ url('assets/css/home/banner.css')}}">
@@ -38,7 +32,7 @@
             <script src="{{ url('assets/js/sweetalert.js')}}"></script>
 
             <style>
-                    a.textfloat:hover::after {
+                a.textfloat:hover::after {
                     content: "Perfil";
                     position: absolute;
                     font-size: 12px;
@@ -49,14 +43,16 @@
                     border: 1px solid white;
                     color: #f0f0f0;
                     background-color: #3d3d3d;
-                    }
+                }
 
-                    .iconuser{
-                        font-size: 45px;
-                        color: {{session('avatar')}};
-                    }
+                .iconuser{
+                    font-size: 45px;
+                    color: {{session('avatar')}};
+                }
             </style>
+
         <!-- CSS & JS Files End-->
+
     </head>
 <body class="text-bg-light">
 
@@ -70,241 +66,31 @@
             </div>
         <!-- ***** Preloader End ***** -->
 
-        <!-- ***** Header Area Start ***** -->
-            <header class="header-area header-sticky shadow-sm position-fixed">
-                <div class="mx-lg-5 mx-0 mx-sm-0 mx-md-5">
-                    <div class="row">
-                        <div class="col-12">
-                            <nav class="main-nav">
+        @extends('user.layouts.header')
 
-                                <!-- ***** Logo Start ***** -->
-                                    <a href="/home" class="logo">
-                                        <div class="logoPingCont d-grid">
-                                            <div class="rounded-4 d-flex pe-3 px-3">
-                                                <img class="logoPing pe-2" src="{{ url('assets/images/icon/isotipo1x.svg')}}">
-                                                <img class="logoPing" src="{{ url('assets/images/icon/logotipo1x.svg')}}">
-                                            </div>
-                                        </div>
-                                    </a>
-                                <!-- ***** Logo End ***** -->
-
-                                <!-- ***** Menu Start ***** -->
-                                    <ul class="nav">
-
-                                        <li>
-                                            <a>
-                                                <button type="button" class="btn btn-outline-ping search-bg" data-bs-toggle="modal" data-bs-target="#buscar" onclick="modalBuscar()">
-                                                    <span class="font"> Buscar </span>
-                                                </button>
-                                            </a>
-                                        </li>
+        @extends('user.layouts.modal')
 
 
-                                        <li class="submenu font">
-
-                                            <a href="javascript:;" class="">
-                                                Ver más
-                                                <i class="down ms-4"></i>
-                                            </a>
-                                            <ul>
-                                                <li>
-                                                    <a href="/categorias">
-                                                        <i>
-                                                            <img src="{{ url('assets/images/icon/border-all.svg')}}" width="14px" class="mx-2" alt="">
-                                                        </i>
-                                                        Categorias
-                                                    </a>
-                                                </li>
-                                                @if(Auth::check())
-                                                <li>
-                                                    <a href="/carrito">
-                                                        <i>
-                                                            <img src="{{ url('assets/images/icon/cart2.svg')}}" width="14px" class="mx-2" alt="">
-                                                        </i>
-                                                        Carrito
-                                                    </a>
-                                                </li>
-                                                @endif
-
-                                                @unless(Auth::check())
-                                                <li>
-                                                    <a href="/registro">
-                                                        <i>
-                                                            <img src="{{ url('assets/images/icon/iconUser.svg')}}" width="14px" class="mx-2" alt="">
-                                                        </i>
-                                                        Registrate
-                                                    </a>
-                                                </li>
-                                                @endunless
-
-                                                <li>
-                                                    <a href="/contactanos#contactUs">
-                                                        <i>
-                                                            <img src="{{ url('assets/images/icon/person-lines-fill.svg')}}" width="14px" class="mx-2" alt="">
-                                                        </i>
-                                                        Contactanos
-                                                    </a>
-                                                </li>
-
-                                                @auth
-                                                <li>
-                                                    <a href="/logout">
-                                                        <i class="bi bi-box-arrow-left mx-2 "></i>
-                                                        Salir
-                                                    </a>
-                                                </li>
-                                                @endauth
-
-                                            </ul>
-                                        </li>
-
-                                        @if(Auth::check())
-                                        <li>
-                                            <a href="{{"/perfil" . "/" . session('id') }} " title="" class="textfloat">
-                                                <i class="fa-solid fa-circle-user d-sm-none d-lg-block d-md-block iconuser"></i>
-                                                <span class="d-lg-none d-md-none">
-                                                    Ingresa a tu perfil
-                                                </span>
-                                            </a>
-                                        </li>
-                                        @else
-                                        <li>
-                                            <a href="/login" title="">
-                                                <i class="fa-solid fa-circle-user d-sm-none d-lg-block d-md-block iconuser"></i>
-                                                <span class="d-lg-none d-md-none font">
-                                                    Ingresa
-                                                </span>
-                                            </a>
-                                        </li>
-                                        @endif
-
-                                    </ul>
-
-                                    <a class='menu-trigger'>
-                                        <span>Menu</span>
-                                    </a>
-
-                                <!-- ***** Menu End ***** -->
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </header>
-        <!-- ***** Header Area End ***** -->
-
-        <!-- ***** Modal Global Start ***** -->
-            <div class="modal fade col-12"  id="buscar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  >
-                <div class="modal-dialog modal-dialog-centered ">
-                    <div class="modal-content modalSearch shadow-lg">
-                        <div class="modal-body d-flex align-items-center col-12 justify-content-end">
-                            <div class="col-6 me-2">
-                                <h1 class="modal-title fs-4  text-light " id="exampleModalLabel">Buscar</h1>
-                            </div>
-                            <div class="col-1">
-                                <button type="button" class="btn-close m-2" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                        </div>
-                        <div class="modal-body">
-                            <div class="input-group flex-nowrap shadow-lg">
-                                <input type="text" class="form-control" id="text-search" placeholder="Buscar.." aria-label="Username" aria-describedby="addon-wrapping" autofocus>
-                                <span class="input-group-text iconSearch" id="addon-wrapping" role="button"><img class="" src="{{ url('assets/images/icon/search.svg')}}" alt=""></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <!-- ***** Modal Global Start ***** -->
-
-        <!-- ***** Body Banner Area Start ***** -->
+        <!-- ***** content ***** -->
             @yield('content')
-        <!-- ***** Body Banner Area End ***** -->
-        
-        <!-- ***** Footer Start ***** -->
-        <footer >
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3">
-                        <div class="first-item">
-                            <div class="logo">
-                                <img class="logoPing pe-2" src="{{ url('assets/images/icon/isotipo1x.svg')}}">
-                                <img class="logoPing pe-2" src="{{ url('assets/images/icon/logotipo1x.svg')}}">
-                            </div>
-                            <ul>
-                                <li><a href="/">Ping Estampados Personalizados</a></li>
-                                <li><a href="#" id="correo">pingep@gmail.com</a></li>
-                                <li><a href="#" id="whatsapp">+57 315 855 9229</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 categorias--">
-                        <h4>Tienda &amp; Categorías</h4>
-                        <ul>
-                            <li><a href="/categoria/hombres">Hombres</a></li>
-                            <li><a href="/categoria/mujeres">Mujeres</a></li>
-                            <li><a href="/categoria/ninos">Niños</a></li>
-                            <li><a href="/categorias">Otros</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3 enlaces-de-la-pagina--">
-                        <h4>Enlaces de la página</h4>
-                        <ul>
-                            <li><a href="/home">Inicio</a></li>
+        <!-- ***** content ***** -->
 
-                            <li><a href="/categorias">Categorías</a></li>
-                            <li><a href="/registro">Registrate</a></li>
-                            <li><a href="/login">Inicia sesión</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3 ayuda-informacion">
-                        <h4>Ayuda e Información</h4>
-                        <ul>
-                            <li><a href="" id="helpwha">Ayuda</a></li>
-                            <li><a href="/contactanos#about-us">Sobre nosotros</a></li>
-                            <li><a href="/contactanos">Contactanos</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="under-footer">
-                            <p>Copyright © 2022 Ping Estampados Personalizados. All Rights Reserved.
+        @extends('user.layouts.footer')
 
-                            <br>Diseño: <a target="_parent" title="" class="text-ping">TPS1-114</a></p>
-                            <ul>
-                                <li><a href="https://github.com/Team-Carvajal"><i class="bi bi-github"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    <!-- ***** Footer End ***** -->
+
         <!-- Plugins -->
 
-            {{-- <script src="{{ url('assets/js/popper.js')}}"></script> --}}
             <script src="{{ url('assets/js/owl-carousel.js')}}"></script>
             <script src="{{ url('assets/js/accordions.js')}}"></script>
             <script src="{{ url('assets/js/datepicker.js')}}"></script>
             <script src="{{ url('assets/js/scrollreveal.min.js')}}"></script>
-            <!-- <script src="{{ url('assets/js/waypoints.min.js')}}"></script> -->
-            <!-- <script src="{{ url('assets/js/jquery.counterup.min.js')}}"></script> -->
             <script src="{{ url('assets/js/imgfix.min.js')}}"></script>
             <script src="{{ url('assets/js/slick.js')}}"></script>
             <script src="{{ url('assets/js/lightbox.js')}}"></script>
             <script src="{{ url('assets/js/isotope.js')}}"></script>
             <script src="{{ url('assets/js/quantity.js')}} "></script>
-            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-
-            {{-- <script>
-            document.querySelector("").addEventListener("keypress", function (evt) {
-            if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
-            {
-                evt.preventDefault();
-            }
-            });
-            </script> --}}
-
-            <!-- Global Init -->
             <script src="{{ url('assets/js/custom.js')}}"></script>
+
 
             <script>
 
