@@ -58,7 +58,7 @@ class ProfileController extends Controller
     public function edit(Profile $profile)
     {
         $profile = profile::where('id', session('id'))->firstOrFail();
-
+        // dd($profile->toArray());
         return view('user.profile.index', compact('profile'));
     }
 

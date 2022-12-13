@@ -1,6 +1,9 @@
 @extends('user.layouts.index')
 @section('title', 'Perfil')
 @section('content')
+@php
+  session(['avatar' => "{$profile->avatar}"]);
+@endphp
 
 <script>
 
@@ -15,16 +18,6 @@ function editar(){
   document.getElementById('enviar').style.display = "inline-block";
 
 
-}
-
-function confirmEditar(){
-  Swal.fire({
-  position: 'top-end',
-  icon: 'success',
-  title: 'Your work has been saved',
-  showConfirmButton: false,
-  timer: 1500
-})
 }
 
 function cancelar(){
@@ -46,13 +39,33 @@ function enviar(){
   document.getElementById('celular').readOnly = true;
   document.getElementById('editar').style.display = "inline-block";
   document.getElementById('cancelar').style.display = "none";
-  confirmEditar();
+  document.getElementById('enviar').style.display = "none";
+  updateprofile();
 }
-
 
 </script>
 
-dd(session('id'));
+<style>
+  .profileIcon{
+    font-size: 180px;
+    color: {{$profile->avatar}};
+  }
+  input[type="color"]{
+    padding: 20px;
+  }
+  label[for="avatarhexauser"]{
+    text-align: right;
+    cursor: pointer;
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    background: {{$profile->avatar}};
+  }
+  label[for="avatarhexauser"]:hover{
+    background: {{$profile->avatar}}80;
+  }
+</style>
+{{-- dd(session('id')); --}}
 
 <div class="container pt-5 mt-5">
     <div class="main-body pt-4 ">
@@ -61,9 +74,12 @@ dd(session('id'));
                   <div class="card">
                     <div class="card-body">
                       <div class="d-flex flex-column align-items-center text-center">
-                        <!-- <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150"> -->
-                        <img src="{{ url('assets/images/icon/iconUser.svg')}}" alt="Admin" class="rounded-circle" width="150">
-                        <div class="mt-3">
+
+                        <i class="fa-solid fa-circle-user d-sm-none d-lg-block d-md-block profileIcon"></i>
+
+                        <div class="mt-3 col-12">
+                          <label for="avatarhexauser" class="float-right"></label>
+                          <input type="color" name="" value="#353535" id="avatarhexauser" class="d-none">
                         </div>
                       </div>
                     </div>
@@ -101,7 +117,8 @@ dd(session('id'));
                                 <div class="col-sm-12">
                                     <button onclick ="editar()" id ="editar" class="btn btn-outline-ping"><i class="bi bi-pen-fill" ></i> Editar</button>
                                     <button onclick ="cancelar()" id ="cancelar" style="display: none" class="btn btn-outline-ping"><i class="bi bi-x-lg"> Cancelar</i></button>
-                                    <button type="submit" onclick="enviar()" id ="enviar" style="display: none" class="btn btn-outline-success" form="profile"><i class="bi bi-check2-all" width="1 em" height="1 em"> Enviar</i></button>
+                                    {{-- <button type="" onclick="enviar()" id ="enviar" style="display: none" class="btn btn-outline-success" form="profile"><i class="bi bi-check2-all" width="1 em" height="1 em"> Enviar</i></button> --}}
+                                    <button type="" onclick="enviar()" id ="enviar" style="display: none" class="btn btn-outline-success"><i class="bi bi-check2-all" width="1 em" height="1 em"> Enviar</i></button>
                                 </div>
                         </div>
                       </div>

@@ -152,17 +152,18 @@
 </section>
 
 <script>
+{{--
+  //   $('.quantity').change(function(){
 
-    //   $('.quantity').change(function(){
+  //     var id  = $(this).parent().find('.productId').val();
+  //     var cant = $(this).val();
 
-    //     var id  = $(this).parent().find('.productId').val();
-    //     var cant = $(this).val();
+  //     $.get('/carrito/actualizar/' + id + '/' + cant, function (data){
+  //       document.querySelector('.subTotal').innerHTML = Intl.NumberFormat('es-ES').format(data);
+  //     })
 
-    //     $.get('/carrito/actualizar/' + id + '/' + cant, function (data){
-    //       document.querySelector('.subTotal').innerHTML = Intl.NumberFormat('es-ES').format(data);
-    //     })
-
-    // });
+  // });
+--}}
 
 
 </script>

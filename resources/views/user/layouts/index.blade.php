@@ -27,6 +27,7 @@
             <link rel="stylesheet" href="{{ url('assets/css/shopping-car/car.css')}}">
             <link rel="stylesheet" href="{{ url('assets/css/product.css')}}">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/js/all.min.js"></script>
             <style>
                     a.textfloat:hover::after {
                     content: "Perfil";
@@ -40,7 +41,13 @@
                     color: #f0f0f0;
                     background-color: #3d3d3d;
                     }
+
+                    .iconuser{
+                        font-size: 45px;
+                        color: {{session('avatar')}};
+                    }
             </style>
+            <script src="{{ url('assets/js/sweetalert.js')}}"></script>
             <!-- CSS & JS Files End-->
     </head>
     <body class="text-bg-light">
@@ -113,20 +120,16 @@
                                     <li>
                                         {{-- <a href="{{"/perfil" . "/" . str_replace(' ' , '-', (strtolower(session('name'))))}} " title="" class="textfloat"> --}}
                                         <a href="{{"/perfil" . "/" . session('id') }} " title="" class="textfloat">
-                                            <i>
-                                                <img src="{{ url('assets/images/icon/iconUser.svg')}}" class="mx-sm-2 login-icono d-sm-none d-lg-block d-md-block" alt="">
-                                            </i>
+                                            <i class="fa-solid fa-circle-user d-sm-none d-lg-block d-md-block iconuser"></i>
                                             <span class="d-lg-none d-md-none">
-                                               Ingresa a tu perfil
+                                                Ingresa a tu perfil
                                             </span>
                                         </a>
                                     </li>
-@else
-                                        <li>
+                                    @else
+                                    <li>
                                         <a href="/login" title="">
-                                            <i>
-                                                <img src="{{ url('assets/images/icon/iconUser.svg')}}" class="mx-sm-2 login-icono d-sm-none d-lg-block d-md-block" alt="">
-                                            </i>
+                                            <i class="fa-solid fa-circle-user d-sm-none d-lg-block d-md-block iconuser"></i>
                                             <span class="d-lg-none d-md-none font">
                                                 Ingresa
                                             </span>

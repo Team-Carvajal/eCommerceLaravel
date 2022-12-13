@@ -73,7 +73,7 @@ dd(session('id'));
                                                 </div>
                                             </div>
                                         </div>
-                                        <img src="{{ url('assets/images/baner-right-image-04.jpg') }}" class="banner-2">
+                                        <img src="{{ url('assets/images/default/defaultcategory.jpg') }}" class="banner-2">
                                     </div>
                                 </div>
                             </div>

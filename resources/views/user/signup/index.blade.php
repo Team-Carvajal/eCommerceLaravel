@@ -34,7 +34,7 @@ input[type=number]::-webkit-outer-spin-button {
                                     </div>
                                     <div class="mb-3 d-flex">
                                         <span class="bg-transparent input-group-text border-0 position-absolute" id="basic-addon1"><i class="bi bi-envelope text-muted"></i></span>
-                                        <input required type="mail" class="form-control ps-5" name="email" placeholder="Correo" aria-label="Username" aria-describedby="basic-addon1" maxlength="255">
+                                        <input required type="mail" class="form-control ps-5" name="email" placeholder="Correo" aria-label="Username" aria-describedby="basic-addon1" maxlength="255" id="email">
                                     </div>
                                     <div class="mb-3 d-flex">
                                         <span class="bg-transparent input-group-text border-0 position-absolute" id="basic-addon1"><i class="bi bi-telephone-fill text-muted"></i></span>
@@ -46,7 +46,7 @@ input[type=number]::-webkit-outer-spin-button {
                                     </div>
                                     <div class="mb-3 d-flex">
                                         <span class="bg-transparent input-group-text border-0 position-absolute" id="basic-addon1"><i class="bi bi-person-fill text-muted"></i></span>
-                                        <input required type="number" class="form-control ps-5" name="dni" placeholder="Numero de documento" maxlength="10"  aria-label="Username" aria-describedby="basic-addon1">
+                                        <input required type="number" class="form-control ps-5" id="dni" name="dni" placeholder="Numero de documento" maxlength="10"  aria-label="Username" aria-describedby="basic-addon1">
                                     </div>
                                     <div class="mb-3 d-flex">
                                         <span class="bg-transparent input-group-text border-0 position-absolute" id="basic-addon1"><i class="bi bi-lock-fill text-muted"></i></span>
@@ -61,9 +61,7 @@ input[type=number]::-webkit-outer-spin-button {
                                     <div class=" row col-md-6 col-sm-6 mx-auto mb-5 container ">
                                         <input type="submit" class="btn btn-primary shadow-sm " value="Registrate" >
                                     </div>
-
                                 </div>
-
                                 <div class="container mb-5 m">
                                     <a>Ya tienes una cuenta?</a>
                                     <a href="/login" class="text-primary">Inicia sesión</a>
@@ -87,6 +85,22 @@ function fecha(){
     date.setAttribute('type', 'date');
     date.setAttribute('max', '2004-12-31');
 }
+{{--
+    // $('#email').on('propertychange input', function (e) {
+        // let email = $('#email').val();
+    // });
+    // text = text.split('')[text.length - 1];
+--}}
+
+    $('#email').focusout(function (e) {
+        let text = $('#email').val();
+            emailduplicate();
+    });
+
+    $('#dni').focusout(function (e) {
+        let text = $('#dni').val();
+            dniduplicate();
+    });
 
 
 </script>
