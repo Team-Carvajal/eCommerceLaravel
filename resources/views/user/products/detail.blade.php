@@ -39,11 +39,13 @@
         width: 20px;
     }
 
-    @for ($i = 0; $i < count($data['product']->colors); $i++)
-    .colores label[for="c-{{$data['product']->colors[$i]->name}}"]{
-        background-color: {{$data['product']->colors[$i]->color}};
+
+    <?php foreach ($data['product']->colors as $colors){ ?>
+    .colores label[for="c-<?php echo $colors->name; ?>"]{
+        background-color: {{$colors->color}};
     }
-    @endfor
+    <?php } ?>
+
 
     .colorActive{
         box-shadow: 0 0 1px 5px #00000040 ;
@@ -118,20 +120,44 @@
 
                             <div class="quantity-content">
 
-                                    <div class="d-grid mb-3">
-                                        <span>Color: <span id="pcolor"></span></span>
-                                        <div class="d-flex gap-2 mt-3 colores">
+                                <div class="d-grid mb-3">
+                                    <span>Color: <span id="pcolor"></span></span>
+                                    <div class="d-flex gap-2 mt-3 colores">
 
-                                            @for ($i = 0; $i < count($data['product']->colors); $i++)
+                                        @for ($i = 0; $i < count($data['product']->colors); $i++)
+                                            <label
+                                                class="shirtColor"
+                                                for="c-{{$data['product']->colors[$i]->name}}">
+                                            </label>
+                                            <input
+                                                value="{{ucfirst($data['product']->colors[$i]->name)}}.{{$data['product']->colors[$i]->id}}"
+                                                type="radio"
+                                                name="color"
+                                                id="c-{{$data['product']->colors[$i]->name}}"
+                                                hidden
+                                                required>
+                                        @endfor
+
+                                    </div>
+                                </div>
+
+                                <div class="d-grid">
+
+                                    <span>Talla: <span id="ptalla"></span></span>
+                                    <div class="d-flex gap-2 mt-3">
+                                        <div>
+
+                                            @for($i = 0; $i < count($data['product']->sizes); $i++)
                                                 <label
-                                                    class="shirtColor"
-                                                    for="c-{{$data['product']->colors[$i]->name}}">
+                                                    class="btn btn-outline-danger shirtSize"
+                                                    for="t-{{$data['product']->sizes[$i]->size}}">
+                                                    {{$data['product']->sizes[$i]->size}}
                                                 </label>
                                                 <input
-                                                    value="{{ucfirst($data['product']->colors[$i]->name)}}.{{$data['product']->colors[$i]->id}}"
                                                     type="radio"
-                                                    name="color"
-                                                    id="c-{{$data['product']->colors[$i]->name}}"
+                                                    name="talla"
+                                                    id="t-{{$data['product']->sizes[$i]->size}}"
+                                                    value=" {{$data['product']->sizes[$i]->size}}.{{$data['product']->sizes[$i]->id}}.{{$data['product']->sizes[$i]->pivot->stock}}"
                                                     hidden
                                                     required>
                                             @endfor
@@ -139,56 +165,32 @@
                                         </div>
                                     </div>
 
-                                    <div class="d-grid">
-
-                                        <span>Talla: <span id="ptalla"></span></span>
-                                        <div class="d-flex gap-2 mt-3">
-                                            <div>
-
-                                                @for($i = 0; $i < count($data['product']->sizes); $i++)
-                                                    <label
-                                                        class="btn btn-outline-danger shirtSize"
-                                                        for="t-{{$data['product']->sizes[$i]->size}}">
-                                                        {{$data['product']->sizes[$i]->size}}
-                                                    </label>
-                                                    <input
-                                                        type="radio"
-                                                        name="talla"
-                                                        id="t-{{$data['product']->sizes[$i]->size}}"
-                                                        value=" {{$data['product']->sizes[$i]->size}}.{{$data['product']->sizes[$i]->id}}.{{$data['product']->sizes[$i]->pivot->stock}}"
-                                                        hidden
-                                                        required>
-                                                @endfor
-
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="d-grid d-lg-flex mt-4">
-                                        <div class="col-12 col-sm-12 col-lg-6 d-grid">
-                                            <span class="fs-6 my-auto">Cantidad:</span>
-                                        </div>
-                                        <div class="quantity buttons_added col-6 d-grid">
-                                            <div class="mx-lg-auto mx-md-auto">
-                                                <input type="button" value="-" class="minus" >
-                                                <input type="number" step="1" min="1" max="1" id="quantity" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode="">
-                                                <input type="button" value="+" class="plus" >
-                                            </div>
-                                            <div class="d-grid mt-2 ">
-                                                <span class="fs-6 text-lg-center text-md-center me-1 quantityStock"></span>
-                                                <span class="fs-6 text-lg-center text-md-center"> Unidades disponibles</span>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
-                                <div class="total">
-                                    <h4 class="mb-3" id="total">Total : $</h4>
-                                    <div class="main-border-button text-center ">
-                                        <button class="btn text-center btn-outline-dark py-2 px-4" type="submit">Añadir al carrito</button>
+                                <div class="d-grid d-lg-flex mt-4">
+                                    <div class="col-12 col-sm-12 col-lg-6 d-grid">
+                                        <span class="fs-6 my-auto">Cantidad:</span>
+                                    </div>
+                                    <div class="quantity buttons_added col-6 d-grid">
+                                        <div class="mx-lg-auto mx-md-auto">
+                                            <input type="button" value="-" class="minus" >
+                                            <input type="number" step="1" min="1" max="1" id="quantity" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode="">
+                                            <input type="button" value="+" class="plus" >
+                                        </div>
+                                        <div class="d-grid mt-2 ">
+                                            <span class="fs-6 text-lg-center text-md-center me-1 quantityStock"></span>
+                                            <span class="fs-6 text-lg-center text-md-center"> Unidades disponibles</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="total">
+                                <h4 class="mb-3" id="total">Total : $</h4>
+                                <div class="main-border-button text-center ">
+                                    <button class="btn text-center btn-outline-dark py-2 px-4" type="submit">Añadir al carrito</button>
+                                </div>
+                            </div>
                         </form>
+                    </div>
                 </div>
             </div>
         </div>
