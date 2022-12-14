@@ -7,9 +7,7 @@ use App\Models\Product;
 use App\Models\Bill;
 use Illuminate\Http\Request;
 use Auth;
-
-
-
+use Mockery\Undefined;
 
 class ShoppingcarController extends Controller
 {
@@ -26,17 +24,23 @@ class ShoppingcarController extends Controller
             ->where( "user_id","=", Auth::id())
             ->where("billstate_id", "=", 1)
             ->get();
+        // dd($data->toArray());
 
-        $data[0]['subTotalCop'] = $data[0]->toArray()['subTotal'];
-        $data[0]['subTotal'] = $data[0]->toArray()['subTotal'] / 4.773;
+        if($data->toArray() == null){
+            return redirect(redirect()->getUrlGenerator()->previous());
+        }
+        else{
+            $data[0]['subTotalCop'] = $data[0]->toArray()['subTotal'];
+            $data[0]['subTotal'] = $data[0]->toArray()['subTotal'] * 0.00021;
 
-
-            foreach($data as $order){
-                if(count($order->first()->orders))
-                    return view('user.shoppingcar.index', compact("data"));
-                else
-                    return redirect('/categorias');
-            }
+                foreach($data as $order){
+                    if(count($order->first()->orders))
+                        return view('user.shoppingcar.index', compact("data"));
+                    else
+                        return redirect(redirect()->getUrlGenerator()->previous());
+                        // return redirect('/categorias');
+                }
+        }
 
     }
 
@@ -164,6 +168,7 @@ class ShoppingcarController extends Controller
             ];
 
             $insert=new Orderbase;
+            $insert->quantity=$request->quantity;
             $insert->product_id=$request->product_id;
             $insert->product_price=($request->product_price * $request->quantity);
             $insert->detail=(json_encode($detail));
@@ -183,6 +188,9 @@ class ShoppingcarController extends Controller
         $lastBill->subTotal=Orderbase::where('bill_id', '=', $lastBill->id)->sum('product_price');
         $lastBill->update();
         }
+
+    // session(['shoppingquantity' => "{$data[0]->orders_count}"]);
+
 
     // Aqui tambien poner la ruta de donde vino la petición
     return redirect(redirect()->getUrlGenerator()->previous());

@@ -311,7 +311,7 @@ CREATE TABLE `ordersbase` (
   `quantity` int(11) NOT NULL,
   `detail` varchar(800) NOT NULL,
   `bill_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
+  `product_id` int(11) NULL,
   `product_price` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,

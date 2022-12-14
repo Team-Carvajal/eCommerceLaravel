@@ -42,4 +42,6 @@
     <div class="background-login">
         <img src="{{ url('assets\images\background-login-01.svg')}}" alt="">
     </div>
+
+
 @endsection

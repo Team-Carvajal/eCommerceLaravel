@@ -23,7 +23,19 @@ class SignupController extends Controller
         return view('user.signup.index');
     }
 
-    
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function check()
+    {
+
+
+    }
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -53,7 +65,7 @@ class SignupController extends Controller
             ]);
 
             if (Auth::attempt($credentials)) {
-                
+
                 $request->session()->regenerate();
                 $user = Auth::user();
                 session(['id' => "{$user['id']}"]);
@@ -62,15 +74,15 @@ class SignupController extends Controller
                     $message = 'El usuario esta registrado';
                     return view('/', compact('message'));
                 }
-*/       
+*/
                 return redirect()->intended('/');
 
             }else{
                 return redirect('/');
             }
 
-            
+
     }
 
-   
+
 }

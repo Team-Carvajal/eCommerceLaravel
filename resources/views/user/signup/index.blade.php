@@ -4,10 +4,10 @@
 <link rel="stylesheet" href="{{ url('assets/css/login-registro.css')}}">
 
 <style>
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 </style>
 
@@ -26,15 +26,15 @@ input[type=number]::-webkit-outer-spin-button {
                         <div class="col-12 mx-auto">
                                     <div class="mb-3 d-flex">
                                         <span class="bg-transparent input-group-text border-0 position-absolute" id="basic-addon1"><i class="bi bi-person-fill text-muted"></i></span>
-                                        <input required type="text" class="form-control ps-5" name="name" placeholder="Nombres" aria-label="Username" aria-describedby="basic-addon1" autofocus>
+                                        <input required type="text" class="form-control ps-5" name="name" placeholder="Nombres" aria-label="Username" aria-describedby="basic-addon1" autofocus pattern="[A-Za-z- ]*" maxlength="50">
                                     </div>
                                     <div class="mb-3 d-flex">
                                         <span class="bg-transparent input-group-text border-0 position-absolute" id="basic-addon1"><i class="bi bi-person-fill text-muted"></i></span>
-                                        <input required type="text" class="form-control ps-5" name="lastName" placeholder="Apellidos" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input required type="text" class="form-control ps-5" name="lastName" placeholder="Apellidos" aria-label="Username" aria-describedby="basic-addon1" pattern="[A-Za-z- ]*" maxlength="50">
                                     </div>
                                     <div class="mb-3 d-flex">
                                         <span class="bg-transparent input-group-text border-0 position-absolute" id="basic-addon1"><i class="bi bi-envelope text-muted"></i></span>
-                                        <input required type="mail" class="form-control ps-5" name="email" placeholder="Correo" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input required type="mail" class="form-control ps-5" name="email" placeholder="Correo" aria-label="Username" aria-describedby="basic-addon1" maxlength="255" id="email">
                                     </div>
                                     <div class="mb-3 d-flex">
                                         <span class="bg-transparent input-group-text border-0 position-absolute" id="basic-addon1"><i class="bi bi-telephone-fill text-muted"></i></span>
@@ -46,7 +46,7 @@ input[type=number]::-webkit-outer-spin-button {
                                     </div>
                                     <div class="mb-3 d-flex">
                                         <span class="bg-transparent input-group-text border-0 position-absolute" id="basic-addon1"><i class="bi bi-person-fill text-muted"></i></span>
-                                        <input required type="number" class="form-control ps-5" name="dni" placeholder="Numero de documento" maxlength="10"  aria-label="Username" aria-describedby="basic-addon1">
+                                        <input required type="number" class="form-control ps-5" id="dni" name="dni" placeholder="Numero de documento" maxlength="10"  aria-label="Username" aria-describedby="basic-addon1">
                                     </div>
                                     <div class="mb-3 d-flex">
                                         <span class="bg-transparent input-group-text border-0 position-absolute" id="basic-addon1"><i class="bi bi-lock-fill text-muted"></i></span>
@@ -61,9 +61,7 @@ input[type=number]::-webkit-outer-spin-button {
                                     <div class=" row col-md-6 col-sm-6 mx-auto mb-5 container ">
                                         <input type="submit" class="btn btn-primary shadow-sm " value="Registrate" >
                                     </div>
-
                                 </div>
-
                                 <div class="container mb-5 m">
                                     <a>Ya tienes una cuenta?</a>
                                     <a href="/login" class="text-primary">Inicia sesión</a>
@@ -87,7 +85,34 @@ function fecha(){
     date.setAttribute('type', 'date');
     date.setAttribute('max', '2004-12-31');
 }
+{{--
+    // $('#email').on('propertychange input', function (e) {
+        // let email = $('#email').val();
+    // });
+    // text = text.split('')[text.length - 1];
+--}}
 
+    $('#email').focusout(function (e) {
+        let text = $('#email').val();
+        querydata('email' , text);
+
+        let texto = "Este correo ya está registrado";
+        dataAlertMessage(texto, 'info', 'bottom-end', 2000);
+    });
+
+    $('#dni').focusout(function (e) {
+        let text = $('#dni').val();
+        querydata('dni' , text);
+
+        let texto = "Esta identificación ya está registrada";
+        dataAlertMessage(texto, 'info', 'bottom-end', 2000);
+    });
+
+    function querydata(type, data){
+        // alert(type);
+        // alert(data);
+
+    }
 
 </script>
 

@@ -58,25 +58,7 @@
 		 }
 	 })
 
-	// $(window).scroll(function() {
-	//   var scroll = $(window).scrollTop();
-	//   var box = $('#top').height();
-	//   var header = $('header').height();
 
-	//   if (scroll >= box - header) {
-	//     $("header").addClass("background-header");
-	//   } else {
-	//     $("header").removeClass("background-header");
-	//   }
-	// });
-
-
-	// Window Resize Mobile Menu Fix
-	mobileNav();
-
-
-	// Scroll animation init
-	window.sr = new scrollReveal();
 
 
 	// Menu Dropdown Toggle
@@ -108,7 +90,7 @@
 	// });
 
 	$(document).ready(function () {
-	    $(document).on("scroll", onScroll);
+	    // $(document).on("scroll", onScroll);
 
 	    //smoothscroll
 	    $('.scroll-to-section a[href^="#"]').on('click', function (e) {

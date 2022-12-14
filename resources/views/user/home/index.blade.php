@@ -2,10 +2,6 @@
 @section('title', 'Home')
 @section('content')
 
-
-dd(session('id'));
-
-
     <!-- ***** Main Banner Area Start ***** -->
     <div class="main-banner carousel-products espacio" id="top">
         <div class="container-fluid">
@@ -70,7 +66,7 @@ dd(session('id'));
                                                 </div>
                                             </div>
                                         </div>
-                                        <img src="{{ url('assets/images/baner-right-image-04.jpg') }}" class="banner-2">
+                                        <img src="{{ url('assets/images/default/defaultcategory.jpg') }}" class="banner-2">
                                     </div>
                                 </div>
                             </div>
