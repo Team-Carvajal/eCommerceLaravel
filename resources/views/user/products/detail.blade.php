@@ -164,7 +164,6 @@
                                         </div>
 
                                     </div>
-                            <form action="{{url('/carrito/agregar')}}" method="post">
                                     <div class="d-grid d-lg-flex mt-4">
                                         <div class="col-12 col-sm-12 col-lg-6 d-grid">
                                             <span class="fs-6 my-auto">Cantidad:</span>
@@ -175,7 +174,7 @@
                                                 <input type="number" step="1" min="1" max="1" id="quantity" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode="">
                                                 <input type="button" value="+" class="plus" >
                                             </div>
-                                            <div class="d-grid mt-2 d-flex">
+                                            <div class="d-grid mt-2 ">
                                                 <span class="fs-6 text-lg-center text-md-center me-1 quantityStock"></span>
                                                 <span class="fs-6 text-lg-center text-md-center"> Unidades disponibles</span>
                                             </div>
@@ -183,7 +182,7 @@
                                     </div>
                                 </div>
                                 <div class="total">
-                                    {{-- <h4 class="mb-3" id="total">Total : ${{number_format($price, 0, ',', '.')}}</h4> --}}
+                                    <h4 class="mb-3" id="total">Total : $</h4>
                                     <div class="main-border-button text-center ">
                                         <button class="btn text-center btn-outline-dark py-2 px-4" type="submit">Añadir al carrito</button>
                                     </div>
@@ -201,7 +200,7 @@
     let color = $('#color');
     let item = [];
 
-    /* Get Color */
+    /*-----------------Get Color-----------------*/
     if ($('input[name="color"]')) {
         document.querySelectorAll('input[name="color"]').forEach((elem) => {
         elem.addEventListener("change", function(event) {
@@ -227,7 +226,8 @@
     })
     })
 
-    /* Get Size */
+    /*-----------------Get Size----------------- */
+
     if ($('input[name="talla"]')) {
         document.querySelectorAll('input[name="talla"]').forEach((elem) => {
         elem.addEventListener("change", function(event) {
@@ -237,9 +237,22 @@
             console.log("color: " + tItem[0]);
             console.log("idcolor: " + tItem[1]);
             console.log("cantidad: " + tItem[2]);
+            $('span.quantityStock').html(tItem[2]);
         });
     });
     }
+    let shirtSize = document.querySelectorAll('label.shirtSize');
+    /* // For each button, register an event listener */
+    shirtSize.forEach(function(elem){
+        elem.addEventListener("click", function(e){
+            /* // On click, remove the MyClass on ALL buttons */
+        shirtSize.forEach(function(el){
+            el.classList.remove("active");
+        });
+        // Add the class on clicked one
+        e.target.classList.add("active");
+    })
+    })
 
 </script>
 

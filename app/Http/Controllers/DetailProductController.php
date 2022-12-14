@@ -15,9 +15,9 @@ class DetailProductController extends Controller
         $product = Product::where('name', str_replace('-' , ' ', ($name)))->get();
 
         $data = [];
-        foreach($product as $product){
-            $data['product'] = $product;
-            $product->sizes; $product->colors; $product->typesprint; $product->type; $product->categories;
+        foreach($product as $products){
+            $data['product'] = $products;
+            $products->sizes; $products->colors; $products->typesprint; $products->type; $products->categories;
         }
         return view('user.products.detail', compact('data'));
         // dd($data);
