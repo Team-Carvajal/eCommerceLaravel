@@ -38,9 +38,9 @@ class LoginController extends Controller
       //dd($user);
 
       session(['name' => "{$user['name']}"]);
-
       session(['email' => "{$user['email']}"]);
       session(['id' => "{$user['id']}"]);
+      session(['avatar' => "{$user['avatar']}"]);
 
       return redirect()->intended('/');
 

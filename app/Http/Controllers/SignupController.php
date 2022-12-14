@@ -78,6 +78,8 @@ class SignupController extends Controller
                 $request->session()->regenerate();
                 $user = Auth::user();
                 session(['id' => "{$user['id']}"]);
+                session(['name' => "{$user['name']}"]);
+                session(['avatar' => "{$user['avatar']}"]);
 /*
                 if(signup::where('email', '=', $credentials['email'])->exists()){
                     $message = 'El usuario esta registrado';

@@ -14,28 +14,21 @@ class ProfileController extends Controller
 {
 
     public function forgotPassword(Request $request){
-    
-    //dd($request->toArray());    
 
-  
+    //dd($request->toArray());
+
+
     $request->validate(['email' => 'required|email']);
- 
+
     $status = Password::sendResetLink(
         $request->only('email')
     );
 
-    
- 
+
+
     return $status === Password::RESET_LINK_SENT
                 ? back()->with(['status' => __($status)])
                 : back()->withErrors(['email' => __($status)]);
-
-
-
-
-
-
-    
 
     }
 
@@ -49,28 +42,28 @@ class ProfileController extends Controller
         'password' => 'required|min:8|confirmed',
     ]);
 
-         
+
     $status = Password::reset(
         $request->only('email', 'password', 'password_confirmation', 'token'),
         function ($user, $password) {
-                                
+
             $user->forceFill([
                 'password' => Hash::make($password)
             ])->setRememberToken(Str::random(60));
- 
+
             $user->save();
- 
+
             event(new PasswordReset($user));
         }
     );
- 
+
     return $status === Password::PASSWORD_RESET
                 ? redirect()->route('home')->with('status', __($status))
                 : back()->withErrors(['email' => [__($status)]]);
     }
 
 
-   
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -93,18 +86,23 @@ class ProfileController extends Controller
      */
     public function update(Request $request, Profile $profile)
     {
-        // $profile = Profile::find(session('id'));
+
+        $profile = Profile::find(session('id'));
+
         $profile->name = $request->name;
         $profile->lastName = $request->lastName;
-        // $profile->birthDate = $request->birthDate;
         $profile->phone = $request->phone;
         $profile->save();
-        return redirect('/perfil'. "/" . session('id'));
+
+        // dd($request->all());
+        // return redirect('/perfil'. "/" . session('id'));
+
         // dd($profile->toArray());
 
         // return $request->all();
 
     }
+
 
    }
 //

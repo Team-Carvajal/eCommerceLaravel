@@ -22,13 +22,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'show'])->name('home');
+Route::get( '/' , [HomeController::class, 'show'])->name('home');
 
 
 // Route::get('/home', [HomeController::class, 'joinproduct']);
 // Route::resource('/perfil',ProfileController::class);
-Route::get('/perfil/{profile}', [ProfileController::class, 'edit'])->middleware('auth');
-Route::post('perfil/update/{profile}', [ProfileController::class, 'update'])->name('profile/update/{profile}');
+Route::get('/perfil/{name?}', [ProfileController::class, 'edit'])->middleware('auth');
+Route::post('perfil/update', [ProfileController::class, 'update'])->name('profile/update');
 
 //Login
 Route::get('/login', [LoginController::class, 'index'])->name('login');
