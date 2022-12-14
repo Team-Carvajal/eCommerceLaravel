@@ -29,9 +29,18 @@ class SignupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function check()
+    public function check($type, $data)
     {
+        $request = profile::select($type)->where( $type , $data)->get();
+        $ans = 0;
+        if(isset($request[0]->$type)){
+            $ans = 1;
+        }else{
+            $ans = 0;
+        }
 
+        echo($ans);
+        // dd($request->toArray());
 
     }
 
@@ -52,6 +61,7 @@ class SignupController extends Controller
             $user->name = ucwords($data['name']);
             $user->lastName = ucwords($data['lastName']);
             $user->email = $data['email'];
+            $user->avatar = $data['avatar'];
             $user->rol_id = 2;
             $user->password = Hash::make($data['password']);
             $user->phone = $data['phone'];
@@ -65,10 +75,11 @@ class SignupController extends Controller
             ]);
 
             if (Auth::attempt($credentials)) {
-
                 $request->session()->regenerate();
                 $user = Auth::user();
                 session(['id' => "{$user['id']}"]);
+                session(['name' => "{$user['name']}"]);
+                session(['avatar' => "{$user['avatar']}"]);
 /*
                 if(signup::where('email', '=', $credentials['email'])->exists()){
                     $message = 'El usuario esta registrado';

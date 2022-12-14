@@ -26,7 +26,7 @@
                 <div class="col-lg-3 enlaces-de-la-pagina--">
                     <h4>Enlaces de la página</h4>
                     <ul>
-                        <li><a href="/home">Inicio</a></li>
+                        <li><a href="/">Inicio</a></li>
 
                         <li><a href="/categorias">Categorías</a></li>
                         <li><a href="/registro">Registrate</a></li>

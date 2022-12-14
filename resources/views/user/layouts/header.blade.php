@@ -4,7 +4,7 @@
             <div class="col-12">
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
-                        <a href="/home" class="logo">
+                        <a href="/" class="logo">
                             <div class="logoPingCont d-grid">
                                 <div class="rounded-4 d-flex pe-3 px-3">
                                     <img class="logoPing pe-2" src="{{ url('assets/images/icon/isotipo1x.svg')}}">
@@ -86,7 +86,7 @@
 
                             @if(Auth::check())
                             <li>
-                                <a href="{{"/perfil" . "/" . session('id') }} " title="" class="textfloat">
+                                <a href="{{"/perfil"}} " title="" class="textfloat">
                                     <i class="fa-solid fa-circle-user d-sm-none d-lg-block d-md-block iconuser"></i>
                                     <span class="d-lg-none d-md-none">
                                         Ingresa a tu perfil
