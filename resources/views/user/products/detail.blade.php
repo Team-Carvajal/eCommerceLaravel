@@ -86,7 +86,9 @@
                         <img src="
                         @php
                             $color = explode('/', ("$_SERVER[REQUEST_URI]"));
-                            $color = $color[4];
+                            if(isset($color[4])){
+                                $color = $color[4];
+                            }
                         @endphp
                         {{
                             url('assets/images/productos/'. $data['product']->colors[0]->product_color->image );
@@ -195,23 +197,61 @@
 </div>
 
 <script>
-    if($("::input[]")){
-        alert()
-    }
+    let pColor = $('#pcolor');
+    let color = $('#color');
+    let item = [];
 
-
-    if (document.querySelector('input[name="color"]')) {
+    /* Get Color */
+    if ($('input[name="color"]')) {
         document.querySelectorAll('input[name="color"]').forEach((elem) => {
         elem.addEventListener("change", function(event) {
             item = event.target.value;
             item = item.split('.');
-            pColor.innerHTML = item[0];
-            imageview.src = `{{url('assets/images/productos')}}/${colores[item[0]]}`;
-            document.querySelector('#idColor').setAttribute('value', item[1]);
-            document.querySelector('#nameColor').setAttribute('value', item[0].toLowerCase());
+            $('#pcolor').html(item[0]);
+            console.log("color: " + item[0]);
+            console.log("idcolor: " + item[1]);
         });
     });
     }
+
+    let ShirtColor = document.querySelectorAll('label.shirtColor');
+    /* // For each button, register an event listener */
+    ShirtColor.forEach(function(elem){
+        elem.addEventListener("click", function(e){
+            /* // On click, remove the MyClass on ALL buttons */
+        ShirtColor.forEach(function(el){
+            el.classList.remove("colorActive");
+        });
+        // Add the class on clicked one
+        e.target.classList.add("colorActive");
+    })
+    })
+
+    /* Get Size */
+    if ($('input[name="talla"]')) {
+        document.querySelectorAll('input[name="talla"]').forEach((elem) => {
+        elem.addEventListener("change", function(event) {
+            tItem = event.target.value;
+            tItem = tItem.split('.');
+            $('#pTalla').html(tItem[0]);
+            console.log("color: " + tItem[0]);
+            console.log("idcolor: " + tItem[1]);
+        });
+    });
+    }
+
+    let ShirtColor = document.querySelectorAll('label.shirtColor');
+    /* // For each button, register an event listener */
+    ShirtColor.forEach(function(elem){
+        elem.addEventListener("click", function(e){
+            /* // On click, remove the MyClass on ALL buttons */
+        ShirtColor.forEach(function(el){
+            el.classList.remove("colorActive");
+        });
+        // Add the class on clicked one
+        e.target.classList.add("colorActive");
+    })
+    })
 </script>
 
 
