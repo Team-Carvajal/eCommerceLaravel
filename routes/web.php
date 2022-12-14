@@ -36,7 +36,7 @@ Route::post('login', [LoginController::class, 'login'])->name('authentication');
 
 Route::get('/registro', [SignupController::class, 'index']);
 Route::post('/registro', [SignupController::class, 'store'])->name('save');
-Route::get('/registro/{type}/{data}', [SignupController::class, 'check'])->name('/check');
+Route::get('/registro/{type}/{data}', [SignupController::class, 'check']);
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 

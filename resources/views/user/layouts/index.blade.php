@@ -2,7 +2,8 @@
 <html lang="es">
     <head>
         @extends('user.layouts.head')
-        
+        <link rel="icon" href="{{ url('assets/images/icon/isotipo1x.svg') }}" type="image/x-icon">
+
         <!-- CSS & JS Files Start-->
             {{-- imported from the web --}}
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>

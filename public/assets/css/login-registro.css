@@ -24,7 +24,7 @@
     width: 100%;
     background: linear-gradient(34deg, rgba(251,233,63,1) 0%, rgba(255,46,89,1) 100%);
     opacity: .8;
-    border-radius: 0% 100% 0% 100% / 100% 0% 100% 0%;  
+    border-radius: 0% 100% 0% 100% / 100% 0% 100% 0%;
     z-index: 1;
 
 }
@@ -62,11 +62,11 @@ body::-webkit-scrollbar-thumb{
     /* background: #6e6e6e; */
     background: #535353;
     border-radius: 0em;
-    
+
 }
 body::-webkit-scrollbar-thumb:hover{
     background: #7a7a7a;
-    
+
 }
 .fs-lg-1{
     font-size: 30px;
@@ -74,7 +74,7 @@ body::-webkit-scrollbar-thumb:hover{
 
 .back{
     position: fixed;
-    top: 10px; 
+    top: 10px;
     left: 20px;
     z-index: 3;
 }
