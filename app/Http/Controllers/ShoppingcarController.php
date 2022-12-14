@@ -26,21 +26,25 @@ class ShoppingcarController extends Controller
             ->get();
         // dd($data->toArray());
 
-        if($data->toArray() == null){
-            return redirect(redirect()->getUrlGenerator()->previous());
-        }
-        else{
+        if($data != null){
             $data[0]['subTotalCop'] = $data[0]->toArray()['subTotal'];
-            $data[0]['subTotal'] = $data[0]->toArray()['subTotal'] * 0.00021;
-
-                foreach($data as $order){
-                    if(count($order->first()->orders))
+                $data[0]['subTotal'] = $data[0]->toArray()['subTotal'] * 0.00021;
+    
+                    foreach($data as $order){
+                        // if(count($order->first()->orders) > 0)
+                        //     return view('user.shoppingcar.index', compact("data"));
+                        // else
+                        // return  'tu mama';
+                        // return redirect(redirect()->getUrlGenerator()->previous());
                         return view('user.shoppingcar.index', compact("data"));
-                    else
-                        return redirect(redirect()->getUrlGenerator()->previous());
-                        // return redirect('/categorias');
-                }
         }
+        
+    }
+
+    else{
+        return redirect(redirect()->getUrlGenerator()->previous());
+    }
+
 
     }
 
@@ -215,7 +219,7 @@ class ShoppingcarController extends Controller
 
 
      return redirect(redirect()->getUrlGenerator()->previous());
-
+        
     }
 
 

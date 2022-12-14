@@ -12,7 +12,10 @@ class ContactusController extends Controller
     {
         $data=ContactUs::first();
         $admi=user::where('rol_id',1)->first();
-        return view('user.contactus.index',compact('data','admi'));
+        $phone = json_encode($admi['phone']);
+
+        return view('user.contactus.index',compact('data','admi', 'phone'));
+
     }
 
 }

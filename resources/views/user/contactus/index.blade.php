@@ -67,7 +67,7 @@
                                 Email:
                                 <span>
                                     <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox?compose=CllgCJfsctWTqvBXsNCdPVMtFXfLglsMlCQHxcrTHNQQxKsfWNZrSWBpbBKPNLDfKtFRCQQRDpg"target="_blank"><i class="bi bi-envelope"></i>
-                                        pingestampados@gmail.com
+                                        {{$admi['email']}}
                                     </a>
                                 </span>
                             </li>
@@ -92,8 +92,9 @@
 
     $('#form-submit-wapp').click(function(){
 
-        let num = '+573158559229';
+        let num = '+573158559229'; 
         let msg = document.getElementById("wapp-message").value;
+        // console.log(num)
 
         var win = window.open(`https://wa.me/${num}?text=${msg}`, '_blank');
 
