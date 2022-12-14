@@ -45,7 +45,7 @@ Route::get('/reset-password', [LoginController::class, 'index']);
 Route::get('/categorias',[ProductController::class, 'categories'])->name('/categorias');
 Route::get('/categoria/{category}',[ProductController::class, 'byCategory'])->name('/categorias/{category}');
 
-Route::get('/categoria/{categoria}/{producto}', [DetailProductController::class, 'show']);
+Route::get('/categoria/{categoria}/{producto}/{color?}', [DetailProductController::class, 'show']);
 
 // Route::get('/contactanos', ContactUsController::class);
 Route::get('/contactanos', [ContactUsController::class, 'index']);

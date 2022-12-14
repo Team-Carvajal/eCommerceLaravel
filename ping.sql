@@ -471,7 +471,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'Koro Sensei Assassination Classroom',55000,'Te extrañamos profesor <3',NULL,12,'2022-11-16 11:49:01','2022-11-16 11:49:01'),(2,'Goku Dragon ball',55000,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',NULL,10,'2022-11-16 12:21:52','2022-11-16 12:21:52'),(3,'Luffy Nika Five Gear One Piece',55000,'',NULL,10,'2022-11-17 00:10:19','2022-11-17 00:10:19'),(4,'Saitama One Punch Man',55000,'',NULL,10,'2022-11-17 00:11:21','2022-11-17 00:11:21'),(5,'Camisa texto Beach',55000,NULL,NULL,5,'2022-11-17 13:28:12','2022-11-17 13:28:13');
+INSERT INTO `products` VALUES (1,'Camisa Koro Sensei Assassination Classroom',55000,'Te extrañamos profesor <3',NULL,12,'2022-11-16 11:49:01','2022-11-16 11:49:01'),(2,'Camisa Goku Dragon ball',55000,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',NULL,10,'2022-11-16 12:21:52','2022-11-16 12:21:52'),(3,'Camisa Luffy Nika Five Gear One Piece',55000,'',NULL,10,'2022-11-17 00:10:19','2022-11-17 00:10:19'),(4,'Camisa Saitama One Punch Man',55000,'',NULL,10,'2022-11-17 00:11:21','2022-11-17 00:11:21'),(5,'Camisa texto Beach',55000,NULL,NULL,5,'2022-11-17 13:28:12','2022-11-17 13:28:13');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -614,6 +614,7 @@ CREATE TABLE `products_shirttypes` (
 
 LOCK TABLES `products_shirttypes` WRITE;
 /*!40000 ALTER TABLE `products_shirttypes` DISABLE KEYS */;
+INSERT INTO `products_shirttypes` (`product_id`, `shirttype_id`, `created_at`, `updated_at`) VALUES ('5', '1', '2022-12-14 10:42:59', '2022-12-14 10:42:59'), ('2', '1', '2022-12-14 10:42:59', '2022-12-14 10:42:59'), ('1', '1', '2022-12-14 10:43:29', '2022-12-14 10:43:29'), ('3', '1', '2022-12-14 10:43:42', '2022-12-14 10:43:42'), ('4', '1', '2022-12-14 10:43:58', '2022-12-14 10:43:58');
 /*!40000 ALTER TABLE `products_shirttypes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -642,6 +643,7 @@ CREATE TABLE `products_typesprint` (
 
 LOCK TABLES `products_typesprint` WRITE;
 /*!40000 ALTER TABLE `products_typesprint` DISABLE KEYS */;
+INSERT INTO `products_typesprint` (`product_id`, `typeprint_id`, `created_at`, `updated_at`) VALUES (1, 2, '2022-12-14 16:04:27', '2022-12-14 16:04:27'),(2, 1, '2022-12-14 16:04:27', '2022-12-14 16:04:27'),(3, 2, '2022-12-14 16:07:46', '2022-12-14 16:07:46'),(4, 5, '2022-12-14 16:08:34', '2022-12-14 16:08:34'),(5, 2, '2022-12-14 16:14:44', '2022-12-14 16:14:58');
 /*!40000 ALTER TABLE `products_typesprint` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -750,7 +752,7 @@ CREATE TABLE `shirttypes` (
 
 LOCK TABLES `shirttypes` WRITE;
 /*!40000 ALTER TABLE `shirttypes` DISABLE KEYS */;
-INSERT INTO `shirttypes` VALUES (1,'Algodon',NULL,NULL),(2,'Licra',NULL,NULL),(3,'Seda',NULL,NULL);
+INSERT INTO `shirttypes` VALUES (1,'Polo cuello redondo',NULL,NULL),(2,'Polo cuello en v',NULL,NULL);
 /*!40000 ALTER TABLE `shirttypes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -804,7 +806,7 @@ CREATE TABLE `typesprint` (
 
 LOCK TABLES `typesprint` WRITE;
 /*!40000 ALTER TABLE `typesprint` DISABLE KEYS */;
-INSERT INTO `typesprint` VALUES (1,'Sublimación',NULL,NULL),(2,'Vinilo Impreso',NULL,NULL),(3,'Serigrafia',NULL,NULL),(4,'Transfer',NULL,NULL),(5,'Laser (DTF)',NULL,NULL);
+INSERT INTO `typesprint` (`id`, `print`, `created_at`, `updated_at`) VALUES ('1', 'Vinilo de corte', '2022-12-14 10:52:31', '2022-12-14 10:52:31'), ('2', 'Vinilo impreso', '2022-12-14 10:52:31', '2022-12-14 10:52:31'), ('3', 'Serigrafia textil digital', '2022-12-14 10:53:26', '2022-12-14 10:53:26'), ('4', 'Sublimacion', '2022-12-14 10:53:26', '2022-12-14 10:53:26'), ('5', 'Transfer', '2022-12-14 10:55:04', '2022-12-14 10:55:04'), ('6', 'DTF', '2022-12-14 10:56:10', '2022-12-14 10:56:10');
 /*!40000 ALTER TABLE `typesprint` ENABLE KEYS */;
 UNLOCK TABLES;
 

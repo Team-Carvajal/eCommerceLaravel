@@ -45,6 +45,8 @@
 
     <script>
 
+
+
       $('#login').click(function (e) {
         var url = '/login';
         $.ajax({

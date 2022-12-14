@@ -18,3 +18,15 @@
         </div>
     </div>
 </div>
+<script>
+        $('#addon-wrapping').click(function(){
+            let text = $('#text-search').val()
+            location.href = "/productos/search/"+text;
+
+        });
+        $('#text-search').keypress(function(event){
+            if (event.key === "Enter")
+            $('#addon-wrapping').click();
+        });
+
+</script>
