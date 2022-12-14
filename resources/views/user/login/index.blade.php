@@ -52,14 +52,16 @@
           url: url,
           data: $("#datauser").serialize(),
 
-           success: function(data, error){
-            if(data == 1){
-
-                dataAlertMessage("Sesión iniciada", 'success', 'bottom-end', 3000);
-                setTimeout(function(){ location.href = "/"; }, 3000);
-
+           success: function(data){
+            if(data['verificador'] == 1){
+                dataAlertMessage("Sesión iniciada", 'success', 'bottom-end', 1000);
+                setTimeout(function(){ location.href = "/"; }, 1000);
             }else{
-                dataAlertMessage("Porfavor revisa los datos", 'error', 'bottom-end', 3000);
+                if(data['error'] == 1){
+                    dataAlertMessage("El correo que ingresaste no existe", 'error', 'bottom-end', 3000);
+                }else{
+                    dataAlertMessage("Porfavor revisa bien tus datos", 'error', 'bottom-end', 3000);
+                }
             }
             }
        });
