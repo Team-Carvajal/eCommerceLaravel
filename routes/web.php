@@ -32,7 +32,7 @@ Route::post('perfil/update', [ProfileController::class, 'update'])->name('profil
 
 //Login
 Route::get('/login', [LoginController::class, 'index'])->name('login');
-Route::post('login', [LoginController::class, 'login'])->name('authentication');
+Route::post('/login', [LoginController::class, 'login'])->name('authentication');
 
 Route::get('/registro', [SignupController::class, 'index']);
 Route::post('/registro', [SignupController::class, 'store'])->name('save');

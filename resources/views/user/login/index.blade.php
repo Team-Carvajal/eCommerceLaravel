@@ -6,7 +6,7 @@
 
     <div class="vh-100 d-grid">
         <div class="blur  col-10 col-md-8 col-lg-5 col-sm-8 shadow rounded-2em m-auto">
-            <form method="POST" action="{{ route('authentication') }}" >
+            <form method="POST" action="{{ route('authentication') }}" id="datauser" >
                 <div class="d-grid">
 
                     @csrf
@@ -20,14 +20,14 @@
                     <div class="col-12 mx-auto">
                         <div class="mb-3 d-flex">
                             <span class="bg-transparent input-group-text border-0 position-absolute" id="basic-addon1"><i class="bi bi-envelope text-muted"></i></span>
-                            <input required type="mail" name="email" class="form-control ps-5" placeholder="Correo" aria-label="Username" aria-describedby="basic-addon1" autofocus>
+                            <input required type="mail" name="email" id="email" class="form-control ps-5" placeholder="Correo" aria-label="Username" aria-describedby="basic-addon1" autofocus>
                         </div>
                         <div class="mb-4 d-flex">
                             <span class="bg-transparent input-group-text border-0 position-absolute" id="basic-addon1"><i class="bi bi-lock-fill text-muted"></i></span>
-                            <input required type="password" name="password" class="form-control ps-5" placeholder="Contraseña" aria-label="Username" aria-describedby="basic-addon1">
+                            <input required type="password" name="password" id="password" class="form-control ps-5" placeholder="Contraseña" aria-label="Username" aria-describedby="basic-addon1">
                         </div>
                         <div class=" row col-md-6 col-sm-6 mx-auto mb-5 container ">
-                            <input type="submit" class="btn btn-primary shadow-sm " value="Continuar" >
+                            <input type="button" class="btn btn-primary shadow-sm " value="Continuar" id="login">
                         </div>
 
                     </div>
@@ -43,5 +43,27 @@
         <img src="{{ url('assets\images\background-login-01.svg')}}" alt="">
     </div>
 
+    <script>
 
+      $('#login').click(function (e) {
+        var url = '/login';
+        $.ajax({
+          type: "POST",
+          url: url,
+          data: $("#datauser").serialize(),
+
+           success: function(data, error){
+            if(data == 1){
+
+                dataAlertMessage("Sesión iniciada", 'success', 'bottom-end', 3000);
+                setTimeout(function(){ location.href = "/"; }, 3000);
+
+            }else{
+                dataAlertMessage("Porfavor revisa los datos", 'error', 'bottom-end', 3000);
+            }
+            }
+       });
+      });
+
+    </script>
 @endsection

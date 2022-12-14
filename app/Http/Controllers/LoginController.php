@@ -25,16 +25,12 @@ class LoginController extends Controller
         'email' => ['required', 'email'],
         'password' => ['required'],
     ]);
-
+    $logeo = 0;
     if (Auth::attempt($credentials)) {
 
-
-
-      $request->session()->regenerate();
-
-       $user = Auth::user();
-
-
+        $request->session()->regenerate();
+        $user = Auth::user();
+        $logeo = 1;
       //dd($user);
 
       session(['name' => "{$user['name']}"]);
@@ -42,11 +38,14 @@ class LoginController extends Controller
       session(['id' => "{$user['id']}"]);
       session(['avatar' => "{$user['avatar']}"]);
 
-      return redirect()->intended('/');
+    //   return redirect()->intended('/');
 
     }else{
-        return redirect('login');
+        $logeo = 0;
+        // return redirect('login');
     }
+    
+    echo($logeo);
 
 
 }
