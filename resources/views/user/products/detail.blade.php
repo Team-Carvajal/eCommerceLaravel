@@ -236,22 +236,11 @@
             $('#pTalla').html(tItem[0]);
             console.log("color: " + tItem[0]);
             console.log("idcolor: " + tItem[1]);
+            console.log("cantidad: " + tItem[2]);
         });
     });
     }
 
-    let ShirtColor = document.querySelectorAll('label.shirtColor');
-    /* // For each button, register an event listener */
-    ShirtColor.forEach(function(elem){
-        elem.addEventListener("click", function(e){
-            /* // On click, remove the MyClass on ALL buttons */
-        ShirtColor.forEach(function(el){
-            el.classList.remove("colorActive");
-        });
-        // Add the class on clicked one
-        e.target.classList.add("colorActive");
-    })
-    })
 </script>
 
 

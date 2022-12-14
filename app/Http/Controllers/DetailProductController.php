@@ -17,11 +17,7 @@ class DetailProductController extends Controller
         $data = [];
         foreach($product as $product){
             $data['product'] = $product;
-            $product->sizes;
-            $product->colors;
-            $product->typesprint;
-            $product->type;
-            $product->categories;
+            $product->sizes; $product->colors; $product->typesprint; $product->type; $product->categories;
         }
         return view('user.products.detail', compact('data'));
         // dd($data);
