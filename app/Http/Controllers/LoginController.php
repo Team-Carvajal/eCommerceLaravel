@@ -16,11 +16,11 @@ class LoginController extends Controller
 {
 
     public function index(){
-        if(session('id')){
-            return redirect('/');
-        }else{
+        // if(session('id')){
+            // return redirect('/');
+        // }else{
             return view('user.login.index');
-        }
+        // }
     }
 
     public function login(Request $request){
