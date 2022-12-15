@@ -196,6 +196,56 @@
     </div>
 </div>
 
+@if (count($data['moreproducts']) <= 8 && count($data['moreproducts']) >= 4)
+    <section class="section carousel-products">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="section-heading">
+                        <h2>Más productos para {{$data['product']->categories[0]->name}}</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="men-item-carousel">
+                        <div class="owl-men-item owl-carousel">
+
+                            @foreach($data['moreproducts'] as $product)
+                            @php
+                                $rand = rand(0, count($product->colors)-1);
+                            @endphp
+                                @foreach($product->colors as $key => $img)
+                                @if($rand == $key)
+                                        <div class="item bg-white p-3 pb-4 rounded shadow-sm">
+                                            <div class="thumb">
+                                                <div class="hover-content">
+                                                    <ul>
+                                                        <li><a href="{{'/' . 'categoria/' . $data['product']->categories[0]->name . '/' . str_replace(' ' , '-', (strtolower($product->name)))}}"><i class="fa fa-eye"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                                <img src="{{ url('assets/images/productos/'. $img->product_color->image )}}" alt="" class="pd-carousel">
+                                            </div>
+                                            <div class="down-content bg-transparent">
+                                                <h4 class="pe-3">{{$product->name}}</h4>
+                                                <span>$ {{ $product->price}}</span>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            @endforeach
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @endif
+
+
 <script>
     let pColor = $('#pcolor');
     let color = $('#color');
@@ -286,8 +336,10 @@
         if(tItem[2] == 0){
             dataAlertMessage(`No hay cantidad disponible`, 'info', 'bottom-end', 1000);
         }
-        else if($('#quantity').val() >= tItem[2]){
+        else if($('#quantity').val() > tItem[2]){
             // $('#quantity').val(tItem[2]);
+            console.log(tItem[2]);
+            console.log($('#quantity').val());
             dataAlertMessage(`La cantidad maxima es ${tItem[2]}`, 'info', 'bottom-end', 1000);
         }
         total = $('#quantity').val() * ({{$data['product']->price}});
@@ -321,33 +373,43 @@
                 'type' : type,
                 '_token' : csrf
             };
-            console.log(detail);
       }
 
     $('#sendcar').click(function (e) {
         getdata();
         // detail = JSON.stringify(detail);
         var url = '/carrito/agregar';
-        $.ajax({
-            type: 'post',
-            url: url,
-            data: detail,
-            beforeSend: function () {
-                console.log('bloqueo botones');
-                dataAlertMessage(`Espera`, 'info', 'bottom-end', 1000);
-            },
-            complete: function () {
-                dataAlertMessage(`Guardado en el carrito`, 'success', 'bottom-end', 1000);
-                console.log('desbloqueo botones');
-            },
-            success: function (response) {
-                console.log('ok!');
-            },
-            error: function (jqXHR) {
-                console.log('boo!');
-            }
+        if(detail['idColor'] == undefined || detail['idColor'] == null){
+            dataAlertMessage('Porfavor Selecciona un color', 'error', 'bottom-end', 1000);
+        }else if(detail['idSize'] == undefined || detail['idSize'] == null){
+            dataAlertMessage('Porfavor Selecciona una talla', 'error', 'bottom-end', 1000);
+        }
+        else{
 
-       });
+            $.ajax({
+                type: 'post',
+                url: url,
+                data: detail,
+                beforeSend: function () {
+                    dataAlertMessage(`Espera`, 'info', 'bottom-end', 1500);
+                },
+                complete: function () {
+                    setTimeout(function(){
+                        dataAlertMessagewithconfirm('Desea ir al carrito?', '', 'bottom-end', 5000, 'si', 'seguir aqui');
+                    }, 2000);
+                },
+                success: function (response) {
+                    setTimeout(function(){
+                        dataAlertMessage(`Guardado en el carrito`, 'success', 'bottom-end', 1000);
+                    }, 1000);
+                },
+                error: function (jqXHR) {
+                    dataAlertMessage(`Error`, 'error', 'bottom-end', 1000);
+                }
+
+           });
+        }
+
       });
 
 

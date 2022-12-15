@@ -12,45 +12,33 @@ class DetailProductController extends Controller
 
     public function show($categoryname, $name)
     {
-        $product = Product::where('name', str_replace('-' , ' ', ($name)))->get();
+        /*-------------Start Get product data-------------*/
 
+        $product = Product::where('name', str_replace('-' , ' ', ($name)))->get();
         $data = [];
         foreach($product as $products){
             $data['product'] = $products;
             $products->sizes; $products->colors; $products->typesprint; $products->type; $products->categories;
         }
+
+        /*-------------End Get product data-------------*/
+
+        /*-------------Start Get related products  in Category-------------*/
+        $product = Product::all();
+        foreach($product as $products){
+            $products->sizes; $products->colors; $products->typesprint; $products->type; $products->categories;
+        }
+        for($i = 0; $i < count($product); $i++){
+            if(strtolower($categoryname) != strtolower($product[$i]->categories[0]->name)){
+                unset($product[$i]);
+            }
+        }
+        $data['moreproducts'] = $product;
+        /*-------------End Get related products  in Category-------------*/
+
+        // dd($data['moreproducts']->toArray());
         return view('user.products.detail', compact('data'));
-        // dd($data);
     }
-
-
-    // public function show($categoryname, $product)
-    // {
-
-
-    // $category = Category::select('*')->where('name', $categoryname)->first();
-    // $categoryproduct = DB::select('select * from products_categories where category_id = ' . $category->id);
-
-    // $producto = str_replace('-' , ' ', (strtolower($product)));
-    // $producto = ("'" .$producto . "'" );
-
-    // $products = DB::select('select * from products where name = '. $producto); /* */
-    // $products = current(array_filter($products));
-
-    // $productcolor = DB::select('select * from products_shirtcolors where product_id = ' . $products->id); /* */
-    // $color = DB::select('select * from shirtcolors'); /* */
-
-    // $productsize = DB::select('select * from products_shirtsizes where product_id =' . $products->id); /* */
-    // $size = DB::select('select * from shirtsizes'); /* */
-
-    // $shirttypes = DB::select('select * from products_shirttypes where product_id =' . $products->id);
-
-    // // dd($products, $categoryproduct, $color, $size, $products ize, $productcolor);
-
-    // return view('user.products.detail', compact('product', 'products', 'color', 'size', 'productsize', 'productcolor', 'categoryname', 'category'));
-
-
-    // }
 
 }
 

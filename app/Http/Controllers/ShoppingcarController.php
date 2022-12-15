@@ -30,13 +30,7 @@ class ShoppingcarController extends Controller
             $data[0]['subTotalCop'] = $data[0]->toArray()['subTotal'];
                 $data[0]['subTotal'] = $data[0]->toArray()['subTotal'] * 0.00021;
 
-                dd($data->toArray());
                     foreach($data as $order){
-                        // if(count($order->first()->orders) > 0)
-                        //     return view('user.shoppingcar.index', compact("data"));
-                        // else
-                        // return  'tu mama';
-                        // return redirect(redirect()->getUrlGenerator()->previous());
                         return view('user.shoppingcar.index', compact("data"));
                     }
 
