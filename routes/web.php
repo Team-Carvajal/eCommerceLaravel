@@ -31,7 +31,7 @@ Route::get('/perfil/{name?}', [ProfileController::class, 'edit'])->middleware('a
 Route::post('perfil/update', [ProfileController::class, 'update'])->name('profile/update');
 
 //Login
-Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::get('/login', [LoginController::class, 'index'])->name('/login');
 Route::post('/login', [LoginController::class, 'login'])->name('authentication');
 
 Route::get('/registro', [SignupController::class, 'index']);

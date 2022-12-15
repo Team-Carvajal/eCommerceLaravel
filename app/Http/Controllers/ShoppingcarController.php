@@ -151,16 +151,16 @@ class ShoppingcarController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
-
+        // dd($request)
         // $json = json_decode($request);
 
         $lastBill=Bill::firstOrCreate(['user_id' => Auth::id()]);
 
-        $lastProduct=Orderbase::where("product_id", "=", $request->product_id)
-            ->where("bill_id", "=", $lastBill->id)
-            ->first();
+        // $lastProduct=Orderbase::where("product_id", "=", $request->product_id)
+        //     ->where("bill_id", "=", $lastBill->id)
+        //     ->first();
 
-        if($lastProduct == null){
+        // if($lastProduct == null){
 
             $detail = [
                 'product_id' => $request->product_id,
@@ -184,15 +184,15 @@ class ShoppingcarController extends Controller
             $lastBill->subTotal=Orderbase::where('bill_id', '=', $lastBill->id)->sum('product_price');
             $lastBill->update();
 
-        }else{
+        // }else{
 
-        $lastProduct->quantity+=$request->quantity;
-        $lastProduct->product_price=($request->quantity * $request->product_price);
-        $lastProduct->update();
+        // $lastProduct->quantity+=$request->quantity;
+        // $lastProduct->product_price=($request->quantity * $request->product_price);
+        // $lastProduct->update();
 
-        $lastBill->subTotal=Orderbase::where('bill_id', '=', $lastBill->id)->sum('product_price');
-        $lastBill->update();
-        }
+        // $lastBill->subTotal=Orderbase::where('bill_id', '=', $lastBill->id)->sum('product_price');
+        // $lastBill->update();
+        // }
 
     // session(['shoppingquantity' => "{$data[0]->orders_count}"]);
 

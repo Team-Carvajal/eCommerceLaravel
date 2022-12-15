@@ -18,9 +18,9 @@
 --
 -- Table structure for table `aboutus`
 --
-DROP DATABASE IF EXISTS `ping2`;
-CREATE DATABASE `ping2`;
-USE `ping2`;
+DROP DATABASE IF EXISTS `ping`;
+CREATE DATABASE `ping`;
+USE `ping`;
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
