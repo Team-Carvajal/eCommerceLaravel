@@ -30,6 +30,7 @@ class ShoppingcarController extends Controller
             $data[0]['subTotalCop'] = $data[0]->toArray()['subTotal'];
                 $data[0]['subTotal'] = $data[0]->toArray()['subTotal'] * 0.00021;
 
+                dd($data->toArray());
                     foreach($data as $order){
                         // if(count($order->first()->orders) > 0)
                         //     return view('user.shoppingcar.index', compact("data"));
@@ -37,7 +38,7 @@ class ShoppingcarController extends Controller
                         // return  'tu mama';
                         // return redirect(redirect()->getUrlGenerator()->previous());
                         return view('user.shoppingcar.index', compact("data"));
-        }
+                    }
 
     }
 
@@ -170,7 +171,9 @@ class ShoppingcarController extends Controller
                 'idSize' => $request->idSize,
                 'nameSize' => $request->nameSize,
                 'product_price' => $request->product_price,
-                'quantity' => $request->quantity
+                'quantity' => $request->quantity,
+                'print' => $request->print,
+                'type' => $request->type,
             ];
 
             $insert=new Orderbase;
