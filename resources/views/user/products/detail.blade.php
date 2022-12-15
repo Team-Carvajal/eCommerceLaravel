@@ -183,7 +183,7 @@
                                 </div>
                             </div>
                             <div class="total">
-                                <span class="mb-3 fs-4 text-muted" id="totalview">Total : $</span>
+                                <span class="mb-3 fs-4 text-muted" id="totalview">Total : $ {{number_format($data['product']->price, 0, ',', '.')}}</span>
                                 <div class="main-border-button text-center ">
                                     <button class="btn text-center btn-outline-dark py-2 px-4" type="button" id="sendcar">Añadir al carrito</button>
                                 </div>
@@ -253,8 +253,6 @@
     let tItem = [];
     let total = "";
     var detail = [];
-
-
     /*-----------------Get Color-----------------*/
     if ($('input[name="color"]')) {
         document.querySelectorAll('input[name="color"]').forEach((elem) => {
@@ -266,8 +264,6 @@
             let image = `${item[2]}.${item[3]}`;
             $('#imageview').attr('src', `${url}/${image}`);
             console.log(url + image);
-            // console.log("color: " + item[0]);
-            // console.log("idcolor: " + item[1]);
         });
     });
     }
@@ -290,11 +286,9 @@
     if ($('input[name="talla"]')) {
         document.querySelectorAll('input[name="talla"]').forEach((elem) => {
         elem.addEventListener("change", function(event) {
+
             tItem = event.target.value;
             tItem = tItem.split('.');
-            // console.log("talla: " + tItem[0]);
-            // console.log("idtalla: " + tItem[1]);
-            // console.log("cantidad: " + tItem[2]);
 
             $('span.quantityStock').html("(" + tItem[2] + ")");
             $('#quantity').attr('max', tItem[2]);
@@ -329,20 +323,18 @@
 
     $('#quantity').on('change',  function (e){
         checkquantity();
-        });
+    });
 
     function checkquantity(){
 
         if(tItem[2] == 0){
             dataAlertMessage(`No hay cantidad disponible`, 'info', 'bottom-end', 1000);
         }
-        else if($('#quantity').val() > tItem[2]){
-            // $('#quantity').val(tItem[2]);
-            console.log(tItem[2]);
-            console.log($('#quantity').val());
+        else if($('#quantity').val() >= (tItem[2]*2)/2){
             dataAlertMessage(`La cantidad maxima es ${tItem[2]}`, 'info', 'bottom-end', 1000);
         }
         total = $('#quantity').val() * ({{$data['product']->price}});
+        total = Intl.NumberFormat('es-ES').format(total);
         $('#totalview').html("Total : $" + total);
 
     }
@@ -383,6 +375,9 @@
             dataAlertMessage('Porfavor Selecciona un color', 'error', 'bottom-end', 1000);
         }else if(detail['idSize'] == undefined || detail['idSize'] == null){
             dataAlertMessage('Porfavor Selecciona una talla', 'error', 'bottom-end', 1000);
+        }else if(tItem[2] < 1){
+            $('#totalview').html("Total : $" + 0);
+            dataAlertMessage('Porfavor Selecciona una talla que tenga productos en stock', 'error', 'bottom-end', 1000);
         }
         else{
 
