@@ -64,11 +64,11 @@ Route::get('/productos/search/{text}', [ProductController::class, 'search']);
 
 
 
-Route::post('/cambiar-contraseña', [ProfileController::class, 'forgotPassword'])->name('password.email');
+Route::post('/cambiar-contrasena', [ProfileController::class, 'forgotPassword'])->name('password.email');
 
 
 
-Route::get('/reset-contraseña/{token}', function ($token) {
+Route::get('/reset-contrasena/{token}', function ($token) {
     return view('user.password.index', ['token' => $token]);
 })->name('password.reset');
 

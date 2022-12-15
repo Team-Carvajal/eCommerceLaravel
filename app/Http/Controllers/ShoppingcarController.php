@@ -29,7 +29,7 @@ class ShoppingcarController extends Controller
         if($data != null){
             $data[0]['subTotalCop'] = $data[0]->toArray()['subTotal'];
                 $data[0]['subTotal'] = $data[0]->toArray()['subTotal'] * 0.00021;
-    
+
                     foreach($data as $order){
                         // if(count($order->first()->orders) > 0)
                         //     return view('user.shoppingcar.index', compact("data"));
@@ -38,7 +38,7 @@ class ShoppingcarController extends Controller
                         // return redirect(redirect()->getUrlGenerator()->previous());
                         return view('user.shoppingcar.index', compact("data"));
         }
-        
+
     }
 
     else{
@@ -152,6 +152,8 @@ class ShoppingcarController extends Controller
      */
     public function store(Request $request){
 
+        // $json = json_decode($request);
+
         $lastBill=Bill::firstOrCreate(['user_id' => Auth::id()]);
 
         $lastProduct=Orderbase::where("product_id", "=", $request->product_id)
@@ -177,7 +179,6 @@ class ShoppingcarController extends Controller
             $insert->product_price=($request->product_price * $request->quantity);
             $insert->detail=(json_encode($detail));
             $insert->bill_id=$lastBill->id;
-            // dd($insert->toArray(), $request->all(), $detail);
             $insert->save();
 
             $lastBill->subTotal=Orderbase::where('bill_id', '=', $lastBill->id)->sum('product_price');
@@ -197,7 +198,7 @@ class ShoppingcarController extends Controller
 
 
     // Aqui tambien poner la ruta de donde vino la petición
-    return redirect(redirect()->getUrlGenerator()->previous());
+    // return redirect(redirect()->getUrlGenerator()->previous());
 
 }
 
@@ -219,7 +220,7 @@ class ShoppingcarController extends Controller
 
 
      return redirect(redirect()->getUrlGenerator()->previous());
-        
+
     }
 
 

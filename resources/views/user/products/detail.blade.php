@@ -39,6 +39,10 @@
         width: 20px;
     }
 
+    #product {
+    margin-top: 0px !important;
+  }
+
 
     <?php foreach ($data['product']->colors as $colors){ ?>
     .colores label[for="c-<?php echo $colors->name; ?>"]{
@@ -108,7 +112,7 @@
                     <div class="right-content col-12 col-sm-12 mx-auto">
 
                         <form action="{{url('/carrito/agregar')}}" method="post" id="product">
-
+                            @csrf
                             <div class="mb-5">
                                 <h3 class="mb-2">{{$data['product']->name}}</h3>
                                 <span class="price">
@@ -137,7 +141,6 @@
                                                 hidden
                                                 required>
                                         @endfor
-
                                     </div>
                                 </div>
 
@@ -169,24 +172,24 @@
                                 <div class="d-grid d-lg-flex mt-4">
                                     <div class="col-12 col-sm-12 col-lg-6 d-grid">
                                         <span class="fs-6 my-auto">Cantidad:</span>
+                                        <div class="d-flex mt-2 ">
+                                            <span class="fs-6 text-lg-center text-md-center me-1 quantityStock"></span>
+                                            <span class="fs-6 text-lg-center text-md-center"> Unidades disponibles</span>
+                                        </div>
                                     </div>
                                     <div class="quantity buttons_added col-6 d-grid">
                                         <div class="mx-lg-auto mx-md-auto">
                                             <input type="button" value="-" class="minus" >
-                                            <input type="number" step="1" min="1" max="1" id="quantity" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode="">
+                                            <input type="number" step="1" min="1" max="1" id="quantity" name="quantity" value="0" title="Qty" class="input-text qty text" size="4" pattern="" inputmode="" disabled >
                                             <input type="button" value="+" class="plus" >
-                                        </div>
-                                        <div class="d-grid mt-2 ">
-                                            <span class="fs-6 text-lg-center text-md-center me-1 quantityStock"></span>
-                                            <span class="fs-6 text-lg-center text-md-center"> Unidades disponibles</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="total">
-                                <h4 class="mb-3" id="total">Total : $</h4>
+                                <span class="mb-3 fs-4 text-muted" id="totalview">Total : $</span>
                                 <div class="main-border-button text-center ">
-                                    <button class="btn text-center btn-outline-dark py-2 px-4" type="submit">Añadir al carrito</button>
+                                    <button class="btn text-center btn-outline-dark py-2 px-4" type="button" id="sendcar">Añadir al carrito</button>
                                 </div>
                             </div>
                         </form>
@@ -201,6 +204,10 @@
     let pColor = $('#pcolor');
     let color = $('#color');
     let item = [];
+    let tItem = [];
+    let total = "";
+    var detail = [];
+
 
     /*-----------------Get Color-----------------*/
     if ($('input[name="color"]')) {
@@ -209,8 +216,8 @@
             item = event.target.value;
             item = item.split('.');
             $('#pcolor').html(item[0]);
-            console.log("color: " + item[0]);
-            console.log("idcolor: " + item[1]);
+            // console.log("color: " + item[0]);
+            // console.log("idcolor: " + item[1]);
         });
     });
     }
@@ -235,11 +242,21 @@
         elem.addEventListener("change", function(event) {
             tItem = event.target.value;
             tItem = tItem.split('.');
-            $('#pTalla').html(tItem[0]);
-            console.log("color: " + tItem[0]);
-            console.log("idcolor: " + tItem[1]);
-            console.log("cantidad: " + tItem[2]);
-            $('span.quantityStock').html(tItem[2]);
+            // console.log("talla: " + tItem[0]);
+            // console.log("idtalla: " + tItem[1]);
+            // console.log("cantidad: " + tItem[2]);
+
+            $('span.quantityStock').html("(" + tItem[2] + ")");
+            $('#quantity').attr('max', tItem[2]);
+            $('#ptalla').html(tItem[0]);
+
+            if(tItem[2] > 0){
+                $('#quantity').val(1);
+                $('#quantity').attr('step', 1);
+            }else{
+                $('#quantity').val(0);
+                $('#quantity').attr('step', 0);
+            }
         });
     });
     }
@@ -255,6 +272,75 @@
         e.target.classList.add("active");
     })
     })
+
+    $('#quantity').on('input',  function (e){
+        checkquantity();
+    });
+
+    $('#quantity').on('change',  function (e){
+        checkquantity();
+        });
+
+    function checkquantity(){
+
+        if(tItem[2] == 0){
+            dataAlertMessage(`No hay cantidad disponible`, 'info', 'bottom-end', 1000);
+        }
+        else if($('#quantity').val() >= tItem[2]){
+            // $('#quantity').val(tItem[2]);
+            dataAlertMessage(`La cantidad maxima es ${tItem[2]}`, 'info', 'bottom-end', 1000);
+        }
+        total = $('#quantity').val() * ({{$data['product']->price}});
+        $('#totalview').html("Total : $" + total);
+
+    }
+    /*-----------------Submit----------------- */
+    function getdata(){
+        var product_id = {{$data['product']->id}};
+        var nameproduct = `{{$data['product']->name}}`;
+        var idColor = item[1];
+        var nameColor = item[0];
+        var idSize = tItem[1];
+        var nameSize = tItem[0];
+        var product_price = {{$data['product']->price}};;
+        var quantity = $('#quantity').val();
+        var print = `{{$data['product']->typesprint[0]->print}}`;
+        var type = `{{$data['product']->type[0]->type}}`;
+        var csrf = $('input[name=_token]').val();
+
+            detail= {
+                'product_id' : product_id,
+                'nameproduct' : nameproduct,
+                'idColor' : idColor,
+                'nameColor' : nameColor,
+                'idSize' : idSize,
+                'nameSize' : nameSize,
+                'product_price' : product_price,
+                'quantity' : quantity,
+                'print' : print,
+                'type' : type,
+                'csrf' : csrf
+            };
+            console.log(detail);
+      }
+
+    $('#sendcar').click(function (e) {
+        getdata();
+        // detail = JSON.stringify(detail);
+        var url = '/carrito/agregar';
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: detail,
+
+            success: function(data)
+            {
+                dataAlertMessage("Agregado correctamente", 'success', 'bottom-end', 3000);
+            }
+
+       });
+      });
+
 
 </script>
 
