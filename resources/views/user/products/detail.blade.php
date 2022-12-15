@@ -89,18 +89,14 @@
             <div class=" col-lg-6 col-md-10 col-sm-12 col-12 mx-auto d-grid mb-md-5 mb-5">
                 <div class="d-flex">
                     <div class="col-10 img-product mx-auto left-images">
-                        <img src="
                         @php
                             $color = explode('/', ("$_SERVER[REQUEST_URI]"));
-                            if(isset($color[4])){
-                                $color = $color[4];
-                            }
+                            if(isset($color[4])){ $color = $color[4]; }
                         @endphp
-                        {{
-                            url('assets/images/productos/'. $data['product']->colors[0]->product_color->image );
-                        }}"
-                    alt=""
-                    id="imageview">
+                        <img
+                            src=" {{ url('assets/images/productos/'. $data['product']->colors[0]->product_color->image ); }}"
+                            alt=""
+                            id="imageview">
                     </div>
                 </div>
             </div>
@@ -134,7 +130,7 @@
                                                 for="c-{{$data['product']->colors[$i]->name}}">
                                             </label>
                                             <input
-                                                value="{{ucfirst($data['product']->colors[$i]->name)}}.{{$data['product']->colors[$i]->id}}"
+                                                value="{{ucfirst($data['product']->colors[$i]->name)}}.{{$data['product']->colors[$i]->id}}.{{$data['product']->colors[$i]->product_color->image}}"
                                                 type="radio"
                                                 name="color"
                                                 id="c-{{$data['product']->colors[$i]->name}}"
@@ -216,6 +212,10 @@
             item = event.target.value;
             item = item.split('.');
             $('#pcolor').html(item[0]);
+            let url = `{{ url('assets/images/productos/')}}`;
+            let image = `${item[2]}.${item[3]}`;
+            $('#imageview').attr('src', `${url}/${image}`);
+            console.log(url + image);
             // console.log("color: " + item[0]);
             // console.log("idcolor: " + item[1]);
         });
@@ -319,7 +319,7 @@
                 'quantity' : quantity,
                 'print' : print,
                 'type' : type,
-                'csrf' : csrf
+                '_token' : csrf
             };
             console.log(detail);
       }
@@ -329,13 +329,22 @@
         // detail = JSON.stringify(detail);
         var url = '/carrito/agregar';
         $.ajax({
-            type: "POST",
+            type: 'post',
             url: url,
             data: detail,
-
-            success: function(data)
-            {
-                dataAlertMessage("Agregado correctamente", 'success', 'bottom-end', 3000);
+            beforeSend: function () {
+                console.log('bloqueo botones');
+                dataAlertMessage(`Espera`, 'info', 'bottom-end', 1000);
+            },
+            complete: function () {
+                dataAlertMessage(`Guardado en el carrito`, 'success', 'bottom-end', 1000);
+                console.log('desbloqueo botones');
+            },
+            success: function (response) {
+                console.log('ok!');
+            },
+            error: function (jqXHR) {
+                console.log('boo!');
             }
 
        });
