@@ -253,6 +253,7 @@
     let tItem = [];
     let total = "";
     var detail = [];
+    var sesion = `{{is_null(session('id'))}}`;
     /*-----------------Get Color-----------------*/
     if ($('input[name="color"]')) {
         document.querySelectorAll('input[name="color"]').forEach((elem) => {
@@ -325,6 +326,7 @@
         checkquantity();
     });
 
+    /*-----------------Verify Quantity----------------- */
     function checkquantity(){
 
         if(tItem[2] == 0){
@@ -372,15 +374,21 @@
         // detail = JSON.stringify(detail);
         var url = '/carrito/agregar';
         if(detail['idColor'] == undefined || detail['idColor'] == null){
-            dataAlertMessage('Porfavor Selecciona un color', 'error', 'bottom-end', 1000);
+            dataAlertMessage('Porfavor selecciona un color', 'error', 'bottom-end', 1500);
         }else if(detail['idSize'] == undefined || detail['idSize'] == null){
-            dataAlertMessage('Porfavor Selecciona una talla', 'error', 'bottom-end', 1000);
+            dataAlertMessage('Porfavor selecciona una talla', 'error', 'bottom-end', 1500);
         }else if(tItem[2] < 1){
             $('#totalview').html("Total : $" + 0);
-            dataAlertMessage('Porfavor Selecciona una talla que tenga productos en stock', 'error', 'bottom-end', 1000);
+            dataAlertMessage('Porfavor selecciona una talla que tenga productos en stock', 'error', 'bottom-end', 2000);
+        }
+        else if(sesion){
+            dataAlertMessage('Porfavor inicia sesión antes de continuar', 'error', 'bottom-end', 2000);
+            setTimeout(function(){
+                location.href = "/carrito"
+            }, 2000);
         }
         else{
-
+            console.log(sesion);
             $.ajax({
                 type: 'post',
                 url: url,
