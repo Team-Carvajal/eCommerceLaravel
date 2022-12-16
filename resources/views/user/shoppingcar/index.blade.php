@@ -69,6 +69,12 @@
                                                     <div>
                                                         <span class="pe-1 small fw-800">Cantidad:</span><span class="small">{{$details->quantity}}</span>
                                                     </div>
+                                                    <div>
+                                                        <span class="pe-1 small fw-800">Tipo de Camisa:</span><span class="small">{{$details->type}}</span>
+                                                    </div>
+                                                    <div>
+                                                        <span class="pe-1 small fw-800">Tipo de Impresion:</span><span class="small">{{$details->print}}</span>
+                                                    </div>
                                                 </div>
                                         </div>
 
