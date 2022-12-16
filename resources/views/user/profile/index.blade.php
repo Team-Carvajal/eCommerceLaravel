@@ -3,7 +3,26 @@
 @section('content')
 
 
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{{-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
+<style>
+  .avatar{
+    font-size: 8em;
+  }
+  label[for="avatar"]{
+      padding: 5px;
+      border-radius: 100%;
+      border: 2px dashed #00000055;
+  }
+  .fs-7{
+      font-size: .9em;
+  }
+  input#avatar{
+    pointer-events: none;
+    display: block;
+    opacity: 0;
+  }
+</style>
+
 
 <script>
 
@@ -14,8 +33,6 @@ function modal(){
         'success'
     )
 }
-
-
 </script>
 
 
@@ -26,13 +43,11 @@ function modal(){
                   <div class="card">
                     <div class="card-body">
                       <div class="d-flex flex-column align-items-center text-center">
-
-                        <i class="fa-solid fa-circle-user d-sm-none d-lg-block d-md-block profileIcon"></i>
-
-                        <div class="mt-3 col-12">
-                          <label for="avatarhexauser" class="float-right"></label>
-                          <input type="color" name="" value="#353535" id="avatarhexauser" class="d-none">
-                        </div>
+                          <label for="avatar">
+                            <i class="fa-solid fa-circle-user d-sm-none d-lg-block d-md-block avatar" style="color:{{$profile->avatar}}"></i>
+                          </label>
+                          <input type="hidden" name="" id="avatar" class="" value="{{$profile->avatar}}">
+                        <span class="fs-7 infoAvatar" style="display:none">[Presiona el icono para cambiar el color]</span>
                       </div>
                     </div>
                   </div>
@@ -42,20 +57,20 @@ function modal(){
                     <div class="card-body">
                       <div class="row">
 
-                        <div class="container">
+                        <div class="container col-11 my-4">
                             <form method="post" action="{{ url('perfil/update') }}" id="profile" class="d-grid mb-4">
                                 @csrf
                                 <div class="form-group">
                                     <label class="letra">Nombres:</label>
-                                    <input type="text" class="form-control letra" id="nombre" name="name" aria-describedby="emailHelp" placeholder=""  value="{{$profile->name}}" readOnly required pattern="[A-Za-z- ]*" autocapitalize="words">
+                                    <input type="text" class="form-control letra" id="name" name="name" aria-describedby="emailHelp" placeholder=""  value="{{$profile->name}}" readOnly required pattern="[A-Za-z- ]*" autocapitalize="words">
                                 </div>
                                 <div class="form-group">
                                   <label class="letra">Apellidos:</label>
-                                  <input type="text" class="form-control letra" id="apellidos" name="lastName" aria-describedby="emailHelp" placeholder=""  value="{{$profile->lastName}}" readOnly required pattern="[A-Za-z- ]*" autocapitalize="words">
+                                  <input type="text" class="form-control letra" id="lastName" name="lastName" aria-describedby="emailHelp" placeholder=""  value="{{$profile->lastName}}" readOnly required pattern="[A-Za-z- ]*" autocapitalize="words">
                                 </div>
                                 <div class="form-group">
                                     <label class="letra">Correo electronico:</label>
-                                    <input type="text" class="form-control letra" id="correo" name="email" aria-describedby="emailHelp" placeholder=""  value="{{$profile->email}}" readOnly required>
+                                    <input type="text" class="form-control letra" id="email" name="email" aria-describedby="emailHelp" placeholder=""  value="{{$profile->email}}" readOnly required>
                                 </div>
                                 <div class="form-group">
                                     <label class="letra">Número identificación:</label>
@@ -63,11 +78,11 @@ function modal(){
                                 </div>
                                 <div class="form-group">
                                     <label class="letra">Fecha de cumpleaños:</label>
-                                    <input type="date" class="form-control letra" id="fecha" name="birthDate" aria-describedby="emailHelp" placeholder=""  value="{{$profile->birthDate}}" readOnly required>
+                                    <input type="date" class="form-control letra" id="birthDate" name="birthDate" aria-describedby="emailHelp" placeholder=""  value="{{$profile->birthDate}}" readOnly required>
                                 </div>
                                 <div class="form-group">
                                     <label class="letra">Celular:</label>
-                                    <input type="text" class="form-control letra" id="celular" name="phone" aria-describedby="emailHelp" placeholder=""  value="{{$profile->phone}}" readOnly required>
+                                    <input type="text" class="form-control letra" id="phone" name="phone" aria-describedby="emailHelp" placeholder=""  value="{{$profile->phone}}" readOnly required>
                                 </div>
                             </form>
                                 <div class="col-sm-12">
@@ -97,37 +112,50 @@ function modal(){
 
       let id = {{session('id')}};
       let parametros;
+      let color = "";
+
+      $('#avatar').on('change', function(e){
+        $('svg.avatar').css('color', $('#avatar').val());
+      } );
 
       $('#editar').click(function (){
-          $('#nombre').removeAttr('readonly');
-          $('#apellidos').removeAttr('readonly');
-          $('#celular').removeAttr('readonly');
+          $('#name').removeAttr('readonly');
+          $('#lastName').removeAttr('readonly');
+          $('#phone').removeAttr('readonly');
           $('#editar').css('display', 'none');
           $('#cancelar').css('display', 'inline-block');
           $('#enviar').css('display', 'inline-block');
+          $('#avatar').attr('type', 'color');
+          $('span.infoAvatar').css('display', 'block');
       });
 
       $('#cancelar').click(function (){
-          document.querySelector('#nombre').setAttribute('readonly', true);
-          document.querySelector('#apellidos').setAttribute('readonly', true);
-          document.querySelector('#celular').setAttribute('readonly', true);
+          document.querySelector('#name').setAttribute('readonly', true);
+          document.querySelector('#lastName').setAttribute('readonly', true);
+          document.querySelector('#phone').setAttribute('readonly', true);
           $('#editar').css('display', 'inline-block');
           $('#cancelar').css('display', 'none');
           $('#enviar').css('display', 'none');
           dataAlertMessage("Cancelado", 'info', 'bottom-end', 3000);
+          $('#avatar').attr('type', 'hidden');
+          $('span.infoAvatar').css('display', 'none');
       });
 
 
       function getdata(){
-        var name = $('#nombre').val();
-        var lastName = $('#apellidos').val();
-        var phone = $('#celular').val();
+        var name = $('#name').val();
+        var lastName = $('#lastName').val();
+        var phone = $('#phone').val();
+        var avatar = $('#avatar').val();
+        var csrf = $('input[name=_token]').val();
 
         request = {
           "id" : id,
           "name" : name,
           "lastName": lastName,
-          "phone": phone
+          "phone": phone,
+          "avatar": avatar,
+          '_token' : csrf
           };
       }
 
@@ -137,17 +165,22 @@ function modal(){
         $.ajax({
           type: "POST",
           url: url,
-          data: $("#profile").serialize(),
+          data: request,
 
            success: function(data)
            {
-            dataAlertMessage("Actualizado", 'success', 'bottom-end', 3000);
-            document.querySelector('#nombre').setAttribute('readonly', true);
-            document.querySelector('#apellidos').setAttribute('readonly', true);
-            document.querySelector('#celular').setAttribute('readonly', true);
+            dataAlertMessage("Actualizado", 'success', 'bottom-end', 2000);
+            setTimeout(function(){
+                dataAlertMessage("Podrás ver los cambios del Avatar cuando actualices la pagina", 'info', 'bottom-end', 4000);
+            }, 4500);
+            document.querySelector('#name').setAttribute('readonly', true);
+            document.querySelector('#lastName').setAttribute('readonly', true);
+            document.querySelector('#phone').setAttribute('readonly', true);
             $('#editar').css('display', 'inline-block');
             $('#cancelar').css('display', 'none');
             $('#enviar').css('display', 'none');
+            $('#avatar').attr('type', 'hidden');
+            $('span.infoAvatar').css('display', 'none');
           }
 
        });

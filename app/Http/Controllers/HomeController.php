@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\home;
 use App\Models\product;
+use App\Models\profile;
 use App\Models\category;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Support\Facades\DB;
@@ -30,6 +31,10 @@ class HomeController extends Controller
      */
     public function show()
     {
+        if(!empty(session('id'))){
+            $profile = profile::where('id', session('id'))->firstOrFail();
+            session(['avatar' => $profile->avatar]);
+        }
         $category = Category::all();
         foreach($category as $product => $productCategory){
             $productCategory = Product::whereRelation('categories', 'id', '=', '1')->get();

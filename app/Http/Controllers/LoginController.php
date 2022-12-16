@@ -44,7 +44,7 @@ class LoginController extends Controller
         session(['name' => "{$user['name']}"]);
         session(['email' => "{$user['email']}"]);
         session(['id' => "{$user['id']}"]);
-        session(['avatar' => "{$user['avatar']}"]);
+
 
         //   return redirect()->intended('/');
 

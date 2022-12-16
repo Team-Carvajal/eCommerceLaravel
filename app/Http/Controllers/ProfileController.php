@@ -92,6 +92,10 @@ class ProfileController extends Controller
         $profile->name = $request->name;
         $profile->lastName = $request->lastName;
         $profile->phone = $request->phone;
+        $profile->avatar = $request->avatar;
+
+        session(['avatar' => $request->avatar]);
+
         $profile->save();
 
         // dd($request->all());

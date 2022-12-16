@@ -98,8 +98,7 @@
                       <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-4">
                           <h5 class="mb-0 text-dark">Sección de pago</h5>
-                          <img src="{{ url('assets/images/icon/iconUser.svg') }}"
-                            class="img-fluid rounded-3" style="width: 45px;" alt="Avatar">
+                          <i class="fa-solid fa-circle-user d-sm-none d-lg-block d-md-block iconuser" style="color:{{session('avatar')}}"></i>
                         </div>
 
                         <hr class="my-4">

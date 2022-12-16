@@ -54,7 +54,6 @@
 
                 .iconuser{
                     font-size: 45px;
-                    color: {{session('avatar')}};
                 }
 
                 @media(max-width: 576px ){
@@ -169,7 +168,7 @@
                                     @if(Auth::check())
                                     <li>
                                         <a href="{{"/perfil"}} " title="" class="textfloat">
-                                            <i class="fa-solid fa-circle-user d-sm-none d-lg-block d-md-block iconuser"></i>
+                                            <i class="fa-solid fa-circle-user d-sm-none d-lg-block d-md-block iconuser" style="color:{{session('avatar')}}"></i>
                                             <span class="d-lg-none d-md-none">
                                                 Ingresa a tu perfil
                                             </span>

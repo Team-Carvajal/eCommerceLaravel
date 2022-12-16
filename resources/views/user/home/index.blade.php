@@ -2,6 +2,7 @@
 @section('title', 'Home')
 @section('content')
 
+
     <!-- ***** Main Banner Area Start ***** -->
     <div class="main-banner carousel-products espacio" id="top">
         <div class="container-fluid">
