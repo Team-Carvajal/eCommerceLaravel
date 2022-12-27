@@ -19,21 +19,47 @@ class ShoppingcarController extends Controller
     public function index()
     {
 
+        $this->newbill();
         $data=Bill::with("orders")
             ->withCount("orders")
             ->where( "user_id","=", Auth::id())
             ->where("billstate_id", "=", 1)
             ->get();
-        // dd($data->toArray());
+        $products = product::all();
 
         if($data != null){
             $data[0]['subTotalCop'] = $data[0]->toArray()['subTotal'];
                 $data[0]['subTotal'] = $data[0]->toArray()['subTotal'] * 0.00021;
-
                     foreach($data as $order){
-                        return view('user.shoppingcar.index', compact("data"));
+                        return view('user.shoppingcar.index', compact("data", "products"));
                     }
 
+    }
+
+    else{
+        return redirect(redirect()->getUrlGenerator()->previous());
+    }
+
+
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function querydata()
+    {
+        $data=Bill::with("orders")
+            ->withCount("orders")
+            ->where( "user_id","=", Auth::id())
+            ->where("billstate_id", "=", 1)
+            ->get();
+
+        // dd($data->toArray());
+
+        if($data != null){
+            $querydata =  $data[0]['orders_count'];
+            return $querydata;
     }
 
     else{
@@ -168,6 +194,7 @@ class ShoppingcarController extends Controller
                 'quantity' => $request->quantity,
                 'print' => $request->print,
                 'type' => $request->type,
+                'image' => $request->image
             ];
 
             $insert=new Orderbase;

@@ -24,7 +24,7 @@ class DetailProductController extends Controller
         /*-------------End Get product data-------------*/
 
         /*-------------Start Get related products  in Category-------------*/
-        $product = Product::all();
+        $product = Product::inRandomOrder()->get();
         foreach($product as $products){
             $products->sizes; $products->colors; $products->typesprint; $products->type; $products->categories;
         }

@@ -9,9 +9,10 @@
         width: 100%;
         margin: auto;
         transition: .2s;
+        transform: scale(1.1);
     }
     .img-product img:hover{
-        transform: scale(1.1);
+        transform: scale(1.2);
     }
     label.miniatura{
         height: 60px;
@@ -70,6 +71,21 @@
     a:hover{
         text-decoration: underline !important;
     }
+    /* div.img-product::before{
+        content: "";
+        width: 10em;
+        height: 2em ;
+        padding: 8px 20px;
+        position: absolute;
+        z-index: 9;
+        background: red;
+        right: 0;
+        -moz-transform: rotate(50deg) translate(60px, -40px);
+        -webkit-transform: rotate(50deg) translate(60px, -40px);
+        -o-transform: rotate(50deg) translate(60px, -40px);
+        -ms-transform: rotate(50deg) translate(60px, -40px);
+        transform: rotate(50deg) translate(60px, -40px);
+    } */
 
 
 </style>
@@ -99,6 +115,62 @@
                             id="imageview">
                     </div>
                 </div>
+                <div class="d-grid bg-white rounded shadow-sm py-4 mt-4">
+                    <div class="d-grid mt-3">
+                        <div class="d-grid col-11 mx-auto">
+                            <span class="fs-6 mb-2 font-weight-bold">Descripción:</span>
+                            <span class="fs-6">{{$data['product']->description}}</span>
+                        </div>
+                        <hr class="col-10 mx-auto">
+                        <table class="table table table-bordered fs-6 col-10 mx-auto">
+                            <tr>
+                                <td colspan="2" class="font-weight-bold">
+                                    Caracteristicas:
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="table-light">Tipo de camisa</td>
+                                <td class="">{{$data['product']->type[0]->type}}</td>
+                            </tr>
+                            <tr>
+                                <td class="table-light">Tipo de estampado</td>
+                                <td class="">{{$data['product']->typesprint[0]->print}}</td>
+                            </tr>
+                            <tr>
+                                <td class="table-light">Colores disponibles</td>
+                                <td class="">
+                                @for ($i = 0; $i < count($data['product']->colors); $i++)
+                                    @if ($i == (count($data['product']->colors)-1) )
+                                        @php $punto = "" @endphp
+                                    @else
+                                        @php $punto = "," @endphp
+                                    @endif
+                                    {{$data['product']->colors[$i]->name . $punto}}
+                                @endfor
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="table-light">Tallas disponibles</td>
+                                <td class="">
+                                @for ($i = 0; $i < count($data['product']->colors); $i++)
+                                    @if ($i == (count($data['product']->colors)-1) )
+                                        @php $punto = "" @endphp
+                                    @else
+                                        @php $punto = "," @endphp
+                                    @endif
+                                    {{$data['product']->sizes[$i]->size . $punto}}
+                                @endfor
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="table-light">Categoria</td>
+                                <td class="">
+                                        {{$data['product']->categories[0]->name}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
 
             <div class=" col-lg-6 col-md-10 col-sm-12 col-12 mx-auto d-grid ">
@@ -109,14 +181,14 @@
 
                         <form action="{{url('/carrito/agregar')}}" method="post" id="product">
                             @csrf
-                            <div class="mb-5">
-                                <h3 class="mb-2">{{$data['product']->name}}</h3>
-                                <span class="price">
+                            <div class="">
+                                <h3 class=" fs-2 mb-2">{{$data['product']->name}}</h3>
+                                <span class="price fs-2">
                                     ${{number_format($data['product']->price, 0, ',', '.')}}
                                 </span>
                             </div>
 
-                            <span>{{$data['product']->description}}</span>
+
 
                             <div class="quantity-content">
 
@@ -184,7 +256,7 @@
                             </div>
                             <div class="total">
                                 <span class="mb-3 fs-4 text-muted" id="totalview">Total : $ {{number_format($data['product']->price, 0, ',', '.')}}</span>
-                                <div class="main-border-button text-center ">
+                                <div class="main-border-button text-center mt-5 mb-4 d-grid">
                                     <button class="btn text-center btn-outline-dark py-2 px-4" type="button" id="sendcar">Añadir al carrito</button>
                                 </div>
                             </div>
@@ -346,6 +418,7 @@
         var nameproduct = `{{$data['product']->name}}`;
         var idColor = item[1];
         var nameColor = item[0];
+        var image = item[2];
         var idSize = tItem[1];
         var nameSize = tItem[0];
         var product_price = {{$data['product']->price}};;
@@ -365,6 +438,7 @@
                 'quantity' : quantity,
                 'print' : print,
                 'type' : type,
+                'image' : image,
                 '_token' : csrf
             };
       }
@@ -388,7 +462,7 @@
             }, 2000);
         }
         else{
-            console.log(sesion);
+            // console.log(sesion);
             $.ajax({
                 type: 'post',
                 url: url,
