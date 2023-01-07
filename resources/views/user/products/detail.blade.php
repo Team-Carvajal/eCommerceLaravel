@@ -483,7 +483,6 @@
                 error: function (jqXHR) {
                     dataAlertMessage(`Error`, 'error', 'bottom-end', 1000);
                 }
-
            });
         }
 

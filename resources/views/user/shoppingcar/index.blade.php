@@ -62,7 +62,9 @@
                         <p class="mb-2" id="total">$</p>
                       </div>
                       <div>
-
+                        <div>
+                          <div id="paypal-button-container"></div>
+                        </div>
                     </div>
                   </div>
                 </div>
@@ -74,6 +76,43 @@
     </div>
 </section>
 
+
+<script src="https://www.paypal.com/sdk/js?client-id=ARqoUskZaVu_BabyP3SNAQbDHhCtw7nPGoWOjBFWuccA9fd4n9cnFZvprIqyd9U2o6gpDicf_SY5qfjN&currency=USD"></script>
+
+<script>
+  paypal.Buttons({
+        style:{
+          layout: 'horizontal',
+          color: 'silver',
+          shape: 'pill',
+          tagline: false,
+          label: 'pay',
+        },
+        // Sets up the transaction when a payment button is clicked
+        createOrder: (data, actions) => {
+          return actions.order.create({
+            purchase_units: [{
+              amount: {
+                value: '{{ number_format($data[0]->subTotal , 2  , '.', ''); }}' /* Can also reference a variable or function */
+              }
+            }]
+          });
+        },
+        // Finalize the transaction after payer approval
+        onApprove: (data, actions) => {
+          return actions.order.capture().then(function(orderData) {
+            // Successful capture! For dev/demo purposes:
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+            const transaction = orderData.purchase_units[0].payments.captures[0];
+            alert(`Transaction ${transaction.status}: \n\nCompletada, tu numero de orden es ${transaction.id}`);
+            // When ready to go live, remove the alert and show a success message within this page. For example:
+            // const element = document.getElementById('paypal-button-container');
+            // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+            // Or go to another URL:  actions.redirect('thank_you.html');
+          });
+        }
+      }).render('#paypal-button-container');
+</script>
 <script>
         document.getElementsByClassName("edit").addEventListener('click', function(e){
         alert();
